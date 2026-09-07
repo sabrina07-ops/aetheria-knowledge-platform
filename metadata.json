@@ -1,0 +1,6 @@
+{
+  "name": "Aetheria Knowledge Platform",
+  "description": "Expandable multi-world educational knowledge platform spanning Technology, Space, Literature, Philosophy, Art, and Science with bilingual English-Arabic support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

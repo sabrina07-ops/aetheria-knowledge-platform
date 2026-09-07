@@ -1,0 +1,1034 @@
+import { Article } from '../types';
+
+export const SEED_ARTICLES: Article[] = [
+  // ==================== SPACE ====================
+  {
+    id: 'james-webb-cosmic-dawn',
+    category: 'space',
+    tags: ['Astrophysics', 'James Webb', 'Cosmology', 'Galaxies'],
+    coverImage: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1400&q=80',
+    author: 'Dr. Elena Vance, Astrophysics Institute',
+    publicationDate: '2026-03-15',
+    readingTime: 6,
+    featured: true,
+    title: {
+      en: 'The Cosmic Dawn: How JWST Rewrote Early Universe Chronology',
+      ar: 'فجر الكون: كيف أعاد تلسكوب جيمس ويب كتابة تاريخ الكون المبكر',
+    },
+    subtitle: {
+      en: 'Spectroscopic observations reveal massive, luminous galaxies burning just 300 million years after the Big Bang.',
+      ar: 'أرصاد طيفية تكشف عن مجرات مضيئة وذات كتلة هائلة اشتعلت بعد 300 مليون سنة فقط من الانفجار العظيم.',
+    },
+    shortDescription: {
+      en: 'For decades, standard cosmological models predicted early galaxies would be tiny, chaotic embryonic clusters. The James Webb Space Telescope shattered this paradigm with JADES-GS-z14-0.',
+      ar: 'لعقود خلت، تنبأت النماذج الكونية القياسية بأن المجرات الأولى ستكون تجمعات جنينية فوضوية وصغيرة. كسر تلسكوب جيمس ويب هذا النموذج عبر مجرة JADES-GS-z14-0.',
+    },
+    fullContent: {
+      en: `### Piercing the Infrared Veil
+
+In the cold silence of the second Sun-Earth Lagrange point (L2), 1.5 million kilometers from Earth, the James Webb Space Telescope unfolds its gold-plated beryllium hexes. By capturing deep infrared radiation shifted toward longer wavelengths by the cosmic expansion, JWST penetrates the dense cosmic dust clouds that blinded its predecessor, Hubble.
+
+### The JADES Discovery
+
+In early 2024 and confirmed into late 2025, astronomers targeted the GOODS-South field. There, at a confirmed redshift of z = 14.32, lay galaxy **JADES-GS-z14-0**. It existed when the universe was barely 290 million years old—merely two percent of its current age of 13.8 billion years.
+
+> "The sheer luminosity of these primordial structures defies conventional dark matter halo accretion models. We expected sparse embers; we found vibrant stellar engines." — *Cosmic Dawn Survey Team*
+
+### Scientific Implications
+
+1. **Premature Mass Accumulation:** The galaxy spans over 1,600 light-years and contains several hundred million solar masses. This suggests star formation was either orders of magnitude more efficient than in the modern cosmos or kicked off by supermassive primordial black hole seeds.
+2. **Heavy Element Enrichment:** Spectroscopic NIRSpec measurements detected distinct ionized oxygen lines. This proves that multiple generations of massive Population III stars had already lived, fused heavier elements in their cores, and detonated as supernovae in less than 300 million years.
+3. **Cosmological Revision:** Theoretical astrophysicists are actively recalibrating early gas-cooling equations and dark matter coalescence models to accommodate this accelerated dawn.`,
+      ar: `### اختراق الحجاب تحت الأحمر
+
+في الصمت المتجمد لنقطة لاغرانج الثانية (L2) بين الأرض والشمس، على بعد 1.5 مليون كيلومتر، ينشر تلسكوب جيمس ويب دروعه المصنوعة من البريليوم المطلي بالذهب. من خلال التقاط الأشعة تحت الحمراء التي انزاحت نحو أطوال موجية أطول بفعل تمدد الكون، يخترق التلسكوب سحب الغبار الكوني الكثيفة التي حجبت الرؤية عن سلفه هابل.
+
+### كشف استطلاع JADES
+
+في رصد دقيق لمنطقة GOODS-South، رصد علماء الفلك مجرة **JADES-GS-z14-0** بانزياح أحمر مؤكد بلغ z = 14.32. لقد لمعت هذه المجرة عندما كان عمر الكون بالكاد 290 مليون سنة فقط، أي ما يمثل 2% فقط من عمره الحالي البالغ 13.8 مليار سنة.
+
+> "إن الإضاءة الهائلة لهذه الهياكل البدائية تتحدى النماذج التقليدية لتراكم هالات المادة المظلمة. كنا نتوقع جمرات نجمية خافتة؛ فوجدنا محركات نجمية متوقدة." — *فريق مسح فجر الكون*
+
+### الأبعاد والدلالات العلمية
+
+1. **تراكم الكتل المبكر:** تمتد المجرة لأكثر من 1600 سنة ضوئية وتضم مئات الملايين من الكتل الشمسية، مما يدل على أن تشكل النجوم كان أكثر كفاءة بمراحل أو تغذى على ثقوب سوداء بدائية فائقة الكتلة.
+2. **التخصيب بالعناصر الثقيلة:** كشف مطياف NIRSpec عن بصمات واضحة للأكسجين المتأين، ما يثبت أن أجيالاً متعددة من نجوم الجيل الثالث العملاقة قد عاشت وانفجرت كسوبرنوفا في وقت قياسي.
+3. **مراجعة النماذج الكونية:** يعكف علماء الفيزياء الفلكية النظرية حالياً على إعادة ضبط معادلات تبريد الغاز ونماذج تكاثف المادة المظلمة لتفسير هذا الفجر المتسارع.`
+    },
+    sources: [
+      'NASA / ESA / CSA James Webb Space Telescope Science Operations',
+      'Nature Astronomy: High-Redshift Spectroscopic Confirmation of JADES-GS-z14-0',
+      'Astrophysical Journal: Gas Infall Dynamics in Primordial Galaxies'
+    ],
+    metadata: {
+      constellation: 'Fornax (Southern Hemisphere)',
+      celestialCoordinates: 'RA 03h 32m 38.8s, Dec -27° 46′ 35″',
+      distanceFromEarth: '33.8 Billion Light Years (Comoving)',
+      missionType: 'Deep-field Infrared Spectroscopy'
+    }
+  },
+  {
+    id: 'dark-matter-halos',
+    category: 'space',
+    tags: ['Dark Matter', 'Gravitational Lensing', 'Astrophysics'],
+    coverImage: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1400&q=80',
+    author: 'Prof. Julian Thorne',
+    publicationDate: '2026-02-28',
+    readingTime: 5,
+    featured: false,
+    title: {
+      en: 'The Invisible Scaffold: Mapping the Dark Matter Web',
+      ar: 'السقالة الخفية: رسم خرائط شبكة المادة المظلمة',
+    },
+    subtitle: {
+      en: 'Weak gravitational lensing transforms warped starlight into high-resolution maps of unseen cosmic matter.',
+      ar: 'عدسات الجاذبية الضعيفة تحول الضوء النجمي المشوه إلى خرائط فائقة الدقة لكتل الكون غير المرئية.',
+    },
+    shortDescription: {
+      en: 'Dark matter constitutes over 85% of all matter in the universe, yet emits no photons. Learn how astronomers decipher its ghostly topography using Einsteinian spacetime curvature.',
+      ar: 'تشكل المادة المظلمة أكثر من 85% من إجمالي مادة الكون لكنها لا تصدر أي فوتونات. تعرف على كيفية فك شفرة تضاريسها الشبحية عبر انحناء نسيج الزمكان.',
+    },
+    fullContent: {
+      en: `### The Ghost in the Machine
+
+When Vera Rubin observed the rotation velocities of spiral galaxies in the 1970s, Newtonian mechanics dictated that stars at the outer rim should orbit sluggishly compared to the dense central nucleus. Instead, rotational velocity curves plateaued. Stars at the periphery moved with ferocity, bound by an invisible gravitational reservoir: the dark matter halo.
+
+### Gravitational Microlensing
+
+Because mass curves spacetime, dense pockets of dark matter act as imperfect magnifying lenses. By measuring the minute statistical shear of millions of background galaxies, the Euclid Space Observatory and Rubin Observatory produce tomographic 3D maps of cosmic filaments.
+
+### Candidates: Axions vs. WIMPs
+
+- **Axions:** Ultra-light hypothetical bosons emerging from quantum chromodynamics Peccei-Quinn symmetry.
+- **WIMPs:** Weakly Interacting Massive Particles predicted by supersymmetry, currently sought in deep underground xenon detectors like LZ and PandaX.`,
+      ar: `### الشبح في الآلة الكونية
+
+عندما رصدت فيرا روبين سرعات دوران المجرات الحلزونية في سبعينيات القرن الماضي، فرضت ميكانيكا نيوتن أن تدور النجوم في الحواف الخارجية ببطء مقارنة بالمركز الكثيف. لكن النتائج كانت صادمة؛ استمرت سرعة النجوم عند الحافة بنفس الشدة، محكومة بجاذبية خزان هائل غير مرئي: هالة المادة المظلمة.
+
+### عدسات الجاذبية الميكروية
+
+نظراً لأن الكتلة تثني نسيج الزمكان، فإن تجمعات المادة المظلمة تعمل كعدسات مكبرة طبيعية. ومن خلال قياس التشوه الإحصائي الدقيق لملايين المجرات الخلفية، يرسم مرصد إقليدس ومرصد روبين خرائط ثلاثية الأبعاد لخيوط الشبكة الكونية.
+
+### المرشحون المحتملون: الأكسيونات مقابل الـ WIMPs
+
+- **الأكسيونات (Axions):** بوزونات افتراضية فائقة الخفة ناتجة عن تناظر بيتسي-كوين في الكروموديناميكا الكمية.
+- **الجسيمات الضخمة ضعيفة التفاعل (WIMPs):** جسيمات تنبأت بها نظرية التناظر الفائق، ويجري البحث عنها في كواشف الزينون المدفونة في أعماق المناجم مثل تجربة LZ.`
+    },
+    sources: [
+      'Euclid Consortium First Survey Data Release',
+      'Physical Review Letters: Dark Matter Halo Substructure and Lensing'
+    ],
+    metadata: {
+      constellation: 'Virgo & Coma Superclusters',
+      celestialCoordinates: 'RA 12h 27m, Dec +12° 43′',
+      distanceFromEarth: '54 Million Light Years',
+      missionType: 'Gravitational Shear Cartography'
+    }
+  },
+
+  // ==================== TECHNOLOGY & DIGITAL WORLD ====================
+  {
+    id: 'nikola-tesla-electricity',
+    category: 'technology',
+    tags: ['Nikola Tesla', 'Electrical Engineering', 'History of Tech', 'Inventions'],
+    coverImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80',
+    author: 'Aetheria Technology Archives',
+    publicationDate: '2026-03-01',
+    readingTime: 7,
+    featured: true,
+    title: {
+      en: 'Nikola Tesla & The Wardenclyffe Dream: Architect of the Alternating Era',
+      ar: 'نيكولا تسلا وحلم واردنكليف: مهندس عصر التيار المتناوب والاتصال اللاسلكي',
+    },
+    subtitle: {
+      en: 'The Serbian-American polymath whose polyphase motor, induction coils, and wireless telecommunications forged the modern world.',
+      ar: 'العالم الصربي الأمريكي الذي شكل محركه متعدد الأطوار وملفاته الحثية ورؤيته اللاسلكية أسس العالم المعاصر.',
+    },
+    shortDescription: {
+      en: 'Beyond the myths lies an engineering genius who conceived alternating current electrical grids, fluorescent lighting, and global wireless data transmission in the late 19th century.',
+      ar: 'وراء الأساطير يقف عبقري هندسي ابتكر شبكات التيار المتناوب والإضاءة الفلورية وبث البيانات اللاسلكي العالمي في أواخر القرن التاسع عشر.',
+    },
+    fullContent: {
+      en: `### The War of the Currents
+
+In the late 1880s, the battle for how civilization would be electrified raged between Thomas Edison’s direct current (DC) low-voltage infrastructure and George Westinghouse’s commercialization of Nikola Tesla’s alternating current (AC) patents. DC suffered from catastrophic line losses over distances greater than a single mile. 
+
+Tesla’s breakthrough was the rotating magnetic field and the AC transformer, enabling voltages to be stepped up to hundreds of thousands of volts for long-distance transit and stepped down safely for domestic and industrial consumption. When the Niagara Falls hydroelectric project switched on in 1896, Tesla's polyphase system won unequivocally.
+
+### Wardenclyffe Tower: The Prototype Internet
+
+In 1901, on the bluffs of Shoreham, Long Island, Tesla began construction of Wardenclyffe—a 187-foot wooden lattice tower crowned with a 55-ton hemispherical steel dome. While backed by J. Pierpont Morgan under the guise of transoceanic telegraphy, Tesla harbored a vaster ambition:
+
+> "When wireless is fully applied the earth will be converted into a huge brain, capable of response in every one of its parts. Distance will be virtually annihilated." — *Nikola Tesla, 1926*
+
+Tesla envisioned injecting high-frequency electrical vibrations into the Earth-ionosphere cavity (later known as the Schumann resonance) to simultaneously transmit electrical power and encrypted worldwide news, stock updates, and private telecommunications.
+
+### Enduring Legacy
+
+- **The Induction Motor:** Still powers over 60% of modern industrial machinery and electric propulsion systems.
+- **Radio Frequency Control:** Demonstrated the world's first remote-controlled teleautomaton vessel at Madison Square Garden in 1898.
+- **The SI Unit:** The *Tesla* (T) permanently honors his contribution to magnetic flux density.`,
+      ar: `### حرب التيارات
+
+في أواخر ثمانينيات القرن التاسع عشر، احتدم الصراع بين البنية التحتية للتيار المستمر (DC) منخفض الجهد بزعامة توماس إديسون، وبين براءات اختراع التيار المتناوب (AC) لنيكولا تسلا والتي تبناها جورج وستنغهاوس. كان التيار المستمر يعاني من هدر هائل في الطاقة لمسافات تتجاوز ميلاً واحداً.
+
+كان إنجاز تسلا الفارق هو ابتكار الحقل المغناطيسي الدوار والمحول الكهربائي، مما أتاح رفع الجهد لمئات الآلاف من الفولتات للنقل عبر مسافات شاسعة، ثم خفضه بأمان للاستهلاك المنزلي والصناعي. ومع افتتاح محطة شلالات نياجرا الكهرومائية عام 1896، انتصر نظام تسلا متعدد الأطوار بلا منازع.
+
+### برج واردنكليف: النموذج الأولي للإنترنت
+
+في عام 1901 في لونغ آيلاند، بدأ تسلا بتشييد برج واردنكليف الخشبي بارتفاع 57 متراً تعلوه قبة فولاذية بوزن 55 طناً. ورغم تمويله من قبل جيه بي مورغان تحت لافتة البرق اللاسلكي عبر الأطلسي، كانت غاية تسلا أبعد بكثير:
+
+> "عندما يتم تطبيق التقنيات اللاسلكية بالكامل، ستتحول الأرض إلى دماغ هائل قادر على الاستجابة في كل جزء من أجزائه. ستتلاشى المسافات تماماً." — *نيكولا تسلا، 1926*
+
+تصور تسلا حقن اهتزازات كهربائية عالية التردد في تجويف الأرض والأيونوسفير (رنين شومان) لنقل الطاقة الكهربائية والبيانات المشفرة والأخبار اللحظية حول الكوكب بأسره دون أسلاك.
+
+### الإرث الهندسي الخالد
+
+- **محرك الحث الكهرومغناطيسي:** ما زال يدير أكثر من 60% من المحركات الصناعية وأنظمة الدفع الكهربائي اليوم.
+- **التحكم عن بُعد بالموجات:** استعرض أول قارب مسيّر بالراديو في ماديسون سكوير جاردن عام 1898.
+- **وحدة القياس العالمية:** تكريماً له، أطلق اسم *تسلا* (T) رسمياً على وحدة كثافة التدفق المغناطيسي.`
+    },
+    sources: [
+      'Tesla, Nikola: "My Inventions: The Autobiography of Nikola Tesla"',
+      'IEEE Spectrum: History of the Alternating Current Polyphase System',
+      'Smithsonian Institution Archives: Wardenclyffe Station Records'
+    ],
+    metadata: {
+      techStack: ['Electromagnetism', 'Polyphase Induction', 'Resonant Transformers', 'Wireless RF'],
+      breakthroughType: 'Electrical Infrastructure & Wireless Telegraphy',
+      impactScore: 98,
+      status: 'Foundational Historic Breakthrough'
+    }
+  },
+  {
+    id: 'quantum-computing-frontier',
+    category: 'technology',
+    tags: ['Quantum Computing', 'Qubits', 'Hardware', 'Physics'],
+    coverImage: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1400&q=80',
+    author: 'Kaelen Vance, Quantum Systems Lab',
+    publicationDate: '2026-02-14',
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: 'The Quantum Advantage: Superconducting Qubits and Neutral Atom Traps',
+      ar: 'التفوق الكمي: الكيوبتات فائقة التوصيل ومصائد الذرات المحايدة',
+    },
+    subtitle: {
+      en: 'How modern coherence times and logical error correction are moving quantum systems from laboratories into industrial reality.',
+      ar: 'كيف تقود فترات التماسك المحسّنة وتصحيح الأخطاء الكمي الحوسبة الكمية من المختبرات إلى التطبيقات الصناعية.',
+    },
+    shortDescription: {
+      en: 'Explore the duel between dilution-refrigerated transmon circuits and optical tweezer neutral-atom arrays as researchers breach the thousand-qubit threshold.',
+      ar: 'استكشف المنافسة بين دوائر الترانزمون فائقة التوصيل ومصفوفات الذرات المحايدة الممسوكة بالملاقط الضوئية مع تجاوز عتبة ألف كيوبت.',
+    },
+    fullContent: {
+      en: `### Superposition and Entanglement
+
+Classical bits reside in binary certainty (0 or 1). A quantum bit (qubit), governed by wave-function mechanics, exists in a linear superposition of both states until measured:
+
+$$\\lvert\\psi\\rangle = \\alpha\\lvert 0\\rangle + \\beta\\lvert 1\\rangle$$
+
+When multiple qubits become entangled, the state space grows exponentially ($2^N$), enabling quantum processors to navigate computational topologies that would exhaust classical supercomputers running for millions of years.
+
+### The Two Major Hardware Architectures
+
+1. **Superconducting Transmons:** Microscopic circuits printed with aluminum and niobium on sapphire substrates, operating at 15 millikelvin inside cryogenic dilution refrigerators.
+2. **Neutral Atom Arrays:** Rubidium or cesium atoms trapped in 3D laser optical tweezers, manipulated with Rydberg excitation pulses for high gate fidelity and long coherence.
+
+### Fault-Tolerant Logical Qubits
+
+The grand engineering milestone is no longer raw physical qubit counts, but surface code error correction: synthesizing hundreds of noisy physical qubits into single fault-tolerant logical qubits capable of sustained algorithms.`,
+      ar: `### التراكب والتشابك الكمي
+
+تستند البتات الكلاسيكية إلى الحتمية الثنائية (0 أو 1). بينما يعيش الكيوبت الكمي في حالة تراكب خطي تحكمها الدالة الموجية حتى لحظة القياس.
+
+وعندما تتشابك عدة كيوبتات معاً، يتضاعف فضاء الحالات الحسابية بشكل أسي ($2^N$)، مما يمنح المعالجات الكمية قدرة خارقة على مسح وتفكيك أنماط حسابية تستغرق فيها أقوى الحواسيب العملاقة ملايين السنين.
+
+### أبرز المنصات الهندسية اليوم
+
+1. **الدوائر فائقة التوصيل (Transmons):** دوائر ميكروية مطبوعة بالألمنيوم والنيوبيوم تعمل عند درجات حرارة تقترب من الصفر المطلق (15 ملي كلفن) داخل مبردات التخفيف الكريوجينية.
+2. **مصفوفات الذرات المحايدة:** ذرات روبيديوم يتم حجزها بواسطة ملاقط ضوئية ليزرية ثلاثية الأبعاد، وتفعيلها بنبضات ريدبرغ لتحقيق دقة بوابات استثنائية.
+
+### الكيوبتات المنطقية وتصحيح الأخطاء
+
+لم يعد الرهان الهندسي منحصراً في عدد الكيوبتات الفيزيائية الخام، بل في تصحيح الأخطاء عبر الأكواد السطحية، لدمج مئات الكيوبتات المشوشة في كيوبت منطقي واحد عالي المناعة ومستدام.`
+    },
+    sources: [
+      'Nature: Logical Quantum Processor with Neutral Atom Architecture',
+      'IBM Quantum Technology Roadmap 2026',
+      'Physical Review X: Surface Code Scalability Benchmarks'
+    ],
+    metadata: {
+      techStack: ['Quantum Decoherence', 'Cryogenics', 'Rydberg States', 'Surface Codes'],
+      breakthroughType: 'Fault-Tolerant Computing',
+      impactScore: 94,
+      status: 'Accelerating Lab-to-Industry'
+    }
+  },
+  {
+    id: 'humanoid-robotics-embodied-ai',
+    category: 'technology',
+    tags: ['Robotics', 'Artificial Intelligence', 'Actuators', 'Automation'],
+    coverImage: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80',
+    author: 'Tariq Al-Mansoor, Autonomous Systems',
+    publicationDate: '2026-02-05',
+    readingTime: 5,
+    featured: false,
+    title: {
+      en: 'The Embodied Machine: How Next-Gen Actuators & VLA Models Power Humanoids',
+      ar: 'الآلة المجسدة: كيف تدعم المشغلات الميكانيكية ونماذج VLA الروبوتات البشرية',
+    },
+    subtitle: {
+      en: 'The convergence of Vision-Language-Action foundation models with quasi-direct drive actuators is reshaping physical labor.',
+      ar: 'تقارب نماذج الرؤية واللغة والعمل مع المشغلات الميكانيكية المباشرة يعيد صياغة مستقبل العمل الفيزيائي.',
+    },
+    shortDescription: {
+      en: 'Humanoids have escaped scripted kinematics. Today, end-to-end multimodal neural networks allow bipeds to generalize real-time motor skills across unstructured factory floors.',
+      ar: 'تحررت الروبوتات شبيهة البشر من الحركات المبرمجة سلفاً. اليوم تتيح الشبكات العصبية متعددة الوسائط التعميم الحركي اللحظي في بيئات العمل غير المهيأة.',
+    },
+    fullContent: {
+      en: `### Beyond Scripted Kinematics
+
+For half a century, industrial robotic arms were rigid, positional machines executing pre-programmed coordinate paths. If an obstacle moved two centimeters, the trajectory failed. 
+
+The new breed of bipedal humanoid robots (Tesla Optimus, Figure 02, Boston Dynamics Atlas, Sanctuary AI) combines two tectonic shifts:
+
+1. **Quasi-Direct Drive (QDD) and Harmonic Actuators:** Low-inertia, high-torque density electric motors offering transparent back-drivability and human-safe impedance control.
+2. **Vision-Language-Action (VLA) Foundation Models:** Instead of explicit physics engines and inverse kinematics solvers, neural networks ingest camera video streams and natural language commands to output continuous joint torques at 100 Hz.
+
+### The Real-World Data Bottleneck
+
+While large language models trained on the internet's text corpus, physical robots lack trillions of tokens of embodied interactions. Companies are bridging this via fleet-teleoperation rigs, dynamic physics sim-to-real pipelines (NVIDIA Isaac Sim), and shadow hand haptic capture.`,
+      ar: `### ما وراء الحركات المبرمجة
+
+طوال نصف قرن، كانت الأذرع الروبوتية الصناعية آلات صلبة تنفذ مسارات محددة مسبقاً وفق إحداثيات صارمة؛ فإذا تحرك عائق بمقدار سنتيمترين فقط، تعطلت الحركة برمتها.
+
+أما الجيل الجديد من الروبوتات البشرية ثنائية الأرجل، فيجمع بين تحولين جذريين:
+
+1. **المشغلات الميكانيكية شبه المباشرة (QDD):** محركات كهربائية منخفضة القصور الذاتي وعالية عزم الدوران، توفر مرونة حركية وسلامة تامة عند التفاعل مع البشر.
+2. **نماذج الرؤية واللغة والعمل (VLA):** بدلاً من حلول الحركية العكسية الكلاسيكية، تتلقى الشبكات العصبية بث الكاميرات المباشر وتخرج أوامر عزم للمفاصل بمعدل 100 هرتز.
+
+### معضلة بيانات العالم الحقيقي
+
+في حين تدربت النماذج اللغوية على مليارات النصوص الرقمية، تفتقر الروبوتات إلى بيانات التفاعل الفيزيائي. تعوض الشركات ذلك عبر محاكاة sim-to-real السريعة وأجهزة التحكم اللمسية الحية.`
+    },
+    sources: [
+      'IEEE Transactions on Robotics: Generalizable Motor Skills via VLA Architectures',
+      'Science Robotics: Torque-Dense Actuation for Bipedal Locomotion'
+    ],
+    metadata: {
+      techStack: ['Vision-Language-Action', 'Sim-to-Real', 'Quasi-Direct Drive Actuators', 'Impedance Control'],
+      breakthroughType: 'Embodied Intelligence',
+      impactScore: 91,
+      status: 'Factory Deployment Phase'
+    }
+  },
+
+  // ==================== ART ====================
+  {
+    id: 'claude-monet-water-lilies',
+    category: 'art',
+    tags: ['Impressionism', 'Claude Monet', 'French Painting', 'Light & Color'],
+    coverImage: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1400&q=80',
+    author: 'Madeleine de la Tour, Art Historian',
+    publicationDate: '2026-02-20',
+    readingTime: 6,
+    featured: true,
+    title: {
+      en: 'Claude Monet: The Alchemy of Water Lilies and the Dissolution of Form',
+      ar: 'كلود مونيه: كيمياء زنابق الماء وذوبان الأشكال في بحيرات الضوء',
+    },
+    subtitle: {
+      en: 'How the master of Giverny surrendered linear perspective to capture the retinal vibration of light and reflective water.',
+      ar: 'كيف تخلى معلم جيفرني عن المنظور الهندسي الصارم ليجسد ارتعاشات الضوء وانعكاسات سطح الماء.',
+    },
+    shortDescription: {
+      en: 'In the twilight of his life, Monet painted the Nymphéas—monumental canvases devoid of horizon or shoreline, plunging the viewer into an infinite liquid sky.',
+      ar: 'في سنوات عمره الأخيرة، رسم مونيه لوحات زنابق الماء الشهيرة (Nymphéas) دون أفق أو شاطئ، ليغمر الرائي في سماء مائية لا متناهية.',
+    },
+    fullContent: {
+      en: `### The Sanctuary at Giverny
+
+In 1890, having acquired the property at Giverny in Normandy, Claude Monet diverted the river Epte to create his famed water garden. He planted weeping willows, Japanese irises, and hybrid Nymphaea water lilies. It was not merely a garden, but a living optical laboratory where atmospheric conditions could be studied from dawn until dusk.
+
+### Abolishing the Horizon
+
+In traditional Western landscape painting since the Renaissance, the horizon line anchored the viewer's orientation in three-dimensional space. Monet progressively lifted, tilted, and finally eradicated the horizon.
+
+In the late *Grandes Décorations* now enshrined at the Musée de l'Orangerie in Paris:
+- The water surface fills the entire visual field from top to bottom.
+- The viewer looks down into the pond while simultaneously looking up into the reflected sky, clouds, and overhanging willow fronds.
+- Space becomes non-Euclidean, liquid, and multidimensional.
+
+> "A landscape does not exist in its own right, since its appearance changes at every moment; but the surrounding atmosphere brings it to life." — *Claude Monet*
+
+### The Cataracts and Color Abstraction
+
+As nuclear cataracts clouded Monet’s crystalline lenses in the 1910s and 1920s, his color palette shifted dramatically toward fiery rusts, cobalt blues, and violent ochres. The brushstrokes thickened into visceral gestures, foreshadowing Abstract Expressionism by three decades.`,
+      ar: `### ملاذ جيفرني
+
+في عام 1890، بعد استقراره في بلدة جيفرني بمنطقة نورماندي، قام كلود مونيه بتحويل مسار نهر إبت لإنشاء حديقته المائية الشهيرة. زرع أشجار الصفصاف والزنابق الهجينة. لم تكن مجرد حديقة عادية، بل مختبراً بصرياً حياً لدراسة تغيرات الضوء الجوي من الفجر حتى الغسق.
+
+### إلغاء خط الأفق
+
+في تقاليد رسم المناظر الطبيعية الغربية منذ عصر النهضة، كان خط الأفق يرسخ موقع المشاهد في فضاء ثلاثي الأبعاد. لكن مونيه تعمد رفع خط الأفق تدريجياً ثم أزاله تماماً.
+
+في لوحات الزخارف الكبرى المعروضة اليوم في متحف الأورانجيري بباريس:
+- يملأ سطح الماء المجال البصري بأكمله من الحافة إلى الحافة.
+- يجد الناظر نفسه ينظر إلى عمق البركة وفي الوقت ذاته إلى انعكاس السحاب والصفصاف على سطحها.
+- يتحول الفضاء إلى نسيج مائي حر، سيال، ومتعدد الأبعاد.
+
+> "المنظر الطبيعي لا وجود له بذاته المستقلة، إذ يتغير مظهره في كل طرفة عين؛ لكن الغلاف الجوي المحيط به هو ما يبث فيه الحياة." — *كلود مونيه*
+
+### مرض الساد والتجريد اللوني
+
+مع إصابة مونيه بمرض الساد (الماء الأبيض) في عينيه، تحولت لوحاته نحو تدرجات الصدأ الملتهب والأزرق الكوبالتي والأصفر المغري العنيف. تحولت ضربات الفرشاة إلى حركات حسية تعبيرية مهدت للفن التجريدي قبل ظهوره بثلاثة عقود كاملة.`
+    },
+    sources: [
+      'Musée de l\'Orangerie: Monet’s Water Lilies Master Catalog',
+      'Wildenstein, Daniel: "Monet: Or the Triumph of Impressionism"',
+      'Metropolitan Museum of Art Journal: Late Works of Claude Monet'
+    ],
+    metadata: {
+      medium: 'Oil on canvas (Monumental Curved Panels)',
+      period: 'Late Impressionism / Proto-Abstract Expressionism',
+      year: '1914–1926',
+      galleryRoom: 'Salle de l\'Orangerie Oval Salon, Paris',
+      provenance: 'Bequest to the French State on Armistice Day, 1918'
+    }
+  },
+  {
+    id: 'renaissance-linear-perspective',
+    category: 'art',
+    tags: ['Renaissance', 'Geometry', 'Brunelleschi', 'Da Vinci', 'Art History'],
+    coverImage: 'https://images.unsplash.com/photo-1577720643272-265f09367456?auto=format&fit=crop&w=1400&q=80',
+    author: 'Prof. Matteo Bellini, Florence Academy',
+    publicationDate: '2026-02-08',
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: 'The Geometry of Vision: Brunelleschi and the Renaissance Perspective Revolution',
+      ar: 'هندسة الرؤية: برونليسكي وثورة المنظور الخطي في عصر النهضة',
+    },
+    subtitle: {
+      en: 'When architects and painters merged Euclidean optics with canvas planes, creating the illusion of infinite spatial depth.',
+      ar: 'عندما دمج المعماريون والرسامون البصريات الإقليدية مع مسطح اللوحة لصنع إيهام العمق اللانهائي.',
+    },
+    shortDescription: {
+      en: 'Discover the mirror experiment in Florence Piazza del Duomo that forever transformed painting from flat Byzantine iconography to mathematical three-dimensional illusion.',
+      ar: 'اكتشف تجربة المرآة الشهيرة في ساحة كاتدرائية فلورنسا التي غيرت مسار الرسم من الأيقونة البيزنطية المسطحة إلى الفضاء الرياضي المجسم.',
+    },
+    fullContent: {
+      en: `### The Mirror in the Piazza
+
+Around 1415, Filippo Brunelleschi stood inside the portal of the Florence Cathedral facing the Baptistery of San Giovanni. Holding a small panel painted with the Baptistery and a peephole drilled through its vanishing point, he held up a mirror to reflect his painting. By flipping the mirror back and forth, observers could not distinguish between the real building and the painted projection.
+
+Brunelleschi had formulated the mathematical principles of **linear perspective**:
+1. All orthogonal lines parallel to the viewer's line of sight converge at a single vanishing point on the horizon.
+2. Apparent object dimensions diminish proportionally to the distance from the observer ($1/d$).
+
+### Masaccio’s Holy Trinity
+
+In 1427, the young painter Masaccio applied Brunelleschi’s system to the fresco of the *Holy Trinity* in the church of Santa Maria Novella. For the first time, parishioners felt as though a real barrel-vaulted Roman chapel had been carved into the solid masonry wall.
+
+### Leon Battista Alberti and Da Vinci
+
+Leon Battista Alberti codified these rules in his seminal 1435 treatise *De pictura*, defining the canvas as an "open window" (*finestra aperta*) into reality. Leonardo da Vinci later expanded this into **atmospheric perspective**, noting that distant mountains appear bluer and less defined due to atmospheric moisture.`,
+      ar: `### المرآة في ساحة الكاتدرائية
+
+قرابة عام 1415، وقف المعماري فيليبو برونليسكي عند بوابة كاتدرائية فلورنسا مقابلاً لمعمودية سان جوفاني. حاملاً لوحة رسم عليها المعمودية وثقب فيها فجوة صغيرة عند نقطة التلاشي، رفع مرآة عاكسة أمام اللوحة. وبإزاحة المرآة وإعادتها، عجز المشاهدون عن التمييز بين المبنى الحقيقي وانعكاس اللوحة المرسومة.
+
+صاغ برونليسكي بذلك القواعد الرياضية لـ **المنظور الخطي**:
+1. تلتقي جميع الخطوط المتعامدة الموازية لخط بصر الرائي في نقطة تلاشٍ واحدة على خط الأفق.
+2. تتضاءل الأبعاد الظاهرية للأجسام تناسباً مع بعدها عن عين المشاهد ($1/d$).
+
+### الثالوث الأقدس لمازاتشو
+
+في عام 1427، طبق الرسام الشاب مازاتشو نظام برونليسكي في جدارية *الثالوث الأقدس* بكنيسة سانتا ماريا نوفيلا. ولأول مرة في تاريخ الفن، شعر المصلون بأن قبو كنيسة روماني قد تم نحته فعلياً داخل الجدار الحجري الأصم.
+
+### ألبرتي ودافنشي
+
+قام ليون باتيستا ألبرتي بتقنين هذه القواعد في كتابه الرائد *عن الرسم* (1435)، واصفاً اللوحة بأنها "نافذة مفتوحة" على العالم. ثم طور ليوناردو دافنشي المنظور الجوي عبر ملاحظة بهتان زرقة الجبال البعيدة بفعل رطوبة الهواء.`
+    },
+    sources: [
+      'Alberti, Leon Battista: "De pictura" (1435)',
+      'Vasari, Giorgio: "Lives of the Most Excellent Painters, Sculptors, and Architects"',
+      'Kemp, Martin: "The Science of Art: Optical Themes in Western Art from Brunelleschi to Seurat"'
+    ],
+    metadata: {
+      medium: 'Fresco and Oil Tempera on Poplar',
+      period: 'Early Italian Renaissance (Quattrocento)',
+      year: 'c. 1415–1428',
+      galleryRoom: 'Santa Maria Novella & Uffizi Galleries, Florence',
+      provenance: 'Florentine Civic and Ecclesiastical Commissions'
+    }
+  },
+
+  // ==================== LITERATURE & PHILOSOPHY ====================
+  {
+    id: 'ibn-khaldun-muqaddimah',
+    category: 'philosophy',
+    tags: ['Ibn Khaldun', 'Philosophy of History', 'Sociology', 'Asabiyyah'],
+    coverImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1400&q=80',
+    author: 'Dr. Rashid Al-Husseini, Islamic Thought Studies',
+    publicationDate: '2026-02-18',
+    readingTime: 7,
+    featured: true,
+    title: {
+      en: 'Ibn Khaldun’s Muqaddimah: The Cyclical Rise and Fall of Empires',
+      ar: 'مقدمة ابن خلدون: فلسفة التاريخ والعصبية ودورات صعود الحضارات وسقوطها',
+    },
+    subtitle: {
+      en: 'The 14th-century North African thinker who founded sociology and demystified how social cohesion transforms desert tribes into ruling dynasties.',
+      ar: 'المفكر الأندلسي المغاربي الذي أسس علم العمران البشري وفكك أسرار تحول العصبية القبلية إلى ملك وحضارة ثم اضمحلال.',
+    },
+    shortDescription: {
+      en: 'Centuries before Machiavelli, Vico, and Marx, Ibn Khaldun formulated the universal laws of economic vitality, urban luxury, and political decay inside the fortress of Qal\'at Ibn Salama.',
+      ar: 'قبل قرون من ميكافيلي وفيكو وماركس، صاغ ابن خلدون القوانين الكونية للحراك الاقتصادي والترف الحضاري وسقوط الدول داخل قلعة بني سلامة.',
+    },
+    fullContent: {
+      en: `### The Retreat at Qal'at Ibn Salama
+
+In 1375, weary of the turbulent intrigue in the courts of Fez, Granada, and Tunis, Abd al-Rahman Ibn Khaldun retreated to the remote fortress of Qal'at Ibn Salama in modern Algeria. There, for four secluded years, he composed the *Muqaddimah* (Prolegomena)—an intellectual monument that transformed historiography from dry chronicling into an empirical science: *'Ilm al-'Umran* (The Science of Human Civilization).
+
+### The Concept of Asabiyyah (Social Cohesion)
+
+At the heart of Ibn Khaldun’s thesis lies **Asabiyyah**—the organic solidarity, mutual trust, and shared purpose forged in harsh desert existence:
+
+> "Civilization has its natural span like the life of an individual. A dynasty rarely passes the life of three generations." — *Ibn Khaldun*
+
+### The Five Stages of the State
+
+1. **Conquest and Establishment:** Unbending Asabiyyah enables hardy nomad tribes to conquer weakened, decadent urban states.
+2. **Autocracy and Consolidation:** The ruler monopolizes authority, relies on mercenary guards, and distances kin.
+3. **Leisure and Magnificence:** Wealth accumulates; grand monuments, luxurious palaces, and flourishing arts define the zenith.
+4. **Contentment and Stagnation:** Governance becomes inert tradition. Expenditures outstrip revenues; taxation escalates, choking commerce.
+5. **Decay and Extinction:** Extravagance consumes the treasury. Asabiyyah completely dissolves. A new vigor from the periphery sweeps the dynasty into history.`,
+      ar: `### خلوة قلعة بني سلامة
+
+في عام 1375م، بعد أن أنهكته صراعات البلاط في فاس وغرناطة وتونس، اعتزل عبد الرحمن بن خلدون في قلعة بني سلامة النائية بالجزائر. وهناك، في عزلة تامة دامت أربع سنوات، خط مؤلفه الخالد *المقدمة*؛ العمل الذي نقل كتابة التاريخ من مجرد سرد للحوادث إلى علم تجريبي صارم: *علم العمران البشري*.
+
+### مفهوم العصبية وروح التماسك
+
+يرتكز فكر ابن خلدون على مفهوم **العصبية**؛ تلك الرابطة العضوية والتضامن القوي الذي تصقله خشونة العيش في البادية:
+
+> "الدول لها أعمار طبيعية كما للأشخاص، وعمر الدولة في الغالب لا يعدو ثلاثة أجيال." — *ابن خلدون*
+
+### أطوار الدولة الخمسة
+
+1. **الظفر والاستيلاء:** حيث تمكن العصبية الصافية القبائل البدوية القوية من إخضاع الحواضر المترفة.
+2. **الاستبداد وتثبيت الملك:** ينفرد الحاكم بالسلطة، ويبعد أهل عصبيته لصالح المرتزقة والبطانة.
+3. **الفراغ والدعة:** مرحلة جباية الثمرات وتشييد الصروح المعمارية العظيمة ورعاية الفنون والصنائع.
+4. **القنوع والمسالمة:** يتحول الحكم إلى تقليد أعمى لأسلافه مع جمود سياسي وعسكري.
+5. **الإسراف والزوال:** يبتلع الترف خزائن الدولة، وتفرض الضرائب المرهقة، وتتلاشى العصبية تماماً حتى تسقط الدولة أمام عصبية ناشئة جديدة.`
+    },
+    sources: [
+      'Ibn Khaldun: "The Muqaddimah: An Introduction to History" (Trans. Franz Rosenthal)',
+      'Toynbee, Arnold: "A Study of History: Appreciation of Ibn Khaldun\'s Philosophy"',
+      'Journal of Middle Eastern Studies: Asabiyyah and Modern Social Capital'
+    ],
+    metadata: {
+      era: 'Islamic Golden Age / 14th Century (Mamluk & Marinid Period)',
+      keyQuote: {
+        en: 'The past resembles the future more than one drop of water resembles another.',
+        ar: 'الماضي أشبه بالآتي من الماء بالماء.'
+      },
+      originalLanguage: 'Arabic (العربية الفصحى)',
+      corePremise: {
+        en: 'Civilizations follow organic cycles dictated by social solidarity and economic morality.',
+        ar: 'تخضع الحضارات لدورات عضوية تحكمها العصبية الاجتماعية والعدالة الاقتصادية.'
+      }
+    }
+  },
+  {
+    id: 'nietzsche-will-to-meaning',
+    category: 'philosophy',
+    tags: ['Friedrich Nietzsche', 'Existentialism', 'Nihilism', 'Morality'],
+    coverImage: 'https://images.unsplash.com/photo-1507842229451-79b1be886a20?auto=format&fit=crop&w=1400&q=80',
+    author: 'Clara Weidmann, Philosophy Chair',
+    publicationDate: '2026-01-25',
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: 'Friedrich Nietzsche: The Twilight of Idols and the Will to Overcome',
+      ar: 'فريدريش نيتشه: غسق الأوثان وإرادة التجاوز نحو معنى جديد',
+    },
+    subtitle: {
+      en: 'Diagnosing European nihilism not as an end, but as a crucible for radical self-creation and amor fati.',
+      ar: 'تشخيص العدمية الأوروبية ليس كنهاية مأساوية، بل كبوتقة لخلق الذات وإرادة الحياة ومحبة القدر.',
+    },
+    shortDescription: {
+      en: 'Explore Nietzsche’s solitary alpine walks in Sils Maria, his deconstruction of herd morality, and his provocative challenge: to live as though your life will recur for all eternity.',
+      ar: 'استكشف تأملات نيتشه في جبال سيلس ماريا السويسرية، وتفكيكه لأخلاق القطيع، وتحديه الفلسفي المثير: العود الأبدي وحب القدر.',
+    },
+    fullContent: {
+      en: `### The Hermit of Sils Maria
+
+During the late 19th century, suffering from near-blindness, migraine attacks, and profound loneliness, Friedrich Nietzsche wandered the Upper Engadine Valley in Switzerland. Far from the academic halls of Basel, his philosophy took on the sharpness of Alpine granite.
+
+### The Death of God and the Threat of Nihilism
+
+When Nietzsche proclaimed through the madman in *The Gay Science* that "God is dead," he was delivering a sober sociological diagnosis. The Enlightenment had dismantled metaphysical foundations, but European culture had not yet faced the terrifying abyss left in their wake: universal nihilism.
+
+### The Counter-Weights
+
+1. **Amor Fati (Love of Fate):** Not mere passive resignation to suffering, but enthusiastic affirmation of every agony and joy as indispensable to the tapestry of existence.
+2. **The Eternal Recurrence:** A psychological thought experiment—if a demon whispered that you must live this exact life over and over for all eternity, would you fall down in despair, or rejoice that life is so profoundly worthy?
+3. **The Übermensch:** The individual who resists cultural conformity, writes their own values, and transforms chaos into artistic mastery.`,
+      ar: `### ناسك سيلس ماريا
+
+في أواخر القرن التاسع عشر، وبينما كان يعاني من ضعف حاد في البصر وصداع مزمن وعزلة قاسية، سار فريدريش نيتشه وحيداً في وادي إنغادين بسويسرا. بعيداً عن صخب قاعات بازل الأكاديمية، اكتسبت كتاباته صلابة صخور الألب ونقاء هوائها.
+
+### موت الإله وشبح العدمية
+
+عندما أعلن نيتشه على لسان الرجل المجنون في كتابه *العلم المرح* عبارته الشهيرة، لم يكن يحتفل، بل كان يقدم تشخيصاً سوسيولوجياً ونفسياً مروعاً. لقد هدمت حركة التنوير المرتكزات الميتافيزيقية القديمة، لكن المجتمعات لم تكن مستعدة بعد للهاوية التي خلفتها: العدمية الشاملة.
+
+### الركائز الفلسفية للنهوض
+
+1. **حب القدر (Amor Fati):** ليس مجرد استسلام سلبي للألم، بل تقبل كل تفصيل من تفاصيل الحياة، بآلامها وأفراحها، كجزء لا يتجزأ من بهاء الوجود.
+2. **العود الأبدي:** اختبار نفسي وفكري صارم؛ لو أن شيطاناً همس في أذنك بأنك ستعيش حياتك هذه ذاتها إلى ما لا نهاية بكل لحظاتها، هل ستنهار رعباً أم ستسجد ابتهاجاً بعظمة الحياة؟
+3. **الإنسان الأعلى (Übermensch):** الكائن الذي يكسر قوالب أخلاق القطيع السائدة، ويصنع قيمه الأخلاقية والجمالية الخاصة من داخل الفوضى.`
+    },
+    sources: [
+      'Nietzsche, Friedrich: "Thus Spoke Zarathustra" & "Ecce Homo"',
+      'Kaufmann, Walter: "Nietzsche: Philosopher, Psychologist, Antichrist"',
+      'Stanford Encyclopedia of Philosophy: Friedrich Nietzsche'
+    ],
+    metadata: {
+      era: 'Late 19th-Century Continental Philosophy',
+      keyQuote: {
+        en: 'He who has a why to live can bear almost any how.',
+        ar: 'من يملك سبباً يعيش من أجله، يمكنه أن يتحمل أي طريقة للعيش.'
+      },
+      originalLanguage: 'German (Deutsch)',
+      corePremise: {
+        en: 'The collapse of external moral dogmas demands sovereign, creative self-overcoming.',
+        ar: 'تداعي المسلمات الأخلاقية الخارجية يفرض على الإنسان تجاوُزاً ذاتياً خلاقاً وصنعاً لمعناه.'
+      }
+    }
+  },
+  {
+    id: 'library-of-alexandria-manuscripts',
+    category: 'literature',
+    tags: ['Library of Alexandria', 'Manuscripts', 'Ancient Greece', 'Papyrus'],
+    coverImage: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1400&q=80',
+    author: 'Aetheria Curatorial Circle',
+    publicationDate: '2026-01-12',
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: 'The Lost Papyrus: Inside the Great Library of Alexandria',
+      ar: 'أوراق البردي المفقودة: في رحاب مكتبة الإسكندرية الكبرى',
+    },
+    subtitle: {
+      en: 'How Ptolemaic scholars collected, transcribed, and curated half a million scrolls to build humanity’s first universal mind.',
+      ar: 'كيف جمع ونسخ علماء العصر البطلمي نصف مليون لفافة بردي لتشييد أول عقل كوني موحد للإنسانية.',
+    },
+    shortDescription: {
+      en: 'Explore the mouseion, the royal mandate requiring every ship entering Alexandria harbor to surrender books for copying, and the tragic mythologies of its multi-century decline.',
+      ar: 'استكشف الميوسيون (دار الحكمة)، والمرسوم الملكي بمصادرة كتب السفن لنسخها، والحقائق التاريخية وراء أفول أعظم صرح معرفي في العصور القديمة.',
+    },
+    fullContent: {
+      en: `### The Ptolemaic Mandate
+
+Founded in the 3rd century BCE under Ptolemy I Soter, the Library of Alexandria was not an isolated repository of texts, but part of a royal research institution—the *Mouseion* (Temple of the Muses). Located within the royal quarter of Alexandria facing the Mediterranean, it housed scholars subsidized with state stipends, private gardens, and lecture halls.
+
+The crown was relentless in its acquisition:
+- Royal agents traveled to Athens, Rhodes, and Babylon to purchase scrolls.
+- By royal decree, any ship docking in Alexandria’s harbor had to surrender all books aboard. Scribes made hasty papyrus copies; the original stayed in the library, while the copy was politely handed back to the ship owner.
+
+### Pioneers of the Mouseion
+
+- **Eratosthenes of Cyrene:** Accurately computed the Earth’s circumference using solar shadows in Alexandria and Syene.
+- **Euclid:** Formalized the axioms of plane geometry in *The Elements*.
+- **Callimachus:** Invented the *Pinakes*—a 120-volume bibliographic catalog that laid the foundation for modern library science.
+
+### The Myth of a Single Blaze
+
+Popular culture often attributes the destruction of the library to a single catastrophic fire set by Julius Caesar in 48 BCE. In truth, Caesar’s fire damaged dockside warehouses. The true demise was a gradual erosion over centuries—budget cuts, civil wars, and imperial purges that starved the institution of ink and parchment.`,
+      ar: `### المرسوم البطلمي الصارم
+
+تأسست مكتبة الإسكندرية في القرن الثالث قبل الميلاد في عهد بطليموس الأول سوتير، ولم تكن مجرد مستودع للكتب، بل جزءاً من مؤسسة بحثية ملكية متكاملة هي *الميوسيون* (معبد ربات الفنون والحكمة). أقيمت في الحي الملكي بالإسكندرية المطل على البحر المتوسط، وضمت باحثين برعاية حكومية كاملة وحدائق خاصة وقاعات للمناظرات.
+
+كان البلاط الملكي شرهاً في اقتناء المخطوطات:
+- جاب رسل الملك أسواق أثينا ورودس وبابل لشراء المخطوطات النادرة.
+- فرض مرسوم ملكي على كل سفينة ترسو في ميناء الإسكندرية تسليم ما تحمله من كتب لنسخها؛ وكان النساخ يقدمون النسخة لأصحاب السفينة ويحتفظون بالأصل داخل المكتبة!
+
+### رواد دار الحكمة
+
+- **إراتوستينس القيرواني:** قاس محيط كوكب الأرض بدقة مذهلة عبر قياس زوايا ظلال الشمس بين الإسكندرية وأسوان.
+- **إقليدس:** صاغ بديهيات الهندسة المستوية في كتابه الخالد *الأصول*.
+- **كاليماخوس:** ابتكر *البيناتكس* (Pinakes)؛ فهرساً ببليوغرافياً في 120 مجلداً شكل أساس علم الفهارس الحديث.
+
+### أسطورة الحريق الواحد
+
+كثيراً ما تصوّر الثقافة الشعبية ضياع المكتبة في حريق درامي واحد أضرمه يوليوس قيصر عام 48 ق.م. والحقيقة التاريخية تثبت أن حريق قيصر نال من مستودعات الميناء، بينما تلاشى هذا الصرح المعرفي تدريجياً عبر قرون طويلة من الإهمال المالي والاضطرابات السياسية.`
+    },
+    sources: [
+      'Casson, Lionel: "Libraries in the Ancient World"',
+      'Canfora, Luciano: "The Vanished Library: A Wonder of the Ancient World"',
+      'Journal of Hellenic Studies: The Mouseion of Alexandria'
+    ],
+    metadata: {
+      era: 'Hellenistic / Ptolemaic Era (c. 285 BCE)',
+      originalLanguage: 'Ancient Greek (Ἑλληνική)',
+      corePremise: {
+        en: 'The audacious first attempt to gather the entirety of human knowledge under one roof.',
+        ar: 'أول محاولة جسورة في تاريخ البشرية لجمع وتدوين شتات المعرفة الإنسانية تحت سقف واحد.'
+      }
+    }
+  },
+
+  // ==================== SCIENCE ====================
+  {
+    id: 'crispr-cas9-genome-revolution',
+    category: 'science',
+    tags: ['Genetics', 'CRISPR', 'Biotechnology', 'Medicine'],
+    coverImage: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=1400&q=80',
+    author: 'Dr. Sarah Lin, Molecular Genetics',
+    publicationDate: '2026-01-30',
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: 'CRISPR-Cas9: Rewriting the Code of Life and Bioethical Horizons',
+      ar: 'كريسبر-كاس9: إعادة كتابة شفرة الحياة والآفاق الأخلاقية للتحرير الجيني',
+    },
+    subtitle: {
+      en: 'How an ancient bacterial immune defense became molecular scissors capable of curing sickle cell disease and redefining human evolution.',
+      ar: 'كيف تحول سلاح مناعي بكتيري عتيق إلى مقص جزيئي قادر على علاج فقر الدم المنجلي وإعادة تشكيل مسار التطور.',
+    },
+    shortDescription: {
+      en: 'From Emmanuelle Charpentier and Jennifer Doudna’s Nobel breakthrough to in vivo base editing, explore the precise machinery rewriting DNA strands with single-nucleotide accuracy.',
+      ar: 'من إنجاز نوبل لشاربنتييه ودودنا إلى تقنيات تعديل القواعد النيتروجينية الحية، تعرف على الآلية الجزيئية التي تعيد كتابة الحمض النووي بدقة فائقة.',
+    },
+    fullContent: {
+      en: `### The Microbial Immune Memory
+
+Long before molecular biologists wielded gene editing in sterile rooms, single-celled bacteria and archaea were waging war against invading bacteriophage viruses. Bacteria developed **CRISPR** (Clustered Regularly Interspaced Short Palindromic Repeats)—an archival genomic scrapbook where fragments of viral DNA are archived as spacer sequences.
+
+When a recurring virus attacks, the bacterium transcribes this spacer into a guide RNA (gRNA), which escorts an endonuclease enzyme (**Cas9**) to inspect the viral genome. Finding a complementary match, Cas9 unzips the double helix and slices both strands with surgical fatality.
+
+### The Precision Revolution
+
+In 2012, Jennifer Doudna and Emmanuelle Charpentier proved that this system could be reprogrammed. By simply synthesizing a custom 20-nucleotide guide RNA, scientists could direct Cas9 to any location in the 3.2 billion base pairs of the human genome.
+
+### Modern Horizons: Prime Editing & Ethics
+
+- **Base and Prime Editing:** Advances that allow transmuting single letters (e.g., C to T or A to G) without causing dangerous double-strand DNA breaks.
+- **Therapeutic Approvals:** Approved therapies for sickle cell anemia and beta-thalassemia represent the first clinical cures directly written into patient hematopoietic stem cells.
+- **The Germline Frontier:** Strict international consensus bars heritable edits in human embryos, prioritizing safety and equity.`,
+      ar: `### الذاكرة المناعية الميكروبية
+
+قبل فترة طويلة من استخدام علماء الأحياء الجزيئية لتقنيات تعديل الجينات، كانت البكتيريا وحيدة الخلية تخوض حروباً شرسة للبقاء ضد الفيروسات الغازية. طورت البكتيريا نظام **CRISPR**؛ وهو بمثابة أرشيف جينومي تحفظ فيه مقاطع من الحمض النووي للفيروسات المهزومة كسلسلة من الفواصل المتكررة.
+
+وعندما يهاجم فيروس مماثل مجدداً، تنسخ البكتيريا هذا الفاصل إلى حمض نووي ريبوزي دليلي (gRNA)، يرشد إنزيماً قاطعاً (**Cas9**) لتمشيط جينوم الفيروس. وعند تطابق التسلسل، يفك الإنزيم الشريط المزدوج ويقطعه بدقة جراحية قاضية.
+
+### ثورة الدقة الجزيئية
+
+في عام 2012، أثبتت جينيفر دودنا وإيمانويل شاربنتييه إمكانية إعادة برمجة هذا النظام الصناعي. وبمجرد تصميم شريط دليلي مكون من 20 حرفاً نيتروجينياً، بات بإمكان العلماء توجيه إنزيم Cas9 إلى أي موضع محدد بدقة متناهية عبر 3.2 مليار زوج من القواعد في الجينوم البشري.
+
+### الآفاق المعاصرة والأخلاقيات
+
+- **تعديل القواعد والتعديل الأولي (Prime Editing):** تقنيات متطورة تتيح تبديل حرف نووي واحد دون الحاجة لكسر الشريطين معاً.
+- **الانتصارات العلاجية:** علاجات معتمدة رسمياً لفقر الدم المنجلي وثلاسيميا بيتا تمثل أولى الشفاءات الجينية المكتوبة مباشرة في خلايا المرضى.
+- **المحاذير الأخلاقية:** إجماع علمي دولي صارم يمنع التعديلات الوراثية على الأجنة البشرية حفاظاً على كرامة النسل البشري.`
+    },
+    sources: [
+      'Doudna, Jennifer & Sternberg, Samuel: "A Crack in Creation: Gene Editing and the Unthinkable Power to Control Evolution"',
+      'New England Journal of Medicine: Clinical Trial Outcomes of CRISPR Therapeutics for Sickle Cell',
+      'Nature Biotechnology: Prime and Base Editing Innovations'
+    ],
+    metadata: {
+      techStack: ['Guide RNA Synthesis', 'Cas9 Endonuclease', 'Prime Editing', 'Viral Vector Delivery'],
+      breakthroughType: 'Targeted Genomic Engineering',
+      impactScore: 97,
+      status: 'Active Clinical Medicine'
+    }
+  },
+
+  // ==================== BIOGRAPHIES & GREAT MINDS ====================
+  {
+    id: 'ibn-al-haytham-father-of-optics',
+    category: 'science',
+    tags: ['Biographies', 'Ibn al-Haytham', 'Optics', 'Scientific Method', 'Scholars'],
+    coverImage: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1400&q=80',
+    author: 'Aetheria Curatorial Circle',
+    publicationDate: '2026-02-14',
+    readingTime: 8,
+    featured: true,
+    title: {
+      en: 'Al-Hasan Ibn al-Haytham: The Father of Modern Optics and the Empirical Method',
+      ar: 'الحسن بن الهيثم: أمير البصريات ومؤسس المنهج العلمي التجريبي',
+    },
+    subtitle: {
+      en: 'How an 11th-century polymath under house arrest in Cairo refuted Greek theories of vision and forged modern experimental science.',
+      ar: 'كيف نقض عالم البصرة والقاهرة في القرن الحادي عشر نظريات الإغريق حول الرؤية، وشيّد المنهج التجريبي الصارم القائم على الشك والاختبار.',
+    },
+    shortDescription: {
+      en: 'Renowned in Europe as Alhazen, Ibn al-Haytham revolutionized physics with his seminal Kitab al-Manazir (Book of Optics), proving light travels into the eye and establishing the dark chamber (camera obscura).',
+      ar: 'المعروف في اللاتينية باسم (Alhazen)؛ أحدث ابن الهيثم ثورة علمية كبرى بكتابه الخالد «المناظر»، مبرهناً أن الضوء ينعكس إلى العين لا منها، ومبتكراً مبدأ القُمرة المظلمة.',
+    },
+    fullContent: {
+      en: `### The Solitary Crucible of Cairo
+
+Born in Basra in 965 CE (354 AH), al-Hasan Ibn al-Haytham lived through the golden age of Islamic scholarship. Summoned to Cairo by the Fatimid Caliph al-Hakim bi-Amr Allah to construct a dam regulating the annual floods of the Nile, Ibn al-Haytham surveyed the terrain near Aswan and realized the engineering was unfeasible with existing technologies. To escape royal retribution, he feigned illness and was placed under house arrest near Al-Azhar Mosque for over a decade.
+
+Rather than succumbing to confinement, he turned his room into a laboratory of darkness and rays.
+
+### Dismantling the Greek Paradigm
+
+For over a millennium, Euclid and Ptolemy had maintained the "emission theory" of vision—that the eye emits invisible rays that reach out and touch objects. Ibn al-Haytham dismantled this mathematically and experimentally:
+1. **Intromission Theory:** He proved that light reflects off objects and enters the cornea through the lens. The sensation of blinding pain caused by looking at the sun demonstrated that rays are external inputs into the ocular system.
+2. **The Camera Obscura (*Al-Bayt al-Muzlim*):** By observing light piercing a pinhole in his shuttered window, he projected the inverted image of the illuminated street outside onto a white wall, establishing the foundation of photography and optical projection.
+3. **Refraction and Reflection:** Through meticulously graduated bronze discs and glass globes filled with water, he measured the angles of incidence and refraction, discovering atmospheric refraction causing stars to appear above their actual astronomical positions.
+
+### The True Father of the Scientific Method
+
+Centuries before Francis Bacon and René Descartes, Ibn al-Haytham formulated the uncompromising philosophy of scientific skepticism:
+
+> *"The seeker after the truth is not one who studies the writings of the ancients and, following his natural disposition, puts his trust in them, but rather the one who suspects his faith in them and questions what he gathers from them, the one who submits to argument and demonstration, and not to the sayings of a human being whose nature is fraught with all kinds of imperfection and deficiency."* — **Kitab al-Manazir (Book of Optics)**
+
+His legacy laid the direct groundwork for Roger Bacon, Witelo, Kepler, and Newton, bridging classical antiquity with modern empirical science.`,
+      ar: `### خلوة القاهرة وعبقرية الحصار
+
+ولد أبو علي الحسن بن الحسن بن الهيثم في البصرة بالعراق عام 965 م (354 هـ). كان عالماً موسوعياً نادراً في الرياضيات والفيزياء والفلك والطب. استدعاه الخليفة الفاطمي الحاكم بأمر الله إلى القاهرة لتنظيم فيضان النيل عبر سد عظيم؛ وعندما عاين الموقع قرب أسوان، أيقن باستحالة المشروع بالإمكانيات الهندسية لزمانه. وإيثاراً للسلامة من بطش الحاكم، تظاهر بالجنون واعتزل في بيته قرب جامع الأزهر في إقامة جبرية استمرت أكثر من عقد.
+
+في تلك العتمة، حوّل ابن الهيثم محبسه إلى مختبر رائد لدراسة الضوء، وأنجز سفره الخالد: **كتاب المناظر**.
+
+### هدم النموذج الإغريقي وبناء علم البصريات
+
+ظل العالم لأكثر من ألف عام أسيراً لنظرية "الانبعاث" التي قال بها إقليدس وبطليموس، والتي زعمت أن العين تبعث أشعة تمتد لتتحسس الأجسام المرئية. أسقط ابن الهيثم هذا الوهم برهاناً وتجربة:
+1. **نظرية الانطباع (دخول الضوء):** أثبت بالتشريح والتجربة أن الرؤية تحدث بانعكاس أشعة الضوء من الأجسام إلى داخل العين، وأن ألم العين عند النظر للشمس يثبت أن المؤثر وارد من الخارج لا صادر من الداخل.
+2. **القمرة المظلمة (Camera Obscura):** لاحظ تسلل الضوء عبر ثقب صغير في جدار غرفته ليرسم صورة مقلوبة للأشجار والأشخاص في الخارج على الجدار المقابل، واضعاً أول أساس عملي لكاميرات التصوير عبر التاريخ.
+3. **الانعكاس والانكسار:** صمم أدوات قياس دقيقة وأواني زجاجية مملوءة بالماء لدراسة انحناء الضوء، وحسب الارتفاع الجوي للشفق الشمسي، مبيناً ظاهرة الانكسار في الغلاف الجوي.
+
+### المنهج العلمي: ميزان الشك والبرهان
+
+قبل فرانسيس بيكون ورينيه ديكارت بقرون طويلة، صاغ ابن الهيثم دستوره الخالد في البحث العلمي:
+
+> *«إن طالب الحق ليس هو من ينظر في كتب الأقدمين فيحسن الظن بهم، بل طالب الحق هو من يتهم ظنه فيهم، ويقف فيما يفهمه عنهم، ويتبع الحجة والبرهان لا قول قائل، لأن الإنسان مجبول على أنواع النقص والنقصان... ونحن إذا سلكنا هذا المسلك، وأمعنا في البحث متجردين عن الهوى، انفتحت لنا وجوه الحقائق.»* — **مقدمة كتاب المناظر**
+
+نُقلت أبحاثه إلى اللاتينية باسم **Alhazen**، وتأثر به كبار فلاسفة الغرب من روجر بيكون وكبلر وإسحاق نيوتن، ليبقى اسمه رمزاً لانتصار العقل التجريبي.`
+    },
+    sources: [
+      'Ibn al-Haytham: "Kitab al-Manazir" (Book of Optics, Books I–VII)',
+      'Sabra, A.I.: "The Optics of Ibn al-Haytham: Books I–III: On Direct Vision"',
+      'UNESCO: International Year of Light & 1000 Years of Ibn al-Haytham',
+      'Lindberg, David C.: "Theories of Vision from Al-Kindi to Kepler"'
+    ],
+    metadata: {
+      isBiography: true,
+      personName: {
+        en: 'Al-Hasan Ibn al-Haytham (Alhazen)',
+        ar: 'الحسن بن الهيثم (الشيخ البصري)'
+      },
+      lifespan: '965 – 1040 CE (354 – 430 AH)',
+      fieldOfImpact: {
+        en: 'Optics, Experimental Physics, Scientific Epistemology, Astronomy',
+        ar: 'علم البصريات، الفيزياء التجريبية، المنهج العلمي، الفلك والرياضيات'
+      },
+      birthPlace: {
+        en: 'Basra (Abbasid Caliphate) — Flourished in Cairo (Fatimid Era)',
+        ar: 'البصرة (العراق) — ازدهر وتوفي في القاهرة (مصر)'
+      },
+      keyQuote: {
+        en: 'The seeker after truth is not one who puts his trust in the writings of the ancients, but rather the one who questions what he gathers from them and submits solely to argument and demonstration.',
+        ar: 'إن طالب الحق ليس هو من يحسن الظن بكتب الأقدمين، بل هو من يتهم ظنه فيهم ويتبع الحجة والبرهان دون سواهما.'
+      },
+      historicalEra: {
+        en: 'Golden Age of Islamic Science (10th–11th Century CE)',
+        ar: 'العصر الذهبي للحضارة الإسلامية (القرن الرابع والخامس الهجري)'
+      },
+      majorContributions: [
+        { en: 'Kitab al-Manazir (The Book of Optics in 7 Treatises)', ar: 'كتاب المناظر (سبع مقالات أرست علم الضوء)' },
+        { en: 'Invented the working principle of the Camera Obscura', ar: 'ابتكار مبدأ القُمرة المظلمة (أساس التصوير الحديث)' },
+        { en: 'First formal formulation of the systematic Empirical Method', ar: 'تأسيس المنهج العلمي التجريبي القائم على الفرضية والاختبار' },
+        { en: 'Formulation of Alhazen’s Problem in spherical geometry', ar: 'مسألة ابن الهيثم في علم المرايا والهندسة الكروية' }
+      ]
+    }
+  },
+  {
+    id: 'marie-curie-radioactivity-pioneer',
+    category: 'science',
+    tags: ['Biographies', 'Marie Curie', 'Physics', 'Chemistry', 'Nobel Laureate'],
+    coverImage: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1400&q=80',
+    author: 'Aetheria Curatorial Circle',
+    publicationDate: '2026-02-20',
+    readingTime: 7,
+    featured: false,
+    title: {
+      en: 'Marie Skłodowska-Curie: The Radiant Will and the Unveiling of the Atom',
+      ar: 'ماري سكلودوفسكا كوري: إشعاع الإرادة والتضحية في محراب الذرة',
+    },
+    subtitle: {
+      en: 'The legendary scientist who discovered Polonium and Radium, becoming the first person to win Nobel prizes in two distinct scientific disciplines.',
+      ar: 'العالمة الفذة التي كشفت عن البولونيوم والراديوم، وأول إنسان في التاريخ يحصد جائزتي نوبل في فرعين علميين مختلفين (الفيزياء والكيمياء).',
+    },
+    shortDescription: {
+      en: 'From clandestine underground universities in occupied Warsaw to isolating pitchblende ores in an unheated Paris shed, Marie Curie shattered gender barriers and laid the foundation for modern nuclear physics and oncology.',
+      ar: 'من الجامعة الطائرة السرية في وارسو المحتلة إلى استخلاص الراديوم في كوخ باريسي متجمد، كسرت ماري كوري القيود لتؤسس للفيزياء النووية والعلاج الإشعاعي للسرطان.',
+    },
+    fullContent: {
+      en: `### The Flying University of Warsaw
+
+Born Maria Skłodowska in Warsaw in 1867 under the oppressive rule of the Russian Empire, women were barred from higher education. Defiant, Maria and her sister attended the "Flying University"—an illegal clandestine network of lectures held in changing private homes after dark. Working as a governess to fund her studies, she arrived at the Sorbonne in Paris in 1891, surviving on bread and tea in a garret.
+
+### The Shed on Rue Lhomond
+
+Joining forces with physicist Pierre Curie, Marie investigated Henri Becquerel's mysterious uranium rays. Suspecting an unknown, intensely active substance in raw uranium ore (pitchblende), the Curies acquired tons of mining tailings from Bohemia. In a drafty wooden shed with no ventilation:
+- Over four years, Marie stirred boiling caldrons of industrial slag with heavy iron rods.
+- By 1898, they announced two new elements: **Polonium** (named after her native Poland) and **Radium** (from the Latin for ray).
+- By 1902, from tons of pitchblende, Marie isolated one-tenth of a gram of pure radium chloride, which glowed with an eerie blue-green luminescence in the dark.
+
+### Unyielding Legacy and Sacrifice
+
+Marie coined the term **Radioactivity**. In 1903, she shared the Nobel Prize in Physics with Pierre and Becquerel. In 1911, overcoming personal heartbreak and virulent xenophobia, she was awarded a solo Nobel Prize in Chemistry.
+
+During World War I, she engineered mobile X-ray units ("Petites Curies") and personally drove them to the front lines, saving thousands of wounded soldiers from amputations. She refused to patent her radium extraction technique, believing scientific discovery belonged freely to humanity. She died in 1934 from aplastic anemia caused by prolonged radiation exposure—her lab notebooks remain radioactive to this day.`,
+      ar: `### الجامعة الطائرة في وارسو
+
+ولدت ماريا سكلودوفسكا في وارسو عام 1867 في ظل الاحتلال الروسي الذي حرّم على الفتيات الالتحاق بالتعليم الجامعي. لم تستسلم الفتاة، بل شاركت مع شقيقتها في "الجامعة الطائرة"؛ وهي شبكة سرية غير قانونية من المحاضرات كانت تُعقد ليلاً في بيوت متبدلة هرباً من رقابة الشرطة. وعملت مربية لسنوات لتمويل دراستها حتى استطاعت السفر إلى باريس للالتحاق بجامعة السوربون عام 1891، حيث عاشت في غرفة علوية متواضعة تقتات على الخبز والشاي وتتفوق على جميع أقرانها.
+
+### كوخ شارع لوموند وعزل الراديوم
+
+التقت بالفيزيائي اللامع بيير كوري وتزوجا، وتوجها معاً لدراسة الأشعة الغامضة التي لاحظها هنري بيكريل في خامات اليورانيوم. شكّت ماري في أن خامات (البيتشبلند) تحتوي على عنصر مجهول ذي نشاط إشعاعي جبار يتجاوز اليورانيوم بكثير. وفي كوخ خشبي رطب يفتقر إلى أبسط شروط التدفئة والتهوية:
+- قلّبت ماري على مدى أربع سنوات مضنية أطناناً من الخامات المشعة في قدور حديدية ضخمة تحت دخان خانق.
+- في عام 1898، أعلنا اكتشاف عنصرين جديدين: **البولونيوم** (تكريماً لوطنها بولندا) و**الراديوم** (مشتق من الكلمة اللاتينية للشعاع).
+- في عام 1902، نجحت بمفردها في عزل عُشر غرام فقط من كلوريد الراديوم النقي بعد تصفية أطنان من الفوسفات، وكان هذا المقدار الضئيل يتوهج في ظلام الليل بضوء أزرق ساحر.
+
+### المجد الإنساني والشهادة في سبيل العلم
+
+ابتكرت ماري كوري مصطلح **«النشاط الإشعاعي» (Radioactivity)**. ونالت عام 1903 جائزة نوبل في الفيزياء مناصفة مع زوجها وبيكريل، ثم نالت منفردة عام 1911 جائزة نوبل في الكيمياء، لتصبح أول إنسان في تاريخ البشرية يحقق هذا الإنجاز المزدوج.
+
+وفي الحرب العالمية الأولى، جهزت سيارات إسعاف بأجهزة أشعة سينية متنقلة عُرفت بـ "كوري الصغيرة"، وقادتها بنفسها إلى جبهات القتال لتصوير شظايا الرصاص وإنقاذ أطراف الجنود الجرحى. ورفضت ماري تسجيل براءة اختراع لاستخلاص الراديوم كي يظل العلاج متاحاً للطب دون احتكار. وتوفيت عام 1934 بفقر الدم اللاتنسجي جراء تعرضها المديد للإشعاع، ولا تزال دفاتر أبحاثها حتى يومنا هذا تشع ضوءاً لا ينطفئ.`
+    },
+    sources: [
+      'Curie, Eve: "Madame Curie: A Biography"',
+      'Quinn, Susan: "Marie Curie: A Life"',
+      'Nobel Foundation: Archives of the 1903 Physics and 1911 Chemistry Prizes',
+      'American Institute of Physics: Marie Curie and the Science of Radioactivity'
+    ],
+    metadata: {
+      isBiography: true,
+      personName: {
+        en: 'Marie Skłodowska-Curie',
+        ar: 'ماري سكلودوفسكا كوري'
+      },
+      lifespan: '1867 – 1934 CE',
+      fieldOfImpact: {
+        en: 'Nuclear Physics, Radiochemistry, Oncology & Medicine',
+        ar: 'الفيزياء النووية، الكيمياء الإشعاعية، علاج الأورام والطب الإشعاعي'
+      },
+      birthPlace: {
+        en: 'Warsaw, Poland — Conducted research and lived in Paris, France',
+        ar: 'وارسو، بولندا — عاشت وأبدعت وتوفيت في باريس، فرنسا'
+      },
+      keyQuote: {
+        en: 'Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.',
+        ar: 'لا شيء في الحياة يستحق أن نخشاه، بل ينبغي فقط أن نفهمه. لقد حان الوقت لنفهم أكثر حتى يقل خوفنا.'
+      },
+      historicalEra: {
+        en: 'Late 19th & Early 20th Century Science Revolution',
+        ar: 'أواخر القرن التاسع عشر وبدايات القرن العشرين'
+      },
+      majorContributions: [
+        { en: 'Discovered Polonium and isolated Radium', ar: 'اكتشاف عنصري البولونيوم والراديوم المشعين' },
+        { en: 'Pioneered the theory and terminology of Radioactivity', ar: 'ابتكار مصطلح ومفهوم النشاط الإشعاعي' },
+        { en: 'Only person to win Nobel Prizes in two different scientific fields', ar: 'الشخص الوحيد الحائز على جائزتي نوبل في فرعين علميين مختلفين' },
+        { en: 'Deployed mobile battlefield radiography units in WWI', ar: 'ابتكار وتشغيل عربات الأشعة المتنقلة لإنقاذ الجرحى في الحرب العالمية الأولى' }
+      ]
+    }
+  },
+  {
+    id: 'ibn-sina-avicenna-prince-of-physicians',
+    category: 'science',
+    tags: ['Biographies', 'Avicenna', 'Medicine', 'Philosophy', 'Scholars'],
+    coverImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80',
+    author: 'Aetheria Curatorial Circle',
+    publicationDate: '2026-02-25',
+    readingTime: 8,
+    featured: false,
+    title: {
+      en: 'Ibn Sina (Avicenna): The Prince of Physicians and Master of Being',
+      ar: 'ابن سينا: الشيخ الرئيس وأمير الأطباء الذي علّم الشرق والغرب',
+    },
+    subtitle: {
+      en: 'The towering genius whose "Canon of Medicine" was the standard medical authority for half a millennium, and whose metaphysical philosophy shaped European scholasticism.',
+      ar: 'العبقري الموسوعي الذي ظل كتابه «القانون في الطب» المرجع الإلزامي لجامعات أوروبا لخمسة قرون كاملة، وصاحب كتاب «الشفاء» أعظم موسوعة فلسفية في العصر الوسيط.',
+    },
+    shortDescription: {
+      en: 'From memorizing the Quran at age ten to diagnosing the diseases of kings on horseback, Ibn Sina pioneered contagion theories, quarantine principles, and clinical neuropsychiatry.',
+      ar: 'من حفظ القرآن والمنطق في صباه إلى معالجة ملوك عصره وهو في ريعان شبابه، وضع ابن سينا أسس نظرية العدوى والحجر الصحي والطب النفسي الجسدي.',
+    },
+    fullContent: {
+      en: `### The Prodigy of Bukhara
+
+Abu Ali al-Husayn ibn Abd Allah ibn Sina, known to the Latin West as **Avicenna**, was born in 980 CE (370 AH) in Afshana near Bukhara (modern-day Uzbekistan). A prodigy endowed with photographic recall, he had mastered the Quran, Arabic poetry, mathematics, and Islamic jurisprudence before puberty. Turning to medicine, he remarked: *"Medicine is not one of the difficult sciences, and in a short time I excelled in it, so that physicians of high repute came to study under me."*
+
+At seventeen, he successfully treated the ruling Samanid Emir Nuh ibn Mansur of a mysterious malady that court doctors had failed to cure. In gratitude, the Emir granted him unfettered access to the fabled royal library of Bukhara.
+
+### Al-Qanun fi al-Tibb: The Medical Bible of Civilizations
+
+Ibn Sina’s monumental **The Canon of Medicine (*Al-Qanun fi al-Tibb*)** synthesized Greco-Roman, Persian, and Indian medical lore with his own rigorous empirical observations:
+1. **Contagion and Quarantine:** He recognized that airborne and waterborne micro-particles cause contagious diseases, establishing the mandatory 40-day quarantine period (*al-Arba'iniyya*, the etymological root of quarantine).
+2. **Clinical Pharmacology:** The Canon listed 760 medicinal drugs, detailing clinical trial protocols: tested on pure conditions, observed for contrary effects, and assessed across varying dosages.
+3. **Psychosomatic Medicine:** He diagnosed a prince dying of an unknown wasting illness by taking his pulse while reciting city street names; the sudden spike in heart rate revealed the secret love causing the melancholic breakdown.
+
+### Kitab al-Shifa: The Encyclopedia of Healing the Soul
+
+Parallel to medicine, Ibn Sina authored **The Book of Healing (*Kitab al-Shifa*)**, a massive encyclopedia of logic, physics, mathematics, and metaphysics. His famous "Floating Man" thought experiment proved self-consciousness exists independently of sensory input, anticipating Descartes' *Cogito* by six centuries.`,
+      ar: `### عبقرية بخارى الخارقة
+
+ولد أبو علي الحسين بن عبد الله بن سينا عام 980 م (370 هـ) في قرية أفشنة قرب بخارى. أوتي ذاكرة فوتوغرافية مذهلة وذكاءً حاداً؛ فأتم حفظ القرآن ودراسة الأدب والمنطق والهندسة قبل بلوغه العاشرة. وعندما اتجه إلى الطب، قال عبارته الشهيرة: *«وعلم الطب ليس من العلوم الصعبة، فلا جرم أني برزت فيه في أقل مدة، حتى بدأ فضلاء الأطباء يقرؤون علي علم الطب!»*
+
+وفي سن السابعة عشرة، داوى أمير الدولة السامانية نوح بن منصور من علة عجز عنها أطباء البلاط، فكافأه الأمير بفتح أبواب خزانة كتبه الملكية العامرة بنفائس المخطوطات التي لم يرها أحد.
+
+### القانون في الطب: إنجيل العلوم الطبية لأوروبا والشرق
+
+جمع ابن سينا في كتابه الخالد **«القانون في الطب»** شتات المعارف الطبية القديمة وأخضعها للمشاهدة والتجربة السريرية الدقيقة:
+1. **العدوى والحجر الصحي:** أدرك قبل ظهور المجاهر بقرون أن الأمراض السارية تنتقل عبر ذرات دقيقة تسبح في الهواء والماء، وأرسى مبدأ الحجر الصحي لأربعين يوماً (الأربعينية التي اشتُق منها مصطلح Quarantine).
+2. **التجارب الدوائية المنضبطة:** وضع في القانون بروتوكولات صارمة لاختبار الأدوية على الإنسان: اشتراط نقاء الدواء، وملاحظة استقرار الأثر العلاجي، وتحديد الجرعات وموانع الاستعمال لأكثر من 760 عقاراً نباتياً ومعدنياً.
+3. **الطب النفسي الجسدي (السيكوسوماتي):** أدرك ترابط الروح والجسد؛ وشخّص مرض أمير عجز الأطباء عن معرفة علته عبر قياس نبضات قلبه أثناء ذكر أسماء شوارع وبيوت المدينة، حتى اضطرب نبضه عند اسم بعينه، ليكشف عن عشقه السري الذي كان يفتك بجسده كآبةً وهزالاً.
+
+### كتاب الشفاء وإثبات الوجود
+
+ولم يقتصر نبوغه على مداواة الأبدان، بل ألّف موسوعة **«الشفاء»** في المنطق والفيزياء والرياضيات والميتافيزيقا. وقدّم فيها تجربة "الإنسان المعلق في الفضاء" التي أثبتت وجود الوعي والذات الإنسانية بمعزل عن الحواس، ممهداً لكوجيتو ديكارت بستة قرون كاملة.`
+    },
+    sources: [
+      'Ibn Sina: "Al-Qanun fi al-Tibb" (The Canon of Medicine, 5 Volumes)',
+      'Gutas, Dimitri: "Avicenna and the Aristotelian Tradition"',
+      'Encyclopaedia Iranica: Avicenna / Medicine and Philosophy',
+      'Rahman, Fazlur: "Avicenna’s Psychology"'
+    ],
+    metadata: {
+      isBiography: true,
+      personName: {
+        en: 'Abu Ali Ibn Sina (Avicenna)',
+        ar: 'أبو علي بن سينا (الشيخ الرئيس)'
+      },
+      lifespan: '980 – 1037 CE (370 – 428 AH)',
+      fieldOfImpact: {
+        en: 'Medicine, Psychosomatic Therapy, Metaphysical Philosophy, Logic',
+        ar: 'الطب السريري، الطب النفسي الجسدي، الفلسفة، المنطق والعلوم الطبيعية'
+      },
+      birthPlace: {
+        en: 'Afshana (Bukhara, Central Asia) — Died in Hamadan, Persia',
+        ar: 'أفشنة (قرب بخارى) — تنقل بين خوارزم وأصفهان وتوفي في همذان'
+      },
+      keyQuote: {
+        en: 'Illusion is half the disease, tranquility is half the cure, and patience is the first step toward healing.',
+        ar: 'الوهم نصف الداء، والاطمئنان نصف الدواء، والصبر أول خطوات الشفاء.'
+      },
+      historicalEra: {
+        en: 'Islamic Golden Age / 10th–11th Century Scholasticism',
+        ar: 'العصر الذهبي للحضارة الإسلامية (القرن الرابع والخامس الهجري)'
+      },
+      majorContributions: [
+        { en: 'Al-Qanun fi al-Tibb (The Canon of Medicine, standard text in Europe until 1650)', ar: 'القانون في الطب (المرجع الرئيسي لجامعات أوروبا حتى أواخر القرن السابع عشر)' },
+        { en: 'Kitab al-Shifa (The Book of Healing, philosophical encyclopedia)', ar: 'كتاب الشفاء (أكبر موسوعة فلسفية وعلمية كتبها رجل واحد في العصر الوسيط)' },
+        { en: 'Pioneered clinical drug testing standards and quarantine protocol', ar: 'تأسيس قواعد التجارب الدوائية السريرية وتطبيق نظام الحجر الصحي' },
+        { en: 'Formulated the Floating Man epistemological thought experiment', ar: 'برهان الإنسان المعلق في الهواء لإثبات جوهر الوعي بالذات' }
+      ]
+    }
+  }
+];
