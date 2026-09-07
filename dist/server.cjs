@@ -1,0 +1,1737 @@
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+
+// server.ts
+var import_config = require("dotenv/config");
+var import_express = __toESM(require("express"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_crypto = __toESM(require("crypto"), 1);
+var import_nodemailer = __toESM(require("nodemailer"), 1);
+var import_vite = require("vite");
+
+// src/data/seedArticles.ts
+var SEED_ARTICLES = [
+  // ==================== SPACE ====================
+  {
+    id: "james-webb-cosmic-dawn",
+    category: "space",
+    tags: ["Astrophysics", "James Webb", "Cosmology", "Galaxies"],
+    coverImage: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1400&q=80",
+    author: "Dr. Elena Vance, Astrophysics Institute",
+    publicationDate: "2026-03-15",
+    readingTime: 6,
+    featured: true,
+    title: {
+      en: "The Cosmic Dawn: How JWST Rewrote Early Universe Chronology",
+      ar: "\u0641\u062C\u0631 \u0627\u0644\u0643\u0648\u0646: \u0643\u064A\u0641 \u0623\u0639\u0627\u062F \u062A\u0644\u0633\u0643\u0648\u0628 \u062C\u064A\u0645\u0633 \u0648\u064A\u0628 \u0643\u062A\u0627\u0628\u0629 \u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0643\u0648\u0646 \u0627\u0644\u0645\u0628\u0643\u0631"
+    },
+    subtitle: {
+      en: "Spectroscopic observations reveal massive, luminous galaxies burning just 300 million years after the Big Bang.",
+      ar: "\u0623\u0631\u0635\u0627\u062F \u0637\u064A\u0641\u064A\u0629 \u062A\u0643\u0634\u0641 \u0639\u0646 \u0645\u062C\u0631\u0627\u062A \u0645\u0636\u064A\u0626\u0629 \u0648\u0630\u0627\u062A \u0643\u062A\u0644\u0629 \u0647\u0627\u0626\u0644\u0629 \u0627\u0634\u062A\u0639\u0644\u062A \u0628\u0639\u062F 300 \u0645\u0644\u064A\u0648\u0646 \u0633\u0646\u0629 \u0641\u0642\u0637 \u0645\u0646 \u0627\u0644\u0627\u0646\u0641\u062C\u0627\u0631 \u0627\u0644\u0639\u0638\u064A\u0645."
+    },
+    shortDescription: {
+      en: "For decades, standard cosmological models predicted early galaxies would be tiny, chaotic embryonic clusters. The James Webb Space Telescope shattered this paradigm with JADES-GS-z14-0.",
+      ar: "\u0644\u0639\u0642\u0648\u062F \u062E\u0644\u062A\u060C \u062A\u0646\u0628\u0623\u062A \u0627\u0644\u0646\u0645\u0627\u0630\u062C \u0627\u0644\u0643\u0648\u0646\u064A\u0629 \u0627\u0644\u0642\u064A\u0627\u0633\u064A\u0629 \u0628\u0623\u0646 \u0627\u0644\u0645\u062C\u0631\u0627\u062A \u0627\u0644\u0623\u0648\u0644\u0649 \u0633\u062A\u0643\u0648\u0646 \u062A\u062C\u0645\u0639\u0627\u062A \u062C\u0646\u064A\u0646\u064A\u0629 \u0641\u0648\u0636\u0648\u064A\u0629 \u0648\u0635\u063A\u064A\u0631\u0629. \u0643\u0633\u0631 \u062A\u0644\u0633\u0643\u0648\u0628 \u062C\u064A\u0645\u0633 \u0648\u064A\u0628 \u0647\u0630\u0627 \u0627\u0644\u0646\u0645\u0648\u0630\u062C \u0639\u0628\u0631 \u0645\u062C\u0631\u0629 JADES-GS-z14-0."
+    },
+    fullContent: {
+      en: `### Piercing the Infrared Veil
+
+In the cold silence of the second Sun-Earth Lagrange point (L2), 1.5 million kilometers from Earth, the James Webb Space Telescope unfolds its gold-plated beryllium hexes. By capturing deep infrared radiation shifted toward longer wavelengths by the cosmic expansion, JWST penetrates the dense cosmic dust clouds that blinded its predecessor, Hubble.
+
+### The JADES Discovery
+
+In early 2024 and confirmed into late 2025, astronomers targeted the GOODS-South field. There, at a confirmed redshift of z = 14.32, lay galaxy **JADES-GS-z14-0**. It existed when the universe was barely 290 million years old\u2014merely two percent of its current age of 13.8 billion years.
+
+> "The sheer luminosity of these primordial structures defies conventional dark matter halo accretion models. We expected sparse embers; we found vibrant stellar engines." \u2014 *Cosmic Dawn Survey Team*
+
+### Scientific Implications
+
+1. **Premature Mass Accumulation:** The galaxy spans over 1,600 light-years and contains several hundred million solar masses. This suggests star formation was either orders of magnitude more efficient than in the modern cosmos or kicked off by supermassive primordial black hole seeds.
+2. **Heavy Element Enrichment:** Spectroscopic NIRSpec measurements detected distinct ionized oxygen lines. This proves that multiple generations of massive Population III stars had already lived, fused heavier elements in their cores, and detonated as supernovae in less than 300 million years.
+3. **Cosmological Revision:** Theoretical astrophysicists are actively recalibrating early gas-cooling equations and dark matter coalescence models to accommodate this accelerated dawn.`,
+      ar: `### \u0627\u062E\u062A\u0631\u0627\u0642 \u0627\u0644\u062D\u062C\u0627\u0628 \u062A\u062D\u062A \u0627\u0644\u0623\u062D\u0645\u0631
+
+\u0641\u064A \u0627\u0644\u0635\u0645\u062A \u0627\u0644\u0645\u062A\u062C\u0645\u062F \u0644\u0646\u0642\u0637\u0629 \u0644\u0627\u063A\u0631\u0627\u0646\u062C \u0627\u0644\u062B\u0627\u0646\u064A\u0629 (L2) \u0628\u064A\u0646 \u0627\u0644\u0623\u0631\u0636 \u0648\u0627\u0644\u0634\u0645\u0633\u060C \u0639\u0644\u0649 \u0628\u0639\u062F 1.5 \u0645\u0644\u064A\u0648\u0646 \u0643\u064A\u0644\u0648\u0645\u062A\u0631\u060C \u064A\u0646\u0634\u0631 \u062A\u0644\u0633\u0643\u0648\u0628 \u062C\u064A\u0645\u0633 \u0648\u064A\u0628 \u062F\u0631\u0648\u0639\u0647 \u0627\u0644\u0645\u0635\u0646\u0648\u0639\u0629 \u0645\u0646 \u0627\u0644\u0628\u0631\u064A\u0644\u064A\u0648\u0645 \u0627\u0644\u0645\u0637\u0644\u064A \u0628\u0627\u0644\u0630\u0647\u0628. \u0645\u0646 \u062E\u0644\u0627\u0644 \u0627\u0644\u062A\u0642\u0627\u0637 \u0627\u0644\u0623\u0634\u0639\u0629 \u062A\u062D\u062A \u0627\u0644\u062D\u0645\u0631\u0627\u0621 \u0627\u0644\u062A\u064A \u0627\u0646\u0632\u0627\u062D\u062A \u0646\u062D\u0648 \u0623\u0637\u0648\u0627\u0644 \u0645\u0648\u062C\u064A\u0629 \u0623\u0637\u0648\u0644 \u0628\u0641\u0639\u0644 \u062A\u0645\u062F\u062F \u0627\u0644\u0643\u0648\u0646\u060C \u064A\u062E\u062A\u0631\u0642 \u0627\u0644\u062A\u0644\u0633\u0643\u0648\u0628 \u0633\u062D\u0628 \u0627\u0644\u063A\u0628\u0627\u0631 \u0627\u0644\u0643\u0648\u0646\u064A \u0627\u0644\u0643\u062B\u064A\u0641\u0629 \u0627\u0644\u062A\u064A \u062D\u062C\u0628\u062A \u0627\u0644\u0631\u0624\u064A\u0629 \u0639\u0646 \u0633\u0644\u0641\u0647 \u0647\u0627\u0628\u0644.
+
+### \u0643\u0634\u0641 \u0627\u0633\u062A\u0637\u0644\u0627\u0639 JADES
+
+\u0641\u064A \u0631\u0635\u062F \u062F\u0642\u064A\u0642 \u0644\u0645\u0646\u0637\u0642\u0629 GOODS-South\u060C \u0631\u0635\u062F \u0639\u0644\u0645\u0627\u0621 \u0627\u0644\u0641\u0644\u0643 \u0645\u062C\u0631\u0629 **JADES-GS-z14-0** \u0628\u0627\u0646\u0632\u064A\u0627\u062D \u0623\u062D\u0645\u0631 \u0645\u0624\u0643\u062F \u0628\u0644\u063A z = 14.32. \u0644\u0642\u062F \u0644\u0645\u0639\u062A \u0647\u0630\u0647 \u0627\u0644\u0645\u062C\u0631\u0629 \u0639\u0646\u062F\u0645\u0627 \u0643\u0627\u0646 \u0639\u0645\u0631 \u0627\u0644\u0643\u0648\u0646 \u0628\u0627\u0644\u0643\u0627\u062F 290 \u0645\u0644\u064A\u0648\u0646 \u0633\u0646\u0629 \u0641\u0642\u0637\u060C \u0623\u064A \u0645\u0627 \u064A\u0645\u062B\u0644 2% \u0641\u0642\u0637 \u0645\u0646 \u0639\u0645\u0631\u0647 \u0627\u0644\u062D\u0627\u0644\u064A \u0627\u0644\u0628\u0627\u0644\u063A 13.8 \u0645\u0644\u064A\u0627\u0631 \u0633\u0646\u0629.
+
+> "\u0625\u0646 \u0627\u0644\u0625\u0636\u0627\u0621\u0629 \u0627\u0644\u0647\u0627\u0626\u0644\u0629 \u0644\u0647\u0630\u0647 \u0627\u0644\u0647\u064A\u0627\u0643\u0644 \u0627\u0644\u0628\u062F\u0627\u0626\u064A\u0629 \u062A\u062A\u062D\u062F\u0649 \u0627\u0644\u0646\u0645\u0627\u0630\u062C \u0627\u0644\u062A\u0642\u0644\u064A\u062F\u064A\u0629 \u0644\u062A\u0631\u0627\u0643\u0645 \u0647\u0627\u0644\u0627\u062A \u0627\u0644\u0645\u0627\u062F\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629. \u0643\u0646\u0627 \u0646\u062A\u0648\u0642\u0639 \u062C\u0645\u0631\u0627\u062A \u0646\u062C\u0645\u064A\u0629 \u062E\u0627\u0641\u062A\u0629\u061B \u0641\u0648\u062C\u062F\u0646\u0627 \u0645\u062D\u0631\u0643\u0627\u062A \u0646\u062C\u0645\u064A\u0629 \u0645\u062A\u0648\u0642\u062F\u0629." \u2014 *\u0641\u0631\u064A\u0642 \u0645\u0633\u062D \u0641\u062C\u0631 \u0627\u0644\u0643\u0648\u0646*
+
+### \u0627\u0644\u0623\u0628\u0639\u0627\u062F \u0648\u0627\u0644\u062F\u0644\u0627\u0644\u0627\u062A \u0627\u0644\u0639\u0644\u0645\u064A\u0629
+
+1. **\u062A\u0631\u0627\u0643\u0645 \u0627\u0644\u0643\u062A\u0644 \u0627\u0644\u0645\u0628\u0643\u0631:** \u062A\u0645\u062A\u062F \u0627\u0644\u0645\u062C\u0631\u0629 \u0644\u0623\u0643\u062B\u0631 \u0645\u0646 1600 \u0633\u0646\u0629 \u0636\u0648\u0626\u064A\u0629 \u0648\u062A\u0636\u0645 \u0645\u0626\u0627\u062A \u0627\u0644\u0645\u0644\u0627\u064A\u064A\u0646 \u0645\u0646 \u0627\u0644\u0643\u062A\u0644 \u0627\u0644\u0634\u0645\u0633\u064A\u0629\u060C \u0645\u0645\u0627 \u064A\u062F\u0644 \u0639\u0644\u0649 \u0623\u0646 \u062A\u0634\u0643\u0644 \u0627\u0644\u0646\u062C\u0648\u0645 \u0643\u0627\u0646 \u0623\u0643\u062B\u0631 \u0643\u0641\u0627\u0621\u0629 \u0628\u0645\u0631\u0627\u062D\u0644 \u0623\u0648 \u062A\u063A\u0630\u0649 \u0639\u0644\u0649 \u062B\u0642\u0648\u0628 \u0633\u0648\u062F\u0627\u0621 \u0628\u062F\u0627\u0626\u064A\u0629 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u0643\u062A\u0644\u0629.
+2. **\u0627\u0644\u062A\u062E\u0635\u064A\u0628 \u0628\u0627\u0644\u0639\u0646\u0627\u0635\u0631 \u0627\u0644\u062B\u0642\u064A\u0644\u0629:** \u0643\u0634\u0641 \u0645\u0637\u064A\u0627\u0641 NIRSpec \u0639\u0646 \u0628\u0635\u0645\u0627\u062A \u0648\u0627\u0636\u062D\u0629 \u0644\u0644\u0623\u0643\u0633\u062C\u064A\u0646 \u0627\u0644\u0645\u062A\u0623\u064A\u0646\u060C \u0645\u0627 \u064A\u062B\u0628\u062A \u0623\u0646 \u0623\u062C\u064A\u0627\u0644\u0627\u064B \u0645\u062A\u0639\u062F\u062F\u0629 \u0645\u0646 \u0646\u062C\u0648\u0645 \u0627\u0644\u062C\u064A\u0644 \u0627\u0644\u062B\u0627\u0644\u062B \u0627\u0644\u0639\u0645\u0644\u0627\u0642\u0629 \u0642\u062F \u0639\u0627\u0634\u062A \u0648\u0627\u0646\u0641\u062C\u0631\u062A \u0643\u0633\u0648\u0628\u0631\u0646\u0648\u0641\u0627 \u0641\u064A \u0648\u0642\u062A \u0642\u064A\u0627\u0633\u064A.
+3. **\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0646\u0645\u0627\u0630\u062C \u0627\u0644\u0643\u0648\u0646\u064A\u0629:** \u064A\u0639\u0643\u0641 \u0639\u0644\u0645\u0627\u0621 \u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0627\u0644\u0641\u0644\u0643\u064A\u0629 \u0627\u0644\u0646\u0638\u0631\u064A\u0629 \u062D\u0627\u0644\u064A\u0627\u064B \u0639\u0644\u0649 \u0625\u0639\u0627\u062F\u0629 \u0636\u0628\u0637 \u0645\u0639\u0627\u062F\u0644\u0627\u062A \u062A\u0628\u0631\u064A\u062F \u0627\u0644\u063A\u0627\u0632 \u0648\u0646\u0645\u0627\u0630\u062C \u062A\u0643\u0627\u062B\u0641 \u0627\u0644\u0645\u0627\u062F\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629 \u0644\u062A\u0641\u0633\u064A\u0631 \u0647\u0630\u0627 \u0627\u0644\u0641\u062C\u0631 \u0627\u0644\u0645\u062A\u0633\u0627\u0631\u0639.`
+    },
+    sources: [
+      "NASA / ESA / CSA James Webb Space Telescope Science Operations",
+      "Nature Astronomy: High-Redshift Spectroscopic Confirmation of JADES-GS-z14-0",
+      "Astrophysical Journal: Gas Infall Dynamics in Primordial Galaxies"
+    ],
+    metadata: {
+      constellation: "Fornax (Southern Hemisphere)",
+      celestialCoordinates: "RA 03h 32m 38.8s, Dec -27\xB0 46\u2032 35\u2033",
+      distanceFromEarth: "33.8 Billion Light Years (Comoving)",
+      missionType: "Deep-field Infrared Spectroscopy"
+    }
+  },
+  {
+    id: "dark-matter-halos",
+    category: "space",
+    tags: ["Dark Matter", "Gravitational Lensing", "Astrophysics"],
+    coverImage: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1400&q=80",
+    author: "Prof. Julian Thorne",
+    publicationDate: "2026-02-28",
+    readingTime: 5,
+    featured: false,
+    title: {
+      en: "The Invisible Scaffold: Mapping the Dark Matter Web",
+      ar: "\u0627\u0644\u0633\u0642\u0627\u0644\u0629 \u0627\u0644\u062E\u0641\u064A\u0629: \u0631\u0633\u0645 \u062E\u0631\u0627\u0626\u0637 \u0634\u0628\u0643\u0629 \u0627\u0644\u0645\u0627\u062F\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629"
+    },
+    subtitle: {
+      en: "Weak gravitational lensing transforms warped starlight into high-resolution maps of unseen cosmic matter.",
+      ar: "\u0639\u062F\u0633\u0627\u062A \u0627\u0644\u062C\u0627\u0630\u0628\u064A\u0629 \u0627\u0644\u0636\u0639\u064A\u0641\u0629 \u062A\u062D\u0648\u0644 \u0627\u0644\u0636\u0648\u0621 \u0627\u0644\u0646\u062C\u0645\u064A \u0627\u0644\u0645\u0634\u0648\u0647 \u0625\u0644\u0649 \u062E\u0631\u0627\u0626\u0637 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u062F\u0642\u0629 \u0644\u0643\u062A\u0644 \u0627\u0644\u0643\u0648\u0646 \u063A\u064A\u0631 \u0627\u0644\u0645\u0631\u0626\u064A\u0629."
+    },
+    shortDescription: {
+      en: "Dark matter constitutes over 85% of all matter in the universe, yet emits no photons. Learn how astronomers decipher its ghostly topography using Einsteinian spacetime curvature.",
+      ar: "\u062A\u0634\u0643\u0644 \u0627\u0644\u0645\u0627\u062F\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629 \u0623\u0643\u062B\u0631 \u0645\u0646 85% \u0645\u0646 \u0625\u062C\u0645\u0627\u0644\u064A \u0645\u0627\u062F\u0629 \u0627\u0644\u0643\u0648\u0646 \u0644\u0643\u0646\u0647\u0627 \u0644\u0627 \u062A\u0635\u062F\u0631 \u0623\u064A \u0641\u0648\u062A\u0648\u0646\u0627\u062A. \u062A\u0639\u0631\u0641 \u0639\u0644\u0649 \u0643\u064A\u0641\u064A\u0629 \u0641\u0643 \u0634\u0641\u0631\u0629 \u062A\u0636\u0627\u0631\u064A\u0633\u0647\u0627 \u0627\u0644\u0634\u0628\u062D\u064A\u0629 \u0639\u0628\u0631 \u0627\u0646\u062D\u0646\u0627\u0621 \u0646\u0633\u064A\u062C \u0627\u0644\u0632\u0645\u0643\u0627\u0646."
+    },
+    fullContent: {
+      en: `### The Ghost in the Machine
+
+When Vera Rubin observed the rotation velocities of spiral galaxies in the 1970s, Newtonian mechanics dictated that stars at the outer rim should orbit sluggishly compared to the dense central nucleus. Instead, rotational velocity curves plateaued. Stars at the periphery moved with ferocity, bound by an invisible gravitational reservoir: the dark matter halo.
+
+### Gravitational Microlensing
+
+Because mass curves spacetime, dense pockets of dark matter act as imperfect magnifying lenses. By measuring the minute statistical shear of millions of background galaxies, the Euclid Space Observatory and Rubin Observatory produce tomographic 3D maps of cosmic filaments.
+
+### Candidates: Axions vs. WIMPs
+
+- **Axions:** Ultra-light hypothetical bosons emerging from quantum chromodynamics Peccei-Quinn symmetry.
+- **WIMPs:** Weakly Interacting Massive Particles predicted by supersymmetry, currently sought in deep underground xenon detectors like LZ and PandaX.`,
+      ar: `### \u0627\u0644\u0634\u0628\u062D \u0641\u064A \u0627\u0644\u0622\u0644\u0629 \u0627\u0644\u0643\u0648\u0646\u064A\u0629
+
+\u0639\u0646\u062F\u0645\u0627 \u0631\u0635\u062F\u062A \u0641\u064A\u0631\u0627 \u0631\u0648\u0628\u064A\u0646 \u0633\u0631\u0639\u0627\u062A \u062F\u0648\u0631\u0627\u0646 \u0627\u0644\u0645\u062C\u0631\u0627\u062A \u0627\u0644\u062D\u0644\u0632\u0648\u0646\u064A\u0629 \u0641\u064A \u0633\u0628\u0639\u064A\u0646\u064A\u0627\u062A \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u0645\u0627\u0636\u064A\u060C \u0641\u0631\u0636\u062A \u0645\u064A\u0643\u0627\u0646\u064A\u0643\u0627 \u0646\u064A\u0648\u062A\u0646 \u0623\u0646 \u062A\u062F\u0648\u0631 \u0627\u0644\u0646\u062C\u0648\u0645 \u0641\u064A \u0627\u0644\u062D\u0648\u0627\u0641 \u0627\u0644\u062E\u0627\u0631\u062C\u064A\u0629 \u0628\u0628\u0637\u0621 \u0645\u0642\u0627\u0631\u0646\u0629 \u0628\u0627\u0644\u0645\u0631\u0643\u0632 \u0627\u0644\u0643\u062B\u064A\u0641. \u0644\u0643\u0646 \u0627\u0644\u0646\u062A\u0627\u0626\u062C \u0643\u0627\u0646\u062A \u0635\u0627\u062F\u0645\u0629\u061B \u0627\u0633\u062A\u0645\u0631\u062A \u0633\u0631\u0639\u0629 \u0627\u0644\u0646\u062C\u0648\u0645 \u0639\u0646\u062F \u0627\u0644\u062D\u0627\u0641\u0629 \u0628\u0646\u0641\u0633 \u0627\u0644\u0634\u062F\u0629\u060C \u0645\u062D\u0643\u0648\u0645\u0629 \u0628\u062C\u0627\u0630\u0628\u064A\u0629 \u062E\u0632\u0627\u0646 \u0647\u0627\u0626\u0644 \u063A\u064A\u0631 \u0645\u0631\u0626\u064A: \u0647\u0627\u0644\u0629 \u0627\u0644\u0645\u0627\u062F\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629.
+
+### \u0639\u062F\u0633\u0627\u062A \u0627\u0644\u062C\u0627\u0630\u0628\u064A\u0629 \u0627\u0644\u0645\u064A\u0643\u0631\u0648\u064A\u0629
+
+\u0646\u0638\u0631\u0627\u064B \u0644\u0623\u0646 \u0627\u0644\u0643\u062A\u0644\u0629 \u062A\u062B\u0646\u064A \u0646\u0633\u064A\u062C \u0627\u0644\u0632\u0645\u0643\u0627\u0646\u060C \u0641\u0625\u0646 \u062A\u062C\u0645\u0639\u0627\u062A \u0627\u0644\u0645\u0627\u062F\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629 \u062A\u0639\u0645\u0644 \u0643\u0639\u062F\u0633\u0627\u062A \u0645\u0643\u0628\u0631\u0629 \u0637\u0628\u064A\u0639\u064A\u0629. \u0648\u0645\u0646 \u062E\u0644\u0627\u0644 \u0642\u064A\u0627\u0633 \u0627\u0644\u062A\u0634\u0648\u0647 \u0627\u0644\u0625\u062D\u0635\u0627\u0626\u064A \u0627\u0644\u062F\u0642\u064A\u0642 \u0644\u0645\u0644\u0627\u064A\u064A\u0646 \u0627\u0644\u0645\u062C\u0631\u0627\u062A \u0627\u0644\u062E\u0644\u0641\u064A\u0629\u060C \u064A\u0631\u0633\u0645 \u0645\u0631\u0635\u062F \u0625\u0642\u0644\u064A\u062F\u0633 \u0648\u0645\u0631\u0635\u062F \u0631\u0648\u0628\u064A\u0646 \u062E\u0631\u0627\u0626\u0637 \u062B\u0644\u0627\u062B\u064A\u0629 \u0627\u0644\u0623\u0628\u0639\u0627\u062F \u0644\u062E\u064A\u0648\u0637 \u0627\u0644\u0634\u0628\u0643\u0629 \u0627\u0644\u0643\u0648\u0646\u064A\u0629.
+
+### \u0627\u0644\u0645\u0631\u0634\u062D\u0648\u0646 \u0627\u0644\u0645\u062D\u062A\u0645\u0644\u0648\u0646: \u0627\u0644\u0623\u0643\u0633\u064A\u0648\u0646\u0627\u062A \u0645\u0642\u0627\u0628\u0644 \u0627\u0644\u0640 WIMPs
+
+- **\u0627\u0644\u0623\u0643\u0633\u064A\u0648\u0646\u0627\u062A (Axions):** \u0628\u0648\u0632\u0648\u0646\u0627\u062A \u0627\u0641\u062A\u0631\u0627\u0636\u064A\u0629 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u062E\u0641\u0629 \u0646\u0627\u062A\u062C\u0629 \u0639\u0646 \u062A\u0646\u0627\u0638\u0631 \u0628\u064A\u062A\u0633\u064A-\u0643\u0648\u064A\u0646 \u0641\u064A \u0627\u0644\u0643\u0631\u0648\u0645\u0648\u062F\u064A\u0646\u0627\u0645\u064A\u0643\u0627 \u0627\u0644\u0643\u0645\u064A\u0629.
+- **\u0627\u0644\u062C\u0633\u064A\u0645\u0627\u062A \u0627\u0644\u0636\u062E\u0645\u0629 \u0636\u0639\u064A\u0641\u0629 \u0627\u0644\u062A\u0641\u0627\u0639\u0644 (WIMPs):** \u062C\u0633\u064A\u0645\u0627\u062A \u062A\u0646\u0628\u0623\u062A \u0628\u0647\u0627 \u0646\u0638\u0631\u064A\u0629 \u0627\u0644\u062A\u0646\u0627\u0638\u0631 \u0627\u0644\u0641\u0627\u0626\u0642\u060C \u0648\u064A\u062C\u0631\u064A \u0627\u0644\u0628\u062D\u062B \u0639\u0646\u0647\u0627 \u0641\u064A \u0643\u0648\u0627\u0634\u0641 \u0627\u0644\u0632\u064A\u0646\u0648\u0646 \u0627\u0644\u0645\u062F\u0641\u0648\u0646\u0629 \u0641\u064A \u0623\u0639\u0645\u0627\u0642 \u0627\u0644\u0645\u0646\u0627\u062C\u0645 \u0645\u062B\u0644 \u062A\u062C\u0631\u0628\u0629 LZ.`
+    },
+    sources: [
+      "Euclid Consortium First Survey Data Release",
+      "Physical Review Letters: Dark Matter Halo Substructure and Lensing"
+    ],
+    metadata: {
+      constellation: "Virgo & Coma Superclusters",
+      celestialCoordinates: "RA 12h 27m, Dec +12\xB0 43\u2032",
+      distanceFromEarth: "54 Million Light Years",
+      missionType: "Gravitational Shear Cartography"
+    }
+  },
+  // ==================== TECHNOLOGY & DIGITAL WORLD ====================
+  {
+    id: "nikola-tesla-electricity",
+    category: "technology",
+    tags: ["Nikola Tesla", "Electrical Engineering", "History of Tech", "Inventions"],
+    coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+    author: "Aetheria Technology Archives",
+    publicationDate: "2026-03-01",
+    readingTime: 7,
+    featured: true,
+    title: {
+      en: "Nikola Tesla & The Wardenclyffe Dream: Architect of the Alternating Era",
+      ar: "\u0646\u064A\u0643\u0648\u0644\u0627 \u062A\u0633\u0644\u0627 \u0648\u062D\u0644\u0645 \u0648\u0627\u0631\u062F\u0646\u0643\u0644\u064A\u0641: \u0645\u0647\u0646\u062F\u0633 \u0639\u0635\u0631 \u0627\u0644\u062A\u064A\u0627\u0631 \u0627\u0644\u0645\u062A\u0646\u0627\u0648\u0628 \u0648\u0627\u0644\u0627\u062A\u0635\u0627\u0644 \u0627\u0644\u0644\u0627\u0633\u0644\u0643\u064A"
+    },
+    subtitle: {
+      en: "The Serbian-American polymath whose polyphase motor, induction coils, and wireless telecommunications forged the modern world.",
+      ar: "\u0627\u0644\u0639\u0627\u0644\u0645 \u0627\u0644\u0635\u0631\u0628\u064A \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A \u0627\u0644\u0630\u064A \u0634\u0643\u0644 \u0645\u062D\u0631\u0643\u0647 \u0645\u062A\u0639\u062F\u062F \u0627\u0644\u0623\u0637\u0648\u0627\u0631 \u0648\u0645\u0644\u0641\u0627\u062A\u0647 \u0627\u0644\u062D\u062B\u064A\u0629 \u0648\u0631\u0624\u064A\u062A\u0647 \u0627\u0644\u0644\u0627\u0633\u0644\u0643\u064A\u0629 \u0623\u0633\u0633 \u0627\u0644\u0639\u0627\u0644\u0645 \u0627\u0644\u0645\u0639\u0627\u0635\u0631."
+    },
+    shortDescription: {
+      en: "Beyond the myths lies an engineering genius who conceived alternating current electrical grids, fluorescent lighting, and global wireless data transmission in the late 19th century.",
+      ar: "\u0648\u0631\u0627\u0621 \u0627\u0644\u0623\u0633\u0627\u0637\u064A\u0631 \u064A\u0642\u0641 \u0639\u0628\u0642\u0631\u064A \u0647\u0646\u062F\u0633\u064A \u0627\u0628\u062A\u0643\u0631 \u0634\u0628\u0643\u0627\u062A \u0627\u0644\u062A\u064A\u0627\u0631 \u0627\u0644\u0645\u062A\u0646\u0627\u0648\u0628 \u0648\u0627\u0644\u0625\u0636\u0627\u0621\u0629 \u0627\u0644\u0641\u0644\u0648\u0631\u064A\u0629 \u0648\u0628\u062B \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0644\u0627\u0633\u0644\u0643\u064A \u0627\u0644\u0639\u0627\u0644\u0645\u064A \u0641\u064A \u0623\u0648\u0627\u062E\u0631 \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u062A\u0627\u0633\u0639 \u0639\u0634\u0631."
+    },
+    fullContent: {
+      en: `### The War of the Currents
+
+In the late 1880s, the battle for how civilization would be electrified raged between Thomas Edison\u2019s direct current (DC) low-voltage infrastructure and George Westinghouse\u2019s commercialization of Nikola Tesla\u2019s alternating current (AC) patents. DC suffered from catastrophic line losses over distances greater than a single mile. 
+
+Tesla\u2019s breakthrough was the rotating magnetic field and the AC transformer, enabling voltages to be stepped up to hundreds of thousands of volts for long-distance transit and stepped down safely for domestic and industrial consumption. When the Niagara Falls hydroelectric project switched on in 1896, Tesla's polyphase system won unequivocally.
+
+### Wardenclyffe Tower: The Prototype Internet
+
+In 1901, on the bluffs of Shoreham, Long Island, Tesla began construction of Wardenclyffe\u2014a 187-foot wooden lattice tower crowned with a 55-ton hemispherical steel dome. While backed by J. Pierpont Morgan under the guise of transoceanic telegraphy, Tesla harbored a vaster ambition:
+
+> "When wireless is fully applied the earth will be converted into a huge brain, capable of response in every one of its parts. Distance will be virtually annihilated." \u2014 *Nikola Tesla, 1926*
+
+Tesla envisioned injecting high-frequency electrical vibrations into the Earth-ionosphere cavity (later known as the Schumann resonance) to simultaneously transmit electrical power and encrypted worldwide news, stock updates, and private telecommunications.
+
+### Enduring Legacy
+
+- **The Induction Motor:** Still powers over 60% of modern industrial machinery and electric propulsion systems.
+- **Radio Frequency Control:** Demonstrated the world's first remote-controlled teleautomaton vessel at Madison Square Garden in 1898.
+- **The SI Unit:** The *Tesla* (T) permanently honors his contribution to magnetic flux density.`,
+      ar: `### \u062D\u0631\u0628 \u0627\u0644\u062A\u064A\u0627\u0631\u0627\u062A
+
+\u0641\u064A \u0623\u0648\u0627\u062E\u0631 \u062B\u0645\u0627\u0646\u064A\u0646\u064A\u0627\u062A \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u062A\u0627\u0633\u0639 \u0639\u0634\u0631\u060C \u0627\u062D\u062A\u062F\u0645 \u0627\u0644\u0635\u0631\u0627\u0639 \u0628\u064A\u0646 \u0627\u0644\u0628\u0646\u064A\u0629 \u0627\u0644\u062A\u062D\u062A\u064A\u0629 \u0644\u0644\u062A\u064A\u0627\u0631 \u0627\u0644\u0645\u0633\u062A\u0645\u0631 (DC) \u0645\u0646\u062E\u0641\u0636 \u0627\u0644\u062C\u0647\u062F \u0628\u0632\u0639\u0627\u0645\u0629 \u062A\u0648\u0645\u0627\u0633 \u0625\u062F\u064A\u0633\u0648\u0646\u060C \u0648\u0628\u064A\u0646 \u0628\u0631\u0627\u0621\u0627\u062A \u0627\u062E\u062A\u0631\u0627\u0639 \u0627\u0644\u062A\u064A\u0627\u0631 \u0627\u0644\u0645\u062A\u0646\u0627\u0648\u0628 (AC) \u0644\u0646\u064A\u0643\u0648\u0644\u0627 \u062A\u0633\u0644\u0627 \u0648\u0627\u0644\u062A\u064A \u062A\u0628\u0646\u0627\u0647\u0627 \u062C\u0648\u0631\u062C \u0648\u0633\u062A\u0646\u063A\u0647\u0627\u0648\u0633. \u0643\u0627\u0646 \u0627\u0644\u062A\u064A\u0627\u0631 \u0627\u0644\u0645\u0633\u062A\u0645\u0631 \u064A\u0639\u0627\u0646\u064A \u0645\u0646 \u0647\u062F\u0631 \u0647\u0627\u0626\u0644 \u0641\u064A \u0627\u0644\u0637\u0627\u0642\u0629 \u0644\u0645\u0633\u0627\u0641\u0627\u062A \u062A\u062A\u062C\u0627\u0648\u0632 \u0645\u064A\u0644\u0627\u064B \u0648\u0627\u062D\u062F\u0627\u064B.
+
+\u0643\u0627\u0646 \u0625\u0646\u062C\u0627\u0632 \u062A\u0633\u0644\u0627 \u0627\u0644\u0641\u0627\u0631\u0642 \u0647\u0648 \u0627\u0628\u062A\u0643\u0627\u0631 \u0627\u0644\u062D\u0642\u0644 \u0627\u0644\u0645\u063A\u0646\u0627\u0637\u064A\u0633\u064A \u0627\u0644\u062F\u0648\u0627\u0631 \u0648\u0627\u0644\u0645\u062D\u0648\u0644 \u0627\u0644\u0643\u0647\u0631\u0628\u0627\u0626\u064A\u060C \u0645\u0645\u0627 \u0623\u062A\u0627\u062D \u0631\u0641\u0639 \u0627\u0644\u062C\u0647\u062F \u0644\u0645\u0626\u0627\u062A \u0627\u0644\u0622\u0644\u0627\u0641 \u0645\u0646 \u0627\u0644\u0641\u0648\u0644\u062A\u0627\u062A \u0644\u0644\u0646\u0642\u0644 \u0639\u0628\u0631 \u0645\u0633\u0627\u0641\u0627\u062A \u0634\u0627\u0633\u0639\u0629\u060C \u062B\u0645 \u062E\u0641\u0636\u0647 \u0628\u0623\u0645\u0627\u0646 \u0644\u0644\u0627\u0633\u062A\u0647\u0644\u0627\u0643 \u0627\u0644\u0645\u0646\u0632\u0644\u064A \u0648\u0627\u0644\u0635\u0646\u0627\u0639\u064A. \u0648\u0645\u0639 \u0627\u0641\u062A\u062A\u0627\u062D \u0645\u062D\u0637\u0629 \u0634\u0644\u0627\u0644\u0627\u062A \u0646\u064A\u0627\u062C\u0631\u0627 \u0627\u0644\u0643\u0647\u0631\u0648\u0645\u0627\u0626\u064A\u0629 \u0639\u0627\u0645 1896\u060C \u0627\u0646\u062A\u0635\u0631 \u0646\u0638\u0627\u0645 \u062A\u0633\u0644\u0627 \u0645\u062A\u0639\u062F\u062F \u0627\u0644\u0623\u0637\u0648\u0627\u0631 \u0628\u0644\u0627 \u0645\u0646\u0627\u0632\u0639.
+
+### \u0628\u0631\u062C \u0648\u0627\u0631\u062F\u0646\u0643\u0644\u064A\u0641: \u0627\u0644\u0646\u0645\u0648\u0630\u062C \u0627\u0644\u0623\u0648\u0644\u064A \u0644\u0644\u0625\u0646\u062A\u0631\u0646\u062A
+
+\u0641\u064A \u0639\u0627\u0645 1901 \u0641\u064A \u0644\u0648\u0646\u063A \u0622\u064A\u0644\u0627\u0646\u062F\u060C \u0628\u062F\u0623 \u062A\u0633\u0644\u0627 \u0628\u062A\u0634\u064A\u064A\u062F \u0628\u0631\u062C \u0648\u0627\u0631\u062F\u0646\u0643\u0644\u064A\u0641 \u0627\u0644\u062E\u0634\u0628\u064A \u0628\u0627\u0631\u062A\u0641\u0627\u0639 57 \u0645\u062A\u0631\u0627\u064B \u062A\u0639\u0644\u0648\u0647 \u0642\u0628\u0629 \u0641\u0648\u0644\u0627\u0630\u064A\u0629 \u0628\u0648\u0632\u0646 55 \u0637\u0646\u0627\u064B. \u0648\u0631\u063A\u0645 \u062A\u0645\u0648\u064A\u0644\u0647 \u0645\u0646 \u0642\u0628\u0644 \u062C\u064A\u0647 \u0628\u064A \u0645\u0648\u0631\u063A\u0627\u0646 \u062A\u062D\u062A \u0644\u0627\u0641\u062A\u0629 \u0627\u0644\u0628\u0631\u0642 \u0627\u0644\u0644\u0627\u0633\u0644\u0643\u064A \u0639\u0628\u0631 \u0627\u0644\u0623\u0637\u0644\u0633\u064A\u060C \u0643\u0627\u0646\u062A \u063A\u0627\u064A\u0629 \u062A\u0633\u0644\u0627 \u0623\u0628\u0639\u062F \u0628\u0643\u062B\u064A\u0631:
+
+> "\u0639\u0646\u062F\u0645\u0627 \u064A\u062A\u0645 \u062A\u0637\u0628\u064A\u0642 \u0627\u0644\u062A\u0642\u0646\u064A\u0627\u062A \u0627\u0644\u0644\u0627\u0633\u0644\u0643\u064A\u0629 \u0628\u0627\u0644\u0643\u0627\u0645\u0644\u060C \u0633\u062A\u062A\u062D\u0648\u0644 \u0627\u0644\u0623\u0631\u0636 \u0625\u0644\u0649 \u062F\u0645\u0627\u063A \u0647\u0627\u0626\u0644 \u0642\u0627\u062F\u0631 \u0639\u0644\u0649 \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0641\u064A \u0643\u0644 \u062C\u0632\u0621 \u0645\u0646 \u0623\u062C\u0632\u0627\u0626\u0647. \u0633\u062A\u062A\u0644\u0627\u0634\u0649 \u0627\u0644\u0645\u0633\u0627\u0641\u0627\u062A \u062A\u0645\u0627\u0645\u0627\u064B." \u2014 *\u0646\u064A\u0643\u0648\u0644\u0627 \u062A\u0633\u0644\u0627\u060C 1926*
+
+\u062A\u0635\u0648\u0631 \u062A\u0633\u0644\u0627 \u062D\u0642\u0646 \u0627\u0647\u062A\u0632\u0627\u0632\u0627\u062A \u0643\u0647\u0631\u0628\u0627\u0626\u064A\u0629 \u0639\u0627\u0644\u064A\u0629 \u0627\u0644\u062A\u0631\u062F\u062F \u0641\u064A \u062A\u062C\u0648\u064A\u0641 \u0627\u0644\u0623\u0631\u0636 \u0648\u0627\u0644\u0623\u064A\u0648\u0646\u0648\u0633\u0641\u064A\u0631 (\u0631\u0646\u064A\u0646 \u0634\u0648\u0645\u0627\u0646) \u0644\u0646\u0642\u0644 \u0627\u0644\u0637\u0627\u0642\u0629 \u0627\u0644\u0643\u0647\u0631\u0628\u0627\u0626\u064A\u0629 \u0648\u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0645\u0634\u0641\u0631\u0629 \u0648\u0627\u0644\u0623\u062E\u0628\u0627\u0631 \u0627\u0644\u0644\u062D\u0638\u064A\u0629 \u062D\u0648\u0644 \u0627\u0644\u0643\u0648\u0643\u0628 \u0628\u0623\u0633\u0631\u0647 \u062F\u0648\u0646 \u0623\u0633\u0644\u0627\u0643.
+
+### \u0627\u0644\u0625\u0631\u062B \u0627\u0644\u0647\u0646\u062F\u0633\u064A \u0627\u0644\u062E\u0627\u0644\u062F
+
+- **\u0645\u062D\u0631\u0643 \u0627\u0644\u062D\u062B \u0627\u0644\u0643\u0647\u0631\u0648\u0645\u063A\u0646\u0627\u0637\u064A\u0633\u064A:** \u0645\u0627 \u0632\u0627\u0644 \u064A\u062F\u064A\u0631 \u0623\u0643\u062B\u0631 \u0645\u0646 60% \u0645\u0646 \u0627\u0644\u0645\u062D\u0631\u0643\u0627\u062A \u0627\u0644\u0635\u0646\u0627\u0639\u064A\u0629 \u0648\u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u062F\u0641\u0639 \u0627\u0644\u0643\u0647\u0631\u0628\u0627\u0626\u064A \u0627\u0644\u064A\u0648\u0645.
+- **\u0627\u0644\u062A\u062D\u0643\u0645 \u0639\u0646 \u0628\u064F\u0639\u062F \u0628\u0627\u0644\u0645\u0648\u062C\u0627\u062A:** \u0627\u0633\u062A\u0639\u0631\u0636 \u0623\u0648\u0644 \u0642\u0627\u0631\u0628 \u0645\u0633\u064A\u0651\u0631 \u0628\u0627\u0644\u0631\u0627\u062F\u064A\u0648 \u0641\u064A \u0645\u0627\u062F\u064A\u0633\u0648\u0646 \u0633\u0643\u0648\u064A\u0631 \u062C\u0627\u0631\u062F\u0646 \u0639\u0627\u0645 1898.
+- **\u0648\u062D\u062F\u0629 \u0627\u0644\u0642\u064A\u0627\u0633 \u0627\u0644\u0639\u0627\u0644\u0645\u064A\u0629:** \u062A\u0643\u0631\u064A\u0645\u0627\u064B \u0644\u0647\u060C \u0623\u0637\u0644\u0642 \u0627\u0633\u0645 *\u062A\u0633\u0644\u0627* (T) \u0631\u0633\u0645\u064A\u0627\u064B \u0639\u0644\u0649 \u0648\u062D\u062F\u0629 \u0643\u062B\u0627\u0641\u0629 \u0627\u0644\u062A\u062F\u0641\u0642 \u0627\u0644\u0645\u063A\u0646\u0627\u0637\u064A\u0633\u064A.`
+    },
+    sources: [
+      'Tesla, Nikola: "My Inventions: The Autobiography of Nikola Tesla"',
+      "IEEE Spectrum: History of the Alternating Current Polyphase System",
+      "Smithsonian Institution Archives: Wardenclyffe Station Records"
+    ],
+    metadata: {
+      techStack: ["Electromagnetism", "Polyphase Induction", "Resonant Transformers", "Wireless RF"],
+      breakthroughType: "Electrical Infrastructure & Wireless Telegraphy",
+      impactScore: 98,
+      status: "Foundational Historic Breakthrough"
+    }
+  },
+  {
+    id: "quantum-computing-frontier",
+    category: "technology",
+    tags: ["Quantum Computing", "Qubits", "Hardware", "Physics"],
+    coverImage: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1400&q=80",
+    author: "Kaelen Vance, Quantum Systems Lab",
+    publicationDate: "2026-02-14",
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: "The Quantum Advantage: Superconducting Qubits and Neutral Atom Traps",
+      ar: "\u0627\u0644\u062A\u0641\u0648\u0642 \u0627\u0644\u0643\u0645\u064A: \u0627\u0644\u0643\u064A\u0648\u0628\u062A\u0627\u062A \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u062A\u0648\u0635\u064A\u0644 \u0648\u0645\u0635\u0627\u0626\u062F \u0627\u0644\u0630\u0631\u0627\u062A \u0627\u0644\u0645\u062D\u0627\u064A\u062F\u0629"
+    },
+    subtitle: {
+      en: "How modern coherence times and logical error correction are moving quantum systems from laboratories into industrial reality.",
+      ar: "\u0643\u064A\u0641 \u062A\u0642\u0648\u062F \u0641\u062A\u0631\u0627\u062A \u0627\u0644\u062A\u0645\u0627\u0633\u0643 \u0627\u0644\u0645\u062D\u0633\u0651\u0646\u0629 \u0648\u062A\u0635\u062D\u064A\u062D \u0627\u0644\u0623\u062E\u0637\u0627\u0621 \u0627\u0644\u0643\u0645\u064A \u0627\u0644\u062D\u0648\u0633\u0628\u0629 \u0627\u0644\u0643\u0645\u064A\u0629 \u0645\u0646 \u0627\u0644\u0645\u062E\u062A\u0628\u0631\u0627\u062A \u0625\u0644\u0649 \u0627\u0644\u062A\u0637\u0628\u064A\u0642\u0627\u062A \u0627\u0644\u0635\u0646\u0627\u0639\u064A\u0629."
+    },
+    shortDescription: {
+      en: "Explore the duel between dilution-refrigerated transmon circuits and optical tweezer neutral-atom arrays as researchers breach the thousand-qubit threshold.",
+      ar: "\u0627\u0633\u062A\u0643\u0634\u0641 \u0627\u0644\u0645\u0646\u0627\u0641\u0633\u0629 \u0628\u064A\u0646 \u062F\u0648\u0627\u0626\u0631 \u0627\u0644\u062A\u0631\u0627\u0646\u0632\u0645\u0648\u0646 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u062A\u0648\u0635\u064A\u0644 \u0648\u0645\u0635\u0641\u0648\u0641\u0627\u062A \u0627\u0644\u0630\u0631\u0627\u062A \u0627\u0644\u0645\u062D\u0627\u064A\u062F\u0629 \u0627\u0644\u0645\u0645\u0633\u0648\u0643\u0629 \u0628\u0627\u0644\u0645\u0644\u0627\u0642\u0637 \u0627\u0644\u0636\u0648\u0626\u064A\u0629 \u0645\u0639 \u062A\u062C\u0627\u0648\u0632 \u0639\u062A\u0628\u0629 \u0623\u0644\u0641 \u0643\u064A\u0648\u0628\u062A."
+    },
+    fullContent: {
+      en: `### Superposition and Entanglement
+
+Classical bits reside in binary certainty (0 or 1). A quantum bit (qubit), governed by wave-function mechanics, exists in a linear superposition of both states until measured:
+
+$$\\lvert\\psi\\rangle = \\alpha\\lvert 0\\rangle + \\beta\\lvert 1\\rangle$$
+
+When multiple qubits become entangled, the state space grows exponentially ($2^N$), enabling quantum processors to navigate computational topologies that would exhaust classical supercomputers running for millions of years.
+
+### The Two Major Hardware Architectures
+
+1. **Superconducting Transmons:** Microscopic circuits printed with aluminum and niobium on sapphire substrates, operating at 15 millikelvin inside cryogenic dilution refrigerators.
+2. **Neutral Atom Arrays:** Rubidium or cesium atoms trapped in 3D laser optical tweezers, manipulated with Rydberg excitation pulses for high gate fidelity and long coherence.
+
+### Fault-Tolerant Logical Qubits
+
+The grand engineering milestone is no longer raw physical qubit counts, but surface code error correction: synthesizing hundreds of noisy physical qubits into single fault-tolerant logical qubits capable of sustained algorithms.`,
+      ar: `### \u0627\u0644\u062A\u0631\u0627\u0643\u0628 \u0648\u0627\u0644\u062A\u0634\u0627\u0628\u0643 \u0627\u0644\u0643\u0645\u064A
+
+\u062A\u0633\u062A\u0646\u062F \u0627\u0644\u0628\u062A\u0627\u062A \u0627\u0644\u0643\u0644\u0627\u0633\u064A\u0643\u064A\u0629 \u0625\u0644\u0649 \u0627\u0644\u062D\u062A\u0645\u064A\u0629 \u0627\u0644\u062B\u0646\u0627\u0626\u064A\u0629 (0 \u0623\u0648 1). \u0628\u064A\u0646\u0645\u0627 \u064A\u0639\u064A\u0634 \u0627\u0644\u0643\u064A\u0648\u0628\u062A \u0627\u0644\u0643\u0645\u064A \u0641\u064A \u062D\u0627\u0644\u0629 \u062A\u0631\u0627\u0643\u0628 \u062E\u0637\u064A \u062A\u062D\u0643\u0645\u0647\u0627 \u0627\u0644\u062F\u0627\u0644\u0629 \u0627\u0644\u0645\u0648\u062C\u064A\u0629 \u062D\u062A\u0649 \u0644\u062D\u0638\u0629 \u0627\u0644\u0642\u064A\u0627\u0633.
+
+\u0648\u0639\u0646\u062F\u0645\u0627 \u062A\u062A\u0634\u0627\u0628\u0643 \u0639\u062F\u0629 \u0643\u064A\u0648\u0628\u062A\u0627\u062A \u0645\u0639\u0627\u064B\u060C \u064A\u062A\u0636\u0627\u0639\u0641 \u0641\u0636\u0627\u0621 \u0627\u0644\u062D\u0627\u0644\u0627\u062A \u0627\u0644\u062D\u0633\u0627\u0628\u064A\u0629 \u0628\u0634\u0643\u0644 \u0623\u0633\u064A ($2^N$)\u060C \u0645\u0645\u0627 \u064A\u0645\u0646\u062D \u0627\u0644\u0645\u0639\u0627\u0644\u062C\u0627\u062A \u0627\u0644\u0643\u0645\u064A\u0629 \u0642\u062F\u0631\u0629 \u062E\u0627\u0631\u0642\u0629 \u0639\u0644\u0649 \u0645\u0633\u062D \u0648\u062A\u0641\u0643\u064A\u0643 \u0623\u0646\u0645\u0627\u0637 \u062D\u0633\u0627\u0628\u064A\u0629 \u062A\u0633\u062A\u063A\u0631\u0642 \u0641\u064A\u0647\u0627 \u0623\u0642\u0648\u0649 \u0627\u0644\u062D\u0648\u0627\u0633\u064A\u0628 \u0627\u0644\u0639\u0645\u0644\u0627\u0642\u0629 \u0645\u0644\u0627\u064A\u064A\u0646 \u0627\u0644\u0633\u0646\u064A\u0646.
+
+### \u0623\u0628\u0631\u0632 \u0627\u0644\u0645\u0646\u0635\u0627\u062A \u0627\u0644\u0647\u0646\u062F\u0633\u064A\u0629 \u0627\u0644\u064A\u0648\u0645
+
+1. **\u0627\u0644\u062F\u0648\u0627\u0626\u0631 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u062A\u0648\u0635\u064A\u0644 (Transmons):** \u062F\u0648\u0627\u0626\u0631 \u0645\u064A\u0643\u0631\u0648\u064A\u0629 \u0645\u0637\u0628\u0648\u0639\u0629 \u0628\u0627\u0644\u0623\u0644\u0645\u0646\u064A\u0648\u0645 \u0648\u0627\u0644\u0646\u064A\u0648\u0628\u064A\u0648\u0645 \u062A\u0639\u0645\u0644 \u0639\u0646\u062F \u062F\u0631\u062C\u0627\u062A \u062D\u0631\u0627\u0631\u0629 \u062A\u0642\u062A\u0631\u0628 \u0645\u0646 \u0627\u0644\u0635\u0641\u0631 \u0627\u0644\u0645\u0637\u0644\u0642 (15 \u0645\u0644\u064A \u0643\u0644\u0641\u0646) \u062F\u0627\u062E\u0644 \u0645\u0628\u0631\u062F\u0627\u062A \u0627\u0644\u062A\u062E\u0641\u064A\u0641 \u0627\u0644\u0643\u0631\u064A\u0648\u062C\u064A\u0646\u064A\u0629.
+2. **\u0645\u0635\u0641\u0648\u0641\u0627\u062A \u0627\u0644\u0630\u0631\u0627\u062A \u0627\u0644\u0645\u062D\u0627\u064A\u062F\u0629:** \u0630\u0631\u0627\u062A \u0631\u0648\u0628\u064A\u062F\u064A\u0648\u0645 \u064A\u062A\u0645 \u062D\u062C\u0632\u0647\u0627 \u0628\u0648\u0627\u0633\u0637\u0629 \u0645\u0644\u0627\u0642\u0637 \u0636\u0648\u0626\u064A\u0629 \u0644\u064A\u0632\u0631\u064A\u0629 \u062B\u0644\u0627\u062B\u064A\u0629 \u0627\u0644\u0623\u0628\u0639\u0627\u062F\u060C \u0648\u062A\u0641\u0639\u064A\u0644\u0647\u0627 \u0628\u0646\u0628\u0636\u0627\u062A \u0631\u064A\u062F\u0628\u0631\u063A \u0644\u062A\u062D\u0642\u064A\u0642 \u062F\u0642\u0629 \u0628\u0648\u0627\u0628\u0627\u062A \u0627\u0633\u062A\u062B\u0646\u0627\u0626\u064A\u0629.
+
+### \u0627\u0644\u0643\u064A\u0648\u0628\u062A\u0627\u062A \u0627\u0644\u0645\u0646\u0637\u0642\u064A\u0629 \u0648\u062A\u0635\u062D\u064A\u062D \u0627\u0644\u0623\u062E\u0637\u0627\u0621
+
+\u0644\u0645 \u064A\u0639\u062F \u0627\u0644\u0631\u0647\u0627\u0646 \u0627\u0644\u0647\u0646\u062F\u0633\u064A \u0645\u0646\u062D\u0635\u0631\u0627\u064B \u0641\u064A \u0639\u062F\u062F \u0627\u0644\u0643\u064A\u0648\u0628\u062A\u0627\u062A \u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0626\u064A\u0629 \u0627\u0644\u062E\u0627\u0645\u060C \u0628\u0644 \u0641\u064A \u062A\u0635\u062D\u064A\u062D \u0627\u0644\u0623\u062E\u0637\u0627\u0621 \u0639\u0628\u0631 \u0627\u0644\u0623\u0643\u0648\u0627\u062F \u0627\u0644\u0633\u0637\u062D\u064A\u0629\u060C \u0644\u062F\u0645\u062C \u0645\u0626\u0627\u062A \u0627\u0644\u0643\u064A\u0648\u0628\u062A\u0627\u062A \u0627\u0644\u0645\u0634\u0648\u0634\u0629 \u0641\u064A \u0643\u064A\u0648\u0628\u062A \u0645\u0646\u0637\u0642\u064A \u0648\u0627\u062D\u062F \u0639\u0627\u0644\u064A \u0627\u0644\u0645\u0646\u0627\u0639\u0629 \u0648\u0645\u0633\u062A\u062F\u0627\u0645.`
+    },
+    sources: [
+      "Nature: Logical Quantum Processor with Neutral Atom Architecture",
+      "IBM Quantum Technology Roadmap 2026",
+      "Physical Review X: Surface Code Scalability Benchmarks"
+    ],
+    metadata: {
+      techStack: ["Quantum Decoherence", "Cryogenics", "Rydberg States", "Surface Codes"],
+      breakthroughType: "Fault-Tolerant Computing",
+      impactScore: 94,
+      status: "Accelerating Lab-to-Industry"
+    }
+  },
+  {
+    id: "humanoid-robotics-embodied-ai",
+    category: "technology",
+    tags: ["Robotics", "Artificial Intelligence", "Actuators", "Automation"],
+    coverImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80",
+    author: "Tariq Al-Mansoor, Autonomous Systems",
+    publicationDate: "2026-02-05",
+    readingTime: 5,
+    featured: false,
+    title: {
+      en: "The Embodied Machine: How Next-Gen Actuators & VLA Models Power Humanoids",
+      ar: "\u0627\u0644\u0622\u0644\u0629 \u0627\u0644\u0645\u062C\u0633\u062F\u0629: \u0643\u064A\u0641 \u062A\u062F\u0639\u0645 \u0627\u0644\u0645\u0634\u063A\u0644\u0627\u062A \u0627\u0644\u0645\u064A\u0643\u0627\u0646\u064A\u0643\u064A\u0629 \u0648\u0646\u0645\u0627\u0630\u062C VLA \u0627\u0644\u0631\u0648\u0628\u0648\u062A\u0627\u062A \u0627\u0644\u0628\u0634\u0631\u064A\u0629"
+    },
+    subtitle: {
+      en: "The convergence of Vision-Language-Action foundation models with quasi-direct drive actuators is reshaping physical labor.",
+      ar: "\u062A\u0642\u0627\u0631\u0628 \u0646\u0645\u0627\u0630\u062C \u0627\u0644\u0631\u0624\u064A\u0629 \u0648\u0627\u0644\u0644\u063A\u0629 \u0648\u0627\u0644\u0639\u0645\u0644 \u0645\u0639 \u0627\u0644\u0645\u0634\u063A\u0644\u0627\u062A \u0627\u0644\u0645\u064A\u0643\u0627\u0646\u064A\u0643\u064A\u0629 \u0627\u0644\u0645\u0628\u0627\u0634\u0631\u0629 \u064A\u0639\u064A\u062F \u0635\u064A\u0627\u063A\u0629 \u0645\u0633\u062A\u0642\u0628\u0644 \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0626\u064A."
+    },
+    shortDescription: {
+      en: "Humanoids have escaped scripted kinematics. Today, end-to-end multimodal neural networks allow bipeds to generalize real-time motor skills across unstructured factory floors.",
+      ar: "\u062A\u062D\u0631\u0631\u062A \u0627\u0644\u0631\u0648\u0628\u0648\u062A\u0627\u062A \u0634\u0628\u064A\u0647\u0629 \u0627\u0644\u0628\u0634\u0631 \u0645\u0646 \u0627\u0644\u062D\u0631\u0643\u0627\u062A \u0627\u0644\u0645\u0628\u0631\u0645\u062C\u0629 \u0633\u0644\u0641\u0627\u064B. \u0627\u0644\u064A\u0648\u0645 \u062A\u062A\u064A\u062D \u0627\u0644\u0634\u0628\u0643\u0627\u062A \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0645\u062A\u0639\u062F\u062F\u0629 \u0627\u0644\u0648\u0633\u0627\u0626\u0637 \u0627\u0644\u062A\u0639\u0645\u064A\u0645 \u0627\u0644\u062D\u0631\u0643\u064A \u0627\u0644\u0644\u062D\u0638\u064A \u0641\u064A \u0628\u064A\u0626\u0627\u062A \u0627\u0644\u0639\u0645\u0644 \u063A\u064A\u0631 \u0627\u0644\u0645\u0647\u064A\u0623\u0629."
+    },
+    fullContent: {
+      en: `### Beyond Scripted Kinematics
+
+For half a century, industrial robotic arms were rigid, positional machines executing pre-programmed coordinate paths. If an obstacle moved two centimeters, the trajectory failed. 
+
+The new breed of bipedal humanoid robots (Tesla Optimus, Figure 02, Boston Dynamics Atlas, Sanctuary AI) combines two tectonic shifts:
+
+1. **Quasi-Direct Drive (QDD) and Harmonic Actuators:** Low-inertia, high-torque density electric motors offering transparent back-drivability and human-safe impedance control.
+2. **Vision-Language-Action (VLA) Foundation Models:** Instead of explicit physics engines and inverse kinematics solvers, neural networks ingest camera video streams and natural language commands to output continuous joint torques at 100 Hz.
+
+### The Real-World Data Bottleneck
+
+While large language models trained on the internet's text corpus, physical robots lack trillions of tokens of embodied interactions. Companies are bridging this via fleet-teleoperation rigs, dynamic physics sim-to-real pipelines (NVIDIA Isaac Sim), and shadow hand haptic capture.`,
+      ar: `### \u0645\u0627 \u0648\u0631\u0627\u0621 \u0627\u0644\u062D\u0631\u0643\u0627\u062A \u0627\u0644\u0645\u0628\u0631\u0645\u062C\u0629
+
+\u0637\u0648\u0627\u0644 \u0646\u0635\u0641 \u0642\u0631\u0646\u060C \u0643\u0627\u0646\u062A \u0627\u0644\u0623\u0630\u0631\u0639 \u0627\u0644\u0631\u0648\u0628\u0648\u062A\u064A\u0629 \u0627\u0644\u0635\u0646\u0627\u0639\u064A\u0629 \u0622\u0644\u0627\u062A \u0635\u0644\u0628\u0629 \u062A\u0646\u0641\u0630 \u0645\u0633\u0627\u0631\u0627\u062A \u0645\u062D\u062F\u062F\u0629 \u0645\u0633\u0628\u0642\u0627\u064B \u0648\u0641\u0642 \u0625\u062D\u062F\u0627\u062B\u064A\u0627\u062A \u0635\u0627\u0631\u0645\u0629\u061B \u0641\u0625\u0630\u0627 \u062A\u062D\u0631\u0643 \u0639\u0627\u0626\u0642 \u0628\u0645\u0642\u062F\u0627\u0631 \u0633\u0646\u062A\u064A\u0645\u062A\u0631\u064A\u0646 \u0641\u0642\u0637\u060C \u062A\u0639\u0637\u0644\u062A \u0627\u0644\u062D\u0631\u0643\u0629 \u0628\u0631\u0645\u062A\u0647\u0627.
+
+\u0623\u0645\u0627 \u0627\u0644\u062C\u064A\u0644 \u0627\u0644\u062C\u062F\u064A\u062F \u0645\u0646 \u0627\u0644\u0631\u0648\u0628\u0648\u062A\u0627\u062A \u0627\u0644\u0628\u0634\u0631\u064A\u0629 \u062B\u0646\u0627\u0626\u064A\u0629 \u0627\u0644\u0623\u0631\u062C\u0644\u060C \u0641\u064A\u062C\u0645\u0639 \u0628\u064A\u0646 \u062A\u062D\u0648\u0644\u064A\u0646 \u062C\u0630\u0631\u064A\u064A\u0646:
+
+1. **\u0627\u0644\u0645\u0634\u063A\u0644\u0627\u062A \u0627\u0644\u0645\u064A\u0643\u0627\u0646\u064A\u0643\u064A\u0629 \u0634\u0628\u0647 \u0627\u0644\u0645\u0628\u0627\u0634\u0631\u0629 (QDD):** \u0645\u062D\u0631\u0643\u0627\u062A \u0643\u0647\u0631\u0628\u0627\u0626\u064A\u0629 \u0645\u0646\u062E\u0641\u0636\u0629 \u0627\u0644\u0642\u0635\u0648\u0631 \u0627\u0644\u0630\u0627\u062A\u064A \u0648\u0639\u0627\u0644\u064A\u0629 \u0639\u0632\u0645 \u0627\u0644\u062F\u0648\u0631\u0627\u0646\u060C \u062A\u0648\u0641\u0631 \u0645\u0631\u0648\u0646\u0629 \u062D\u0631\u0643\u064A\u0629 \u0648\u0633\u0644\u0627\u0645\u0629 \u062A\u0627\u0645\u0629 \u0639\u0646\u062F \u0627\u0644\u062A\u0641\u0627\u0639\u0644 \u0645\u0639 \u0627\u0644\u0628\u0634\u0631.
+2. **\u0646\u0645\u0627\u0630\u062C \u0627\u0644\u0631\u0624\u064A\u0629 \u0648\u0627\u0644\u0644\u063A\u0629 \u0648\u0627\u0644\u0639\u0645\u0644 (VLA):** \u0628\u062F\u0644\u0627\u064B \u0645\u0646 \u062D\u0644\u0648\u0644 \u0627\u0644\u062D\u0631\u0643\u064A\u0629 \u0627\u0644\u0639\u0643\u0633\u064A\u0629 \u0627\u0644\u0643\u0644\u0627\u0633\u064A\u0643\u064A\u0629\u060C \u062A\u062A\u0644\u0642\u0649 \u0627\u0644\u0634\u0628\u0643\u0627\u062A \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0628\u062B \u0627\u0644\u0643\u0627\u0645\u064A\u0631\u0627\u062A \u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0648\u062A\u062E\u0631\u062C \u0623\u0648\u0627\u0645\u0631 \u0639\u0632\u0645 \u0644\u0644\u0645\u0641\u0627\u0635\u0644 \u0628\u0645\u0639\u062F\u0644 100 \u0647\u0631\u062A\u0632.
+
+### \u0645\u0639\u0636\u0644\u0629 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0639\u0627\u0644\u0645 \u0627\u0644\u062D\u0642\u064A\u0642\u064A
+
+\u0641\u064A \u062D\u064A\u0646 \u062A\u062F\u0631\u0628\u062A \u0627\u0644\u0646\u0645\u0627\u0630\u062C \u0627\u0644\u0644\u063A\u0648\u064A\u0629 \u0639\u0644\u0649 \u0645\u0644\u064A\u0627\u0631\u0627\u062A \u0627\u0644\u0646\u0635\u0648\u0635 \u0627\u0644\u0631\u0642\u0645\u064A\u0629\u060C \u062A\u0641\u062A\u0642\u0631 \u0627\u0644\u0631\u0648\u0628\u0648\u062A\u0627\u062A \u0625\u0644\u0649 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u062A\u0641\u0627\u0639\u0644 \u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0626\u064A. \u062A\u0639\u0648\u0636 \u0627\u0644\u0634\u0631\u0643\u0627\u062A \u0630\u0644\u0643 \u0639\u0628\u0631 \u0645\u062D\u0627\u0643\u0627\u0629 sim-to-real \u0627\u0644\u0633\u0631\u064A\u0639\u0629 \u0648\u0623\u062C\u0647\u0632\u0629 \u0627\u0644\u062A\u062D\u0643\u0645 \u0627\u0644\u0644\u0645\u0633\u064A\u0629 \u0627\u0644\u062D\u064A\u0629.`
+    },
+    sources: [
+      "IEEE Transactions on Robotics: Generalizable Motor Skills via VLA Architectures",
+      "Science Robotics: Torque-Dense Actuation for Bipedal Locomotion"
+    ],
+    metadata: {
+      techStack: ["Vision-Language-Action", "Sim-to-Real", "Quasi-Direct Drive Actuators", "Impedance Control"],
+      breakthroughType: "Embodied Intelligence",
+      impactScore: 91,
+      status: "Factory Deployment Phase"
+    }
+  },
+  // ==================== ART ====================
+  {
+    id: "claude-monet-water-lilies",
+    category: "art",
+    tags: ["Impressionism", "Claude Monet", "French Painting", "Light & Color"],
+    coverImage: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1400&q=80",
+    author: "Madeleine de la Tour, Art Historian",
+    publicationDate: "2026-02-20",
+    readingTime: 6,
+    featured: true,
+    title: {
+      en: "Claude Monet: The Alchemy of Water Lilies and the Dissolution of Form",
+      ar: "\u0643\u0644\u0648\u062F \u0645\u0648\u0646\u064A\u0647: \u0643\u064A\u0645\u064A\u0627\u0621 \u0632\u0646\u0627\u0628\u0642 \u0627\u0644\u0645\u0627\u0621 \u0648\u0630\u0648\u0628\u0627\u0646 \u0627\u0644\u0623\u0634\u0643\u0627\u0644 \u0641\u064A \u0628\u062D\u064A\u0631\u0627\u062A \u0627\u0644\u0636\u0648\u0621"
+    },
+    subtitle: {
+      en: "How the master of Giverny surrendered linear perspective to capture the retinal vibration of light and reflective water.",
+      ar: "\u0643\u064A\u0641 \u062A\u062E\u0644\u0649 \u0645\u0639\u0644\u0645 \u062C\u064A\u0641\u0631\u0646\u064A \u0639\u0646 \u0627\u0644\u0645\u0646\u0638\u0648\u0631 \u0627\u0644\u0647\u0646\u062F\u0633\u064A \u0627\u0644\u0635\u0627\u0631\u0645 \u0644\u064A\u062C\u0633\u062F \u0627\u0631\u062A\u0639\u0627\u0634\u0627\u062A \u0627\u0644\u0636\u0648\u0621 \u0648\u0627\u0646\u0639\u0643\u0627\u0633\u0627\u062A \u0633\u0637\u062D \u0627\u0644\u0645\u0627\u0621."
+    },
+    shortDescription: {
+      en: "In the twilight of his life, Monet painted the Nymph\xE9as\u2014monumental canvases devoid of horizon or shoreline, plunging the viewer into an infinite liquid sky.",
+      ar: "\u0641\u064A \u0633\u0646\u0648\u0627\u062A \u0639\u0645\u0631\u0647 \u0627\u0644\u0623\u062E\u064A\u0631\u0629\u060C \u0631\u0633\u0645 \u0645\u0648\u0646\u064A\u0647 \u0644\u0648\u062D\u0627\u062A \u0632\u0646\u0627\u0628\u0642 \u0627\u0644\u0645\u0627\u0621 \u0627\u0644\u0634\u0647\u064A\u0631\u0629 (Nymph\xE9as) \u062F\u0648\u0646 \u0623\u0641\u0642 \u0623\u0648 \u0634\u0627\u0637\u0626\u060C \u0644\u064A\u063A\u0645\u0631 \u0627\u0644\u0631\u0627\u0626\u064A \u0641\u064A \u0633\u0645\u0627\u0621 \u0645\u0627\u0626\u064A\u0629 \u0644\u0627 \u0645\u062A\u0646\u0627\u0647\u064A\u0629."
+    },
+    fullContent: {
+      en: `### The Sanctuary at Giverny
+
+In 1890, having acquired the property at Giverny in Normandy, Claude Monet diverted the river Epte to create his famed water garden. He planted weeping willows, Japanese irises, and hybrid Nymphaea water lilies. It was not merely a garden, but a living optical laboratory where atmospheric conditions could be studied from dawn until dusk.
+
+### Abolishing the Horizon
+
+In traditional Western landscape painting since the Renaissance, the horizon line anchored the viewer's orientation in three-dimensional space. Monet progressively lifted, tilted, and finally eradicated the horizon.
+
+In the late *Grandes D\xE9corations* now enshrined at the Mus\xE9e de l'Orangerie in Paris:
+- The water surface fills the entire visual field from top to bottom.
+- The viewer looks down into the pond while simultaneously looking up into the reflected sky, clouds, and overhanging willow fronds.
+- Space becomes non-Euclidean, liquid, and multidimensional.
+
+> "A landscape does not exist in its own right, since its appearance changes at every moment; but the surrounding atmosphere brings it to life." \u2014 *Claude Monet*
+
+### The Cataracts and Color Abstraction
+
+As nuclear cataracts clouded Monet\u2019s crystalline lenses in the 1910s and 1920s, his color palette shifted dramatically toward fiery rusts, cobalt blues, and violent ochres. The brushstrokes thickened into visceral gestures, foreshadowing Abstract Expressionism by three decades.`,
+      ar: `### \u0645\u0644\u0627\u0630 \u062C\u064A\u0641\u0631\u0646\u064A
+
+\u0641\u064A \u0639\u0627\u0645 1890\u060C \u0628\u0639\u062F \u0627\u0633\u062A\u0642\u0631\u0627\u0631\u0647 \u0641\u064A \u0628\u0644\u062F\u0629 \u062C\u064A\u0641\u0631\u0646\u064A \u0628\u0645\u0646\u0637\u0642\u0629 \u0646\u0648\u0631\u0645\u0627\u0646\u062F\u064A\u060C \u0642\u0627\u0645 \u0643\u0644\u0648\u062F \u0645\u0648\u0646\u064A\u0647 \u0628\u062A\u062D\u0648\u064A\u0644 \u0645\u0633\u0627\u0631 \u0646\u0647\u0631 \u0625\u0628\u062A \u0644\u0625\u0646\u0634\u0627\u0621 \u062D\u062F\u064A\u0642\u062A\u0647 \u0627\u0644\u0645\u0627\u0626\u064A\u0629 \u0627\u0644\u0634\u0647\u064A\u0631\u0629. \u0632\u0631\u0639 \u0623\u0634\u062C\u0627\u0631 \u0627\u0644\u0635\u0641\u0635\u0627\u0641 \u0648\u0627\u0644\u0632\u0646\u0627\u0628\u0642 \u0627\u0644\u0647\u062C\u064A\u0646\u0629. \u0644\u0645 \u062A\u0643\u0646 \u0645\u062C\u0631\u062F \u062D\u062F\u064A\u0642\u0629 \u0639\u0627\u062F\u064A\u0629\u060C \u0628\u0644 \u0645\u062E\u062A\u0628\u0631\u0627\u064B \u0628\u0635\u0631\u064A\u0627\u064B \u062D\u064A\u0627\u064B \u0644\u062F\u0631\u0627\u0633\u0629 \u062A\u063A\u064A\u0631\u0627\u062A \u0627\u0644\u0636\u0648\u0621 \u0627\u0644\u062C\u0648\u064A \u0645\u0646 \u0627\u0644\u0641\u062C\u0631 \u062D\u062A\u0649 \u0627\u0644\u063A\u0633\u0642.
+
+### \u0625\u0644\u063A\u0627\u0621 \u062E\u0637 \u0627\u0644\u0623\u0641\u0642
+
+\u0641\u064A \u062A\u0642\u0627\u0644\u064A\u062F \u0631\u0633\u0645 \u0627\u0644\u0645\u0646\u0627\u0638\u0631 \u0627\u0644\u0637\u0628\u064A\u0639\u064A\u0629 \u0627\u0644\u063A\u0631\u0628\u064A\u0629 \u0645\u0646\u0630 \u0639\u0635\u0631 \u0627\u0644\u0646\u0647\u0636\u0629\u060C \u0643\u0627\u0646 \u062E\u0637 \u0627\u0644\u0623\u0641\u0642 \u064A\u0631\u0633\u062E \u0645\u0648\u0642\u0639 \u0627\u0644\u0645\u0634\u0627\u0647\u062F \u0641\u064A \u0641\u0636\u0627\u0621 \u062B\u0644\u0627\u062B\u064A \u0627\u0644\u0623\u0628\u0639\u0627\u062F. \u0644\u0643\u0646 \u0645\u0648\u0646\u064A\u0647 \u062A\u0639\u0645\u062F \u0631\u0641\u0639 \u062E\u0637 \u0627\u0644\u0623\u0641\u0642 \u062A\u062F\u0631\u064A\u062C\u064A\u0627\u064B \u062B\u0645 \u0623\u0632\u0627\u0644\u0647 \u062A\u0645\u0627\u0645\u0627\u064B.
+
+\u0641\u064A \u0644\u0648\u062D\u0627\u062A \u0627\u0644\u0632\u062E\u0627\u0631\u0641 \u0627\u0644\u0643\u0628\u0631\u0649 \u0627\u0644\u0645\u0639\u0631\u0648\u0636\u0629 \u0627\u0644\u064A\u0648\u0645 \u0641\u064A \u0645\u062A\u062D\u0641 \u0627\u0644\u0623\u0648\u0631\u0627\u0646\u062C\u064A\u0631\u064A \u0628\u0628\u0627\u0631\u064A\u0633:
+- \u064A\u0645\u0644\u0623 \u0633\u0637\u062D \u0627\u0644\u0645\u0627\u0621 \u0627\u0644\u0645\u062C\u0627\u0644 \u0627\u0644\u0628\u0635\u0631\u064A \u0628\u0623\u0643\u0645\u0644\u0647 \u0645\u0646 \u0627\u0644\u062D\u0627\u0641\u0629 \u0625\u0644\u0649 \u0627\u0644\u062D\u0627\u0641\u0629.
+- \u064A\u062C\u062F \u0627\u0644\u0646\u0627\u0638\u0631 \u0646\u0641\u0633\u0647 \u064A\u0646\u0638\u0631 \u0625\u0644\u0649 \u0639\u0645\u0642 \u0627\u0644\u0628\u0631\u0643\u0629 \u0648\u0641\u064A \u0627\u0644\u0648\u0642\u062A \u0630\u0627\u062A\u0647 \u0625\u0644\u0649 \u0627\u0646\u0639\u0643\u0627\u0633 \u0627\u0644\u0633\u062D\u0627\u0628 \u0648\u0627\u0644\u0635\u0641\u0635\u0627\u0641 \u0639\u0644\u0649 \u0633\u0637\u062D\u0647\u0627.
+- \u064A\u062A\u062D\u0648\u0644 \u0627\u0644\u0641\u0636\u0627\u0621 \u0625\u0644\u0649 \u0646\u0633\u064A\u062C \u0645\u0627\u0626\u064A \u062D\u0631\u060C \u0633\u064A\u0627\u0644\u060C \u0648\u0645\u062A\u0639\u062F\u062F \u0627\u0644\u0623\u0628\u0639\u0627\u062F.
+
+> "\u0627\u0644\u0645\u0646\u0638\u0631 \u0627\u0644\u0637\u0628\u064A\u0639\u064A \u0644\u0627 \u0648\u062C\u0648\u062F \u0644\u0647 \u0628\u0630\u0627\u062A\u0647 \u0627\u0644\u0645\u0633\u062A\u0642\u0644\u0629\u060C \u0625\u0630 \u064A\u062A\u063A\u064A\u0631 \u0645\u0638\u0647\u0631\u0647 \u0641\u064A \u0643\u0644 \u0637\u0631\u0641\u0629 \u0639\u064A\u0646\u061B \u0644\u0643\u0646 \u0627\u0644\u063A\u0644\u0627\u0641 \u0627\u0644\u062C\u0648\u064A \u0627\u0644\u0645\u062D\u064A\u0637 \u0628\u0647 \u0647\u0648 \u0645\u0627 \u064A\u0628\u062B \u0641\u064A\u0647 \u0627\u0644\u062D\u064A\u0627\u0629." \u2014 *\u0643\u0644\u0648\u062F \u0645\u0648\u0646\u064A\u0647*
+
+### \u0645\u0631\u0636 \u0627\u0644\u0633\u0627\u062F \u0648\u0627\u0644\u062A\u062C\u0631\u064A\u062F \u0627\u0644\u0644\u0648\u0646\u064A
+
+\u0645\u0639 \u0625\u0635\u0627\u0628\u0629 \u0645\u0648\u0646\u064A\u0647 \u0628\u0645\u0631\u0636 \u0627\u0644\u0633\u0627\u062F (\u0627\u0644\u0645\u0627\u0621 \u0627\u0644\u0623\u0628\u064A\u0636) \u0641\u064A \u0639\u064A\u0646\u064A\u0647\u060C \u062A\u062D\u0648\u0644\u062A \u0644\u0648\u062D\u0627\u062A\u0647 \u0646\u062D\u0648 \u062A\u062F\u0631\u062C\u0627\u062A \u0627\u0644\u0635\u062F\u0623 \u0627\u0644\u0645\u0644\u062A\u0647\u0628 \u0648\u0627\u0644\u0623\u0632\u0631\u0642 \u0627\u0644\u0643\u0648\u0628\u0627\u0644\u062A\u064A \u0648\u0627\u0644\u0623\u0635\u0641\u0631 \u0627\u0644\u0645\u063A\u0631\u064A \u0627\u0644\u0639\u0646\u064A\u0641. \u062A\u062D\u0648\u0644\u062A \u0636\u0631\u0628\u0627\u062A \u0627\u0644\u0641\u0631\u0634\u0627\u0629 \u0625\u0644\u0649 \u062D\u0631\u0643\u0627\u062A \u062D\u0633\u064A\u0629 \u062A\u0639\u0628\u064A\u0631\u064A\u0629 \u0645\u0647\u062F\u062A \u0644\u0644\u0641\u0646 \u0627\u0644\u062A\u062C\u0631\u064A\u062F\u064A \u0642\u0628\u0644 \u0638\u0647\u0648\u0631\u0647 \u0628\u062B\u0644\u0627\u062B\u0629 \u0639\u0642\u0648\u062F \u0643\u0627\u0645\u0644\u0629.`
+    },
+    sources: [
+      "Mus\xE9e de l'Orangerie: Monet\u2019s Water Lilies Master Catalog",
+      'Wildenstein, Daniel: "Monet: Or the Triumph of Impressionism"',
+      "Metropolitan Museum of Art Journal: Late Works of Claude Monet"
+    ],
+    metadata: {
+      medium: "Oil on canvas (Monumental Curved Panels)",
+      period: "Late Impressionism / Proto-Abstract Expressionism",
+      year: "1914\u20131926",
+      galleryRoom: "Salle de l'Orangerie Oval Salon, Paris",
+      provenance: "Bequest to the French State on Armistice Day, 1918"
+    }
+  },
+  {
+    id: "renaissance-linear-perspective",
+    category: "art",
+    tags: ["Renaissance", "Geometry", "Brunelleschi", "Da Vinci", "Art History"],
+    coverImage: "https://images.unsplash.com/photo-1577720643272-265f09367456?auto=format&fit=crop&w=1400&q=80",
+    author: "Prof. Matteo Bellini, Florence Academy",
+    publicationDate: "2026-02-08",
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: "The Geometry of Vision: Brunelleschi and the Renaissance Perspective Revolution",
+      ar: "\u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u0631\u0624\u064A\u0629: \u0628\u0631\u0648\u0646\u0644\u064A\u0633\u0643\u064A \u0648\u062B\u0648\u0631\u0629 \u0627\u0644\u0645\u0646\u0638\u0648\u0631 \u0627\u0644\u062E\u0637\u064A \u0641\u064A \u0639\u0635\u0631 \u0627\u0644\u0646\u0647\u0636\u0629"
+    },
+    subtitle: {
+      en: "When architects and painters merged Euclidean optics with canvas planes, creating the illusion of infinite spatial depth.",
+      ar: "\u0639\u0646\u062F\u0645\u0627 \u062F\u0645\u062C \u0627\u0644\u0645\u0639\u0645\u0627\u0631\u064A\u0648\u0646 \u0648\u0627\u0644\u0631\u0633\u0627\u0645\u0648\u0646 \u0627\u0644\u0628\u0635\u0631\u064A\u0627\u062A \u0627\u0644\u0625\u0642\u0644\u064A\u062F\u064A\u0629 \u0645\u0639 \u0645\u0633\u0637\u062D \u0627\u0644\u0644\u0648\u062D\u0629 \u0644\u0635\u0646\u0639 \u0625\u064A\u0647\u0627\u0645 \u0627\u0644\u0639\u0645\u0642 \u0627\u0644\u0644\u0627\u0646\u0647\u0627\u0626\u064A."
+    },
+    shortDescription: {
+      en: "Discover the mirror experiment in Florence Piazza del Duomo that forever transformed painting from flat Byzantine iconography to mathematical three-dimensional illusion.",
+      ar: "\u0627\u0643\u062A\u0634\u0641 \u062A\u062C\u0631\u0628\u0629 \u0627\u0644\u0645\u0631\u0622\u0629 \u0627\u0644\u0634\u0647\u064A\u0631\u0629 \u0641\u064A \u0633\u0627\u062D\u0629 \u0643\u0627\u062A\u062F\u0631\u0627\u0626\u064A\u0629 \u0641\u0644\u0648\u0631\u0646\u0633\u0627 \u0627\u0644\u062A\u064A \u063A\u064A\u0631\u062A \u0645\u0633\u0627\u0631 \u0627\u0644\u0631\u0633\u0645 \u0645\u0646 \u0627\u0644\u0623\u064A\u0642\u0648\u0646\u0629 \u0627\u0644\u0628\u064A\u0632\u0646\u0637\u064A\u0629 \u0627\u0644\u0645\u0633\u0637\u062D\u0629 \u0625\u0644\u0649 \u0627\u0644\u0641\u0636\u0627\u0621 \u0627\u0644\u0631\u064A\u0627\u0636\u064A \u0627\u0644\u0645\u062C\u0633\u0645."
+    },
+    fullContent: {
+      en: `### The Mirror in the Piazza
+
+Around 1415, Filippo Brunelleschi stood inside the portal of the Florence Cathedral facing the Baptistery of San Giovanni. Holding a small panel painted with the Baptistery and a peephole drilled through its vanishing point, he held up a mirror to reflect his painting. By flipping the mirror back and forth, observers could not distinguish between the real building and the painted projection.
+
+Brunelleschi had formulated the mathematical principles of **linear perspective**:
+1. All orthogonal lines parallel to the viewer's line of sight converge at a single vanishing point on the horizon.
+2. Apparent object dimensions diminish proportionally to the distance from the observer ($1/d$).
+
+### Masaccio\u2019s Holy Trinity
+
+In 1427, the young painter Masaccio applied Brunelleschi\u2019s system to the fresco of the *Holy Trinity* in the church of Santa Maria Novella. For the first time, parishioners felt as though a real barrel-vaulted Roman chapel had been carved into the solid masonry wall.
+
+### Leon Battista Alberti and Da Vinci
+
+Leon Battista Alberti codified these rules in his seminal 1435 treatise *De pictura*, defining the canvas as an "open window" (*finestra aperta*) into reality. Leonardo da Vinci later expanded this into **atmospheric perspective**, noting that distant mountains appear bluer and less defined due to atmospheric moisture.`,
+      ar: `### \u0627\u0644\u0645\u0631\u0622\u0629 \u0641\u064A \u0633\u0627\u062D\u0629 \u0627\u0644\u0643\u0627\u062A\u062F\u0631\u0627\u0626\u064A\u0629
+
+\u0642\u0631\u0627\u0628\u0629 \u0639\u0627\u0645 1415\u060C \u0648\u0642\u0641 \u0627\u0644\u0645\u0639\u0645\u0627\u0631\u064A \u0641\u064A\u0644\u064A\u0628\u0648 \u0628\u0631\u0648\u0646\u0644\u064A\u0633\u0643\u064A \u0639\u0646\u062F \u0628\u0648\u0627\u0628\u0629 \u0643\u0627\u062A\u062F\u0631\u0627\u0626\u064A\u0629 \u0641\u0644\u0648\u0631\u0646\u0633\u0627 \u0645\u0642\u0627\u0628\u0644\u0627\u064B \u0644\u0645\u0639\u0645\u0648\u062F\u064A\u0629 \u0633\u0627\u0646 \u062C\u0648\u0641\u0627\u0646\u064A. \u062D\u0627\u0645\u0644\u0627\u064B \u0644\u0648\u062D\u0629 \u0631\u0633\u0645 \u0639\u0644\u064A\u0647\u0627 \u0627\u0644\u0645\u0639\u0645\u0648\u062F\u064A\u0629 \u0648\u062B\u0642\u0628 \u0641\u064A\u0647\u0627 \u0641\u062C\u0648\u0629 \u0635\u063A\u064A\u0631\u0629 \u0639\u0646\u062F \u0646\u0642\u0637\u0629 \u0627\u0644\u062A\u0644\u0627\u0634\u064A\u060C \u0631\u0641\u0639 \u0645\u0631\u0622\u0629 \u0639\u0627\u0643\u0633\u0629 \u0623\u0645\u0627\u0645 \u0627\u0644\u0644\u0648\u062D\u0629. \u0648\u0628\u0625\u0632\u0627\u062D\u0629 \u0627\u0644\u0645\u0631\u0622\u0629 \u0648\u0625\u0639\u0627\u062F\u062A\u0647\u0627\u060C \u0639\u062C\u0632 \u0627\u0644\u0645\u0634\u0627\u0647\u062F\u0648\u0646 \u0639\u0646 \u0627\u0644\u062A\u0645\u064A\u064A\u0632 \u0628\u064A\u0646 \u0627\u0644\u0645\u0628\u0646\u0649 \u0627\u0644\u062D\u0642\u064A\u0642\u064A \u0648\u0627\u0646\u0639\u0643\u0627\u0633 \u0627\u0644\u0644\u0648\u062D\u0629 \u0627\u0644\u0645\u0631\u0633\u0648\u0645\u0629.
+
+\u0635\u0627\u063A \u0628\u0631\u0648\u0646\u0644\u064A\u0633\u0643\u064A \u0628\u0630\u0644\u0643 \u0627\u0644\u0642\u0648\u0627\u0639\u062F \u0627\u0644\u0631\u064A\u0627\u0636\u064A\u0629 \u0644\u0640 **\u0627\u0644\u0645\u0646\u0638\u0648\u0631 \u0627\u0644\u062E\u0637\u064A**:
+1. \u062A\u0644\u062A\u0642\u064A \u062C\u0645\u064A\u0639 \u0627\u0644\u062E\u0637\u0648\u0637 \u0627\u0644\u0645\u062A\u0639\u0627\u0645\u062F\u0629 \u0627\u0644\u0645\u0648\u0627\u0632\u064A\u0629 \u0644\u062E\u0637 \u0628\u0635\u0631 \u0627\u0644\u0631\u0627\u0626\u064A \u0641\u064A \u0646\u0642\u0637\u0629 \u062A\u0644\u0627\u0634\u064D \u0648\u0627\u062D\u062F\u0629 \u0639\u0644\u0649 \u062E\u0637 \u0627\u0644\u0623\u0641\u0642.
+2. \u062A\u062A\u0636\u0627\u0621\u0644 \u0627\u0644\u0623\u0628\u0639\u0627\u062F \u0627\u0644\u0638\u0627\u0647\u0631\u064A\u0629 \u0644\u0644\u0623\u062C\u0633\u0627\u0645 \u062A\u0646\u0627\u0633\u0628\u0627\u064B \u0645\u0639 \u0628\u0639\u062F\u0647\u0627 \u0639\u0646 \u0639\u064A\u0646 \u0627\u0644\u0645\u0634\u0627\u0647\u062F ($1/d$).
+
+### \u0627\u0644\u062B\u0627\u0644\u0648\u062B \u0627\u0644\u0623\u0642\u062F\u0633 \u0644\u0645\u0627\u0632\u0627\u062A\u0634\u0648
+
+\u0641\u064A \u0639\u0627\u0645 1427\u060C \u0637\u0628\u0642 \u0627\u0644\u0631\u0633\u0627\u0645 \u0627\u0644\u0634\u0627\u0628 \u0645\u0627\u0632\u0627\u062A\u0634\u0648 \u0646\u0638\u0627\u0645 \u0628\u0631\u0648\u0646\u0644\u064A\u0633\u0643\u064A \u0641\u064A \u062C\u062F\u0627\u0631\u064A\u0629 *\u0627\u0644\u062B\u0627\u0644\u0648\u062B \u0627\u0644\u0623\u0642\u062F\u0633* \u0628\u0643\u0646\u064A\u0633\u0629 \u0633\u0627\u0646\u062A\u0627 \u0645\u0627\u0631\u064A\u0627 \u0646\u0648\u0641\u064A\u0644\u0627. \u0648\u0644\u0623\u0648\u0644 \u0645\u0631\u0629 \u0641\u064A \u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0641\u0646\u060C \u0634\u0639\u0631 \u0627\u0644\u0645\u0635\u0644\u0648\u0646 \u0628\u0623\u0646 \u0642\u0628\u0648 \u0643\u0646\u064A\u0633\u0629 \u0631\u0648\u0645\u0627\u0646\u064A \u0642\u062F \u062A\u0645 \u0646\u062D\u062A\u0647 \u0641\u0639\u0644\u064A\u0627\u064B \u062F\u0627\u062E\u0644 \u0627\u0644\u062C\u062F\u0627\u0631 \u0627\u0644\u062D\u062C\u0631\u064A \u0627\u0644\u0623\u0635\u0645.
+
+### \u0623\u0644\u0628\u0631\u062A\u064A \u0648\u062F\u0627\u0641\u0646\u0634\u064A
+
+\u0642\u0627\u0645 \u0644\u064A\u0648\u0646 \u0628\u0627\u062A\u064A\u0633\u062A\u0627 \u0623\u0644\u0628\u0631\u062A\u064A \u0628\u062A\u0642\u0646\u064A\u0646 \u0647\u0630\u0647 \u0627\u0644\u0642\u0648\u0627\u0639\u062F \u0641\u064A \u0643\u062A\u0627\u0628\u0647 \u0627\u0644\u0631\u0627\u0626\u062F *\u0639\u0646 \u0627\u0644\u0631\u0633\u0645* (1435)\u060C \u0648\u0627\u0635\u0641\u0627\u064B \u0627\u0644\u0644\u0648\u062D\u0629 \u0628\u0623\u0646\u0647\u0627 "\u0646\u0627\u0641\u0630\u0629 \u0645\u0641\u062A\u0648\u062D\u0629" \u0639\u0644\u0649 \u0627\u0644\u0639\u0627\u0644\u0645. \u062B\u0645 \u0637\u0648\u0631 \u0644\u064A\u0648\u0646\u0627\u0631\u062F\u0648 \u062F\u0627\u0641\u0646\u0634\u064A \u0627\u0644\u0645\u0646\u0638\u0648\u0631 \u0627\u0644\u062C\u0648\u064A \u0639\u0628\u0631 \u0645\u0644\u0627\u062D\u0638\u0629 \u0628\u0647\u062A\u0627\u0646 \u0632\u0631\u0642\u0629 \u0627\u0644\u062C\u0628\u0627\u0644 \u0627\u0644\u0628\u0639\u064A\u062F\u0629 \u0628\u0641\u0639\u0644 \u0631\u0637\u0648\u0628\u0629 \u0627\u0644\u0647\u0648\u0627\u0621.`
+    },
+    sources: [
+      'Alberti, Leon Battista: "De pictura" (1435)',
+      'Vasari, Giorgio: "Lives of the Most Excellent Painters, Sculptors, and Architects"',
+      'Kemp, Martin: "The Science of Art: Optical Themes in Western Art from Brunelleschi to Seurat"'
+    ],
+    metadata: {
+      medium: "Fresco and Oil Tempera on Poplar",
+      period: "Early Italian Renaissance (Quattrocento)",
+      year: "c. 1415\u20131428",
+      galleryRoom: "Santa Maria Novella & Uffizi Galleries, Florence",
+      provenance: "Florentine Civic and Ecclesiastical Commissions"
+    }
+  },
+  // ==================== LITERATURE & PHILOSOPHY ====================
+  {
+    id: "ibn-khaldun-muqaddimah",
+    category: "philosophy",
+    tags: ["Ibn Khaldun", "Philosophy of History", "Sociology", "Asabiyyah"],
+    coverImage: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1400&q=80",
+    author: "Dr. Rashid Al-Husseini, Islamic Thought Studies",
+    publicationDate: "2026-02-18",
+    readingTime: 7,
+    featured: true,
+    title: {
+      en: "Ibn Khaldun\u2019s Muqaddimah: The Cyclical Rise and Fall of Empires",
+      ar: "\u0645\u0642\u062F\u0645\u0629 \u0627\u0628\u0646 \u062E\u0644\u062F\u0648\u0646: \u0641\u0644\u0633\u0641\u0629 \u0627\u0644\u062A\u0627\u0631\u064A\u062E \u0648\u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0648\u062F\u0648\u0631\u0627\u062A \u0635\u0639\u0648\u062F \u0627\u0644\u062D\u0636\u0627\u0631\u0627\u062A \u0648\u0633\u0642\u0648\u0637\u0647\u0627"
+    },
+    subtitle: {
+      en: "The 14th-century North African thinker who founded sociology and demystified how social cohesion transforms desert tribes into ruling dynasties.",
+      ar: "\u0627\u0644\u0645\u0641\u0643\u0631 \u0627\u0644\u0623\u0646\u062F\u0644\u0633\u064A \u0627\u0644\u0645\u063A\u0627\u0631\u0628\u064A \u0627\u0644\u0630\u064A \u0623\u0633\u0633 \u0639\u0644\u0645 \u0627\u0644\u0639\u0645\u0631\u0627\u0646 \u0627\u0644\u0628\u0634\u0631\u064A \u0648\u0641\u0643\u0643 \u0623\u0633\u0631\u0627\u0631 \u062A\u062D\u0648\u0644 \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0627\u0644\u0642\u0628\u0644\u064A\u0629 \u0625\u0644\u0649 \u0645\u0644\u0643 \u0648\u062D\u0636\u0627\u0631\u0629 \u062B\u0645 \u0627\u0636\u0645\u062D\u0644\u0627\u0644."
+    },
+    shortDescription: {
+      en: "Centuries before Machiavelli, Vico, and Marx, Ibn Khaldun formulated the universal laws of economic vitality, urban luxury, and political decay inside the fortress of Qal'at Ibn Salama.",
+      ar: "\u0642\u0628\u0644 \u0642\u0631\u0648\u0646 \u0645\u0646 \u0645\u064A\u0643\u0627\u0641\u064A\u0644\u064A \u0648\u0641\u064A\u0643\u0648 \u0648\u0645\u0627\u0631\u0643\u0633\u060C \u0635\u0627\u063A \u0627\u0628\u0646 \u062E\u0644\u062F\u0648\u0646 \u0627\u0644\u0642\u0648\u0627\u0646\u064A\u0646 \u0627\u0644\u0643\u0648\u0646\u064A\u0629 \u0644\u0644\u062D\u0631\u0627\u0643 \u0627\u0644\u0627\u0642\u062A\u0635\u0627\u062F\u064A \u0648\u0627\u0644\u062A\u0631\u0641 \u0627\u0644\u062D\u0636\u0627\u0631\u064A \u0648\u0633\u0642\u0648\u0637 \u0627\u0644\u062F\u0648\u0644 \u062F\u0627\u062E\u0644 \u0642\u0644\u0639\u0629 \u0628\u0646\u064A \u0633\u0644\u0627\u0645\u0629."
+    },
+    fullContent: {
+      en: `### The Retreat at Qal'at Ibn Salama
+
+In 1375, weary of the turbulent intrigue in the courts of Fez, Granada, and Tunis, Abd al-Rahman Ibn Khaldun retreated to the remote fortress of Qal'at Ibn Salama in modern Algeria. There, for four secluded years, he composed the *Muqaddimah* (Prolegomena)\u2014an intellectual monument that transformed historiography from dry chronicling into an empirical science: *'Ilm al-'Umran* (The Science of Human Civilization).
+
+### The Concept of Asabiyyah (Social Cohesion)
+
+At the heart of Ibn Khaldun\u2019s thesis lies **Asabiyyah**\u2014the organic solidarity, mutual trust, and shared purpose forged in harsh desert existence:
+
+> "Civilization has its natural span like the life of an individual. A dynasty rarely passes the life of three generations." \u2014 *Ibn Khaldun*
+
+### The Five Stages of the State
+
+1. **Conquest and Establishment:** Unbending Asabiyyah enables hardy nomad tribes to conquer weakened, decadent urban states.
+2. **Autocracy and Consolidation:** The ruler monopolizes authority, relies on mercenary guards, and distances kin.
+3. **Leisure and Magnificence:** Wealth accumulates; grand monuments, luxurious palaces, and flourishing arts define the zenith.
+4. **Contentment and Stagnation:** Governance becomes inert tradition. Expenditures outstrip revenues; taxation escalates, choking commerce.
+5. **Decay and Extinction:** Extravagance consumes the treasury. Asabiyyah completely dissolves. A new vigor from the periphery sweeps the dynasty into history.`,
+      ar: `### \u062E\u0644\u0648\u0629 \u0642\u0644\u0639\u0629 \u0628\u0646\u064A \u0633\u0644\u0627\u0645\u0629
+
+\u0641\u064A \u0639\u0627\u0645 1375\u0645\u060C \u0628\u0639\u062F \u0623\u0646 \u0623\u0646\u0647\u0643\u062A\u0647 \u0635\u0631\u0627\u0639\u0627\u062A \u0627\u0644\u0628\u0644\u0627\u0637 \u0641\u064A \u0641\u0627\u0633 \u0648\u063A\u0631\u0646\u0627\u0637\u0629 \u0648\u062A\u0648\u0646\u0633\u060C \u0627\u0639\u062A\u0632\u0644 \u0639\u0628\u062F \u0627\u0644\u0631\u062D\u0645\u0646 \u0628\u0646 \u062E\u0644\u062F\u0648\u0646 \u0641\u064A \u0642\u0644\u0639\u0629 \u0628\u0646\u064A \u0633\u0644\u0627\u0645\u0629 \u0627\u0644\u0646\u0627\u0626\u064A\u0629 \u0628\u0627\u0644\u062C\u0632\u0627\u0626\u0631. \u0648\u0647\u0646\u0627\u0643\u060C \u0641\u064A \u0639\u0632\u0644\u0629 \u062A\u0627\u0645\u0629 \u062F\u0627\u0645\u062A \u0623\u0631\u0628\u0639 \u0633\u0646\u0648\u0627\u062A\u060C \u062E\u0637 \u0645\u0624\u0644\u0641\u0647 \u0627\u0644\u062E\u0627\u0644\u062F *\u0627\u0644\u0645\u0642\u062F\u0645\u0629*\u061B \u0627\u0644\u0639\u0645\u0644 \u0627\u0644\u0630\u064A \u0646\u0642\u0644 \u0643\u062A\u0627\u0628\u0629 \u0627\u0644\u062A\u0627\u0631\u064A\u062E \u0645\u0646 \u0645\u062C\u0631\u062F \u0633\u0631\u062F \u0644\u0644\u062D\u0648\u0627\u062F\u062B \u0625\u0644\u0649 \u0639\u0644\u0645 \u062A\u062C\u0631\u064A\u0628\u064A \u0635\u0627\u0631\u0645: *\u0639\u0644\u0645 \u0627\u0644\u0639\u0645\u0631\u0627\u0646 \u0627\u0644\u0628\u0634\u0631\u064A*.
+
+### \u0645\u0641\u0647\u0648\u0645 \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0648\u0631\u0648\u062D \u0627\u0644\u062A\u0645\u0627\u0633\u0643
+
+\u064A\u0631\u062A\u0643\u0632 \u0641\u0643\u0631 \u0627\u0628\u0646 \u062E\u0644\u062F\u0648\u0646 \u0639\u0644\u0649 \u0645\u0641\u0647\u0648\u0645 **\u0627\u0644\u0639\u0635\u0628\u064A\u0629**\u061B \u062A\u0644\u0643 \u0627\u0644\u0631\u0627\u0628\u0637\u0629 \u0627\u0644\u0639\u0636\u0648\u064A\u0629 \u0648\u0627\u0644\u062A\u0636\u0627\u0645\u0646 \u0627\u0644\u0642\u0648\u064A \u0627\u0644\u0630\u064A \u062A\u0635\u0642\u0644\u0647 \u062E\u0634\u0648\u0646\u0629 \u0627\u0644\u0639\u064A\u0634 \u0641\u064A \u0627\u0644\u0628\u0627\u062F\u064A\u0629:
+
+> "\u0627\u0644\u062F\u0648\u0644 \u0644\u0647\u0627 \u0623\u0639\u0645\u0627\u0631 \u0637\u0628\u064A\u0639\u064A\u0629 \u0643\u0645\u0627 \u0644\u0644\u0623\u0634\u062E\u0627\u0635\u060C \u0648\u0639\u0645\u0631 \u0627\u0644\u062F\u0648\u0644\u0629 \u0641\u064A \u0627\u0644\u063A\u0627\u0644\u0628 \u0644\u0627 \u064A\u0639\u062F\u0648 \u062B\u0644\u0627\u062B\u0629 \u0623\u062C\u064A\u0627\u0644." \u2014 *\u0627\u0628\u0646 \u062E\u0644\u062F\u0648\u0646*
+
+### \u0623\u0637\u0648\u0627\u0631 \u0627\u0644\u062F\u0648\u0644\u0629 \u0627\u0644\u062E\u0645\u0633\u0629
+
+1. **\u0627\u0644\u0638\u0641\u0631 \u0648\u0627\u0644\u0627\u0633\u062A\u064A\u0644\u0627\u0621:** \u062D\u064A\u062B \u062A\u0645\u0643\u0646 \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0627\u0644\u0635\u0627\u0641\u064A\u0629 \u0627\u0644\u0642\u0628\u0627\u0626\u0644 \u0627\u0644\u0628\u062F\u0648\u064A\u0629 \u0627\u0644\u0642\u0648\u064A\u0629 \u0645\u0646 \u0625\u062E\u0636\u0627\u0639 \u0627\u0644\u062D\u0648\u0627\u0636\u0631 \u0627\u0644\u0645\u062A\u0631\u0641\u0629.
+2. **\u0627\u0644\u0627\u0633\u062A\u0628\u062F\u0627\u062F \u0648\u062A\u062B\u0628\u064A\u062A \u0627\u0644\u0645\u0644\u0643:** \u064A\u0646\u0641\u0631\u062F \u0627\u0644\u062D\u0627\u0643\u0645 \u0628\u0627\u0644\u0633\u0644\u0637\u0629\u060C \u0648\u064A\u0628\u0639\u062F \u0623\u0647\u0644 \u0639\u0635\u0628\u064A\u062A\u0647 \u0644\u0635\u0627\u0644\u062D \u0627\u0644\u0645\u0631\u062A\u0632\u0642\u0629 \u0648\u0627\u0644\u0628\u0637\u0627\u0646\u0629.
+3. **\u0627\u0644\u0641\u0631\u0627\u063A \u0648\u0627\u0644\u062F\u0639\u0629:** \u0645\u0631\u062D\u0644\u0629 \u062C\u0628\u0627\u064A\u0629 \u0627\u0644\u062B\u0645\u0631\u0627\u062A \u0648\u062A\u0634\u064A\u064A\u062F \u0627\u0644\u0635\u0631\u0648\u062D \u0627\u0644\u0645\u0639\u0645\u0627\u0631\u064A\u0629 \u0627\u0644\u0639\u0638\u064A\u0645\u0629 \u0648\u0631\u0639\u0627\u064A\u0629 \u0627\u0644\u0641\u0646\u0648\u0646 \u0648\u0627\u0644\u0635\u0646\u0627\u0626\u0639.
+4. **\u0627\u0644\u0642\u0646\u0648\u0639 \u0648\u0627\u0644\u0645\u0633\u0627\u0644\u0645\u0629:** \u064A\u062A\u062D\u0648\u0644 \u0627\u0644\u062D\u0643\u0645 \u0625\u0644\u0649 \u062A\u0642\u0644\u064A\u062F \u0623\u0639\u0645\u0649 \u0644\u0623\u0633\u0644\u0627\u0641\u0647 \u0645\u0639 \u062C\u0645\u0648\u062F \u0633\u064A\u0627\u0633\u064A \u0648\u0639\u0633\u0643\u0631\u064A.
+5. **\u0627\u0644\u0625\u0633\u0631\u0627\u0641 \u0648\u0627\u0644\u0632\u0648\u0627\u0644:** \u064A\u0628\u062A\u0644\u0639 \u0627\u0644\u062A\u0631\u0641 \u062E\u0632\u0627\u0626\u0646 \u0627\u0644\u062F\u0648\u0644\u0629\u060C \u0648\u062A\u0641\u0631\u0636 \u0627\u0644\u0636\u0631\u0627\u0626\u0628 \u0627\u0644\u0645\u0631\u0647\u0642\u0629\u060C \u0648\u062A\u062A\u0644\u0627\u0634\u0649 \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u062A\u0645\u0627\u0645\u0627\u064B \u062D\u062A\u0649 \u062A\u0633\u0642\u0637 \u0627\u0644\u062F\u0648\u0644\u0629 \u0623\u0645\u0627\u0645 \u0639\u0635\u0628\u064A\u0629 \u0646\u0627\u0634\u0626\u0629 \u062C\u062F\u064A\u062F\u0629.`
+    },
+    sources: [
+      'Ibn Khaldun: "The Muqaddimah: An Introduction to History" (Trans. Franz Rosenthal)',
+      `Toynbee, Arnold: "A Study of History: Appreciation of Ibn Khaldun's Philosophy"`,
+      "Journal of Middle Eastern Studies: Asabiyyah and Modern Social Capital"
+    ],
+    metadata: {
+      era: "Islamic Golden Age / 14th Century (Mamluk & Marinid Period)",
+      keyQuote: {
+        en: "The past resembles the future more than one drop of water resembles another.",
+        ar: "\u0627\u0644\u0645\u0627\u0636\u064A \u0623\u0634\u0628\u0647 \u0628\u0627\u0644\u0622\u062A\u064A \u0645\u0646 \u0627\u0644\u0645\u0627\u0621 \u0628\u0627\u0644\u0645\u0627\u0621."
+      },
+      originalLanguage: "Arabic (\u0627\u0644\u0639\u0631\u0628\u064A\u0629 \u0627\u0644\u0641\u0635\u062D\u0649)",
+      corePremise: {
+        en: "Civilizations follow organic cycles dictated by social solidarity and economic morality.",
+        ar: "\u062A\u062E\u0636\u0639 \u0627\u0644\u062D\u0636\u0627\u0631\u0627\u062A \u0644\u062F\u0648\u0631\u0627\u062A \u0639\u0636\u0648\u064A\u0629 \u062A\u062D\u0643\u0645\u0647\u0627 \u0627\u0644\u0639\u0635\u0628\u064A\u0629 \u0627\u0644\u0627\u062C\u062A\u0645\u0627\u0639\u064A\u0629 \u0648\u0627\u0644\u0639\u062F\u0627\u0644\u0629 \u0627\u0644\u0627\u0642\u062A\u0635\u0627\u062F\u064A\u0629."
+      }
+    }
+  },
+  {
+    id: "nietzsche-will-to-meaning",
+    category: "philosophy",
+    tags: ["Friedrich Nietzsche", "Existentialism", "Nihilism", "Morality"],
+    coverImage: "https://images.unsplash.com/photo-1507842229451-79b1be886a20?auto=format&fit=crop&w=1400&q=80",
+    author: "Clara Weidmann, Philosophy Chair",
+    publicationDate: "2026-01-25",
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: "Friedrich Nietzsche: The Twilight of Idols and the Will to Overcome",
+      ar: "\u0641\u0631\u064A\u062F\u0631\u064A\u0634 \u0646\u064A\u062A\u0634\u0647: \u063A\u0633\u0642 \u0627\u0644\u0623\u0648\u062B\u0627\u0646 \u0648\u0625\u0631\u0627\u062F\u0629 \u0627\u0644\u062A\u062C\u0627\u0648\u0632 \u0646\u062D\u0648 \u0645\u0639\u0646\u0649 \u062C\u062F\u064A\u062F"
+    },
+    subtitle: {
+      en: "Diagnosing European nihilism not as an end, but as a crucible for radical self-creation and amor fati.",
+      ar: "\u062A\u0634\u062E\u064A\u0635 \u0627\u0644\u0639\u062F\u0645\u064A\u0629 \u0627\u0644\u0623\u0648\u0631\u0648\u0628\u064A\u0629 \u0644\u064A\u0633 \u0643\u0646\u0647\u0627\u064A\u0629 \u0645\u0623\u0633\u0627\u0648\u064A\u0629\u060C \u0628\u0644 \u0643\u0628\u0648\u062A\u0642\u0629 \u0644\u062E\u0644\u0642 \u0627\u0644\u0630\u0627\u062A \u0648\u0625\u0631\u0627\u062F\u0629 \u0627\u0644\u062D\u064A\u0627\u0629 \u0648\u0645\u062D\u0628\u0629 \u0627\u0644\u0642\u062F\u0631."
+    },
+    shortDescription: {
+      en: "Explore Nietzsche\u2019s solitary alpine walks in Sils Maria, his deconstruction of herd morality, and his provocative challenge: to live as though your life will recur for all eternity.",
+      ar: "\u0627\u0633\u062A\u0643\u0634\u0641 \u062A\u0623\u0645\u0644\u0627\u062A \u0646\u064A\u062A\u0634\u0647 \u0641\u064A \u062C\u0628\u0627\u0644 \u0633\u064A\u0644\u0633 \u0645\u0627\u0631\u064A\u0627 \u0627\u0644\u0633\u0648\u064A\u0633\u0631\u064A\u0629\u060C \u0648\u062A\u0641\u0643\u064A\u0643\u0647 \u0644\u0623\u062E\u0644\u0627\u0642 \u0627\u0644\u0642\u0637\u064A\u0639\u060C \u0648\u062A\u062D\u062F\u064A\u0647 \u0627\u0644\u0641\u0644\u0633\u0641\u064A \u0627\u0644\u0645\u062B\u064A\u0631: \u0627\u0644\u0639\u0648\u062F \u0627\u0644\u0623\u0628\u062F\u064A \u0648\u062D\u0628 \u0627\u0644\u0642\u062F\u0631."
+    },
+    fullContent: {
+      en: `### The Hermit of Sils Maria
+
+During the late 19th century, suffering from near-blindness, migraine attacks, and profound loneliness, Friedrich Nietzsche wandered the Upper Engadine Valley in Switzerland. Far from the academic halls of Basel, his philosophy took on the sharpness of Alpine granite.
+
+### The Death of God and the Threat of Nihilism
+
+When Nietzsche proclaimed through the madman in *The Gay Science* that "God is dead," he was delivering a sober sociological diagnosis. The Enlightenment had dismantled metaphysical foundations, but European culture had not yet faced the terrifying abyss left in their wake: universal nihilism.
+
+### The Counter-Weights
+
+1. **Amor Fati (Love of Fate):** Not mere passive resignation to suffering, but enthusiastic affirmation of every agony and joy as indispensable to the tapestry of existence.
+2. **The Eternal Recurrence:** A psychological thought experiment\u2014if a demon whispered that you must live this exact life over and over for all eternity, would you fall down in despair, or rejoice that life is so profoundly worthy?
+3. **The \xDCbermensch:** The individual who resists cultural conformity, writes their own values, and transforms chaos into artistic mastery.`,
+      ar: `### \u0646\u0627\u0633\u0643 \u0633\u064A\u0644\u0633 \u0645\u0627\u0631\u064A\u0627
+
+\u0641\u064A \u0623\u0648\u0627\u062E\u0631 \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u062A\u0627\u0633\u0639 \u0639\u0634\u0631\u060C \u0648\u0628\u064A\u0646\u0645\u0627 \u0643\u0627\u0646 \u064A\u0639\u0627\u0646\u064A \u0645\u0646 \u0636\u0639\u0641 \u062D\u0627\u062F \u0641\u064A \u0627\u0644\u0628\u0635\u0631 \u0648\u0635\u062F\u0627\u0639 \u0645\u0632\u0645\u0646 \u0648\u0639\u0632\u0644\u0629 \u0642\u0627\u0633\u064A\u0629\u060C \u0633\u0627\u0631 \u0641\u0631\u064A\u062F\u0631\u064A\u0634 \u0646\u064A\u062A\u0634\u0647 \u0648\u062D\u064A\u062F\u0627\u064B \u0641\u064A \u0648\u0627\u062F\u064A \u0625\u0646\u063A\u0627\u062F\u064A\u0646 \u0628\u0633\u0648\u064A\u0633\u0631\u0627. \u0628\u0639\u064A\u062F\u0627\u064B \u0639\u0646 \u0635\u062E\u0628 \u0642\u0627\u0639\u0627\u062A \u0628\u0627\u0632\u0644 \u0627\u0644\u0623\u0643\u0627\u062F\u064A\u0645\u064A\u0629\u060C \u0627\u0643\u062A\u0633\u0628\u062A \u0643\u062A\u0627\u0628\u0627\u062A\u0647 \u0635\u0644\u0627\u0628\u0629 \u0635\u062E\u0648\u0631 \u0627\u0644\u0623\u0644\u0628 \u0648\u0646\u0642\u0627\u0621 \u0647\u0648\u0627\u0626\u0647\u0627.
+
+### \u0645\u0648\u062A \u0627\u0644\u0625\u0644\u0647 \u0648\u0634\u0628\u062D \u0627\u0644\u0639\u062F\u0645\u064A\u0629
+
+\u0639\u0646\u062F\u0645\u0627 \u0623\u0639\u0644\u0646 \u0646\u064A\u062A\u0634\u0647 \u0639\u0644\u0649 \u0644\u0633\u0627\u0646 \u0627\u0644\u0631\u062C\u0644 \u0627\u0644\u0645\u062C\u0646\u0648\u0646 \u0641\u064A \u0643\u062A\u0627\u0628\u0647 *\u0627\u0644\u0639\u0644\u0645 \u0627\u0644\u0645\u0631\u062D* \u0639\u0628\u0627\u0631\u062A\u0647 \u0627\u0644\u0634\u0647\u064A\u0631\u0629\u060C \u0644\u0645 \u064A\u0643\u0646 \u064A\u062D\u062A\u0641\u0644\u060C \u0628\u0644 \u0643\u0627\u0646 \u064A\u0642\u062F\u0645 \u062A\u0634\u062E\u064A\u0635\u0627\u064B \u0633\u0648\u0633\u064A\u0648\u0644\u0648\u062C\u064A\u0627\u064B \u0648\u0646\u0641\u0633\u064A\u0627\u064B \u0645\u0631\u0648\u0639\u0627\u064B. \u0644\u0642\u062F \u0647\u062F\u0645\u062A \u062D\u0631\u0643\u0629 \u0627\u0644\u062A\u0646\u0648\u064A\u0631 \u0627\u0644\u0645\u0631\u062A\u0643\u0632\u0627\u062A \u0627\u0644\u0645\u064A\u062A\u0627\u0641\u064A\u0632\u064A\u0642\u064A\u0629 \u0627\u0644\u0642\u062F\u064A\u0645\u0629\u060C \u0644\u0643\u0646 \u0627\u0644\u0645\u062C\u062A\u0645\u0639\u0627\u062A \u0644\u0645 \u062A\u0643\u0646 \u0645\u0633\u062A\u0639\u062F\u0629 \u0628\u0639\u062F \u0644\u0644\u0647\u0627\u0648\u064A\u0629 \u0627\u0644\u062A\u064A \u062E\u0644\u0641\u062A\u0647\u0627: \u0627\u0644\u0639\u062F\u0645\u064A\u0629 \u0627\u0644\u0634\u0627\u0645\u0644\u0629.
+
+### \u0627\u0644\u0631\u0643\u0627\u0626\u0632 \u0627\u0644\u0641\u0644\u0633\u0641\u064A\u0629 \u0644\u0644\u0646\u0647\u0648\u0636
+
+1. **\u062D\u0628 \u0627\u0644\u0642\u062F\u0631 (Amor Fati):** \u0644\u064A\u0633 \u0645\u062C\u0631\u062F \u0627\u0633\u062A\u0633\u0644\u0627\u0645 \u0633\u0644\u0628\u064A \u0644\u0644\u0623\u0644\u0645\u060C \u0628\u0644 \u062A\u0642\u0628\u0644 \u0643\u0644 \u062A\u0641\u0635\u064A\u0644 \u0645\u0646 \u062A\u0641\u0627\u0635\u064A\u0644 \u0627\u0644\u062D\u064A\u0627\u0629\u060C \u0628\u0622\u0644\u0627\u0645\u0647\u0627 \u0648\u0623\u0641\u0631\u0627\u062D\u0647\u0627\u060C \u0643\u062C\u0632\u0621 \u0644\u0627 \u064A\u062A\u062C\u0632\u0623 \u0645\u0646 \u0628\u0647\u0627\u0621 \u0627\u0644\u0648\u062C\u0648\u062F.
+2. **\u0627\u0644\u0639\u0648\u062F \u0627\u0644\u0623\u0628\u062F\u064A:** \u0627\u062E\u062A\u0628\u0627\u0631 \u0646\u0641\u0633\u064A \u0648\u0641\u0643\u0631\u064A \u0635\u0627\u0631\u0645\u061B \u0644\u0648 \u0623\u0646 \u0634\u064A\u0637\u0627\u0646\u0627\u064B \u0647\u0645\u0633 \u0641\u064A \u0623\u0630\u0646\u0643 \u0628\u0623\u0646\u0643 \u0633\u062A\u0639\u064A\u0634 \u062D\u064A\u0627\u062A\u0643 \u0647\u0630\u0647 \u0630\u0627\u062A\u0647\u0627 \u0625\u0644\u0649 \u0645\u0627 \u0644\u0627 \u0646\u0647\u0627\u064A\u0629 \u0628\u0643\u0644 \u0644\u062D\u0638\u0627\u062A\u0647\u0627\u060C \u0647\u0644 \u0633\u062A\u0646\u0647\u0627\u0631 \u0631\u0639\u0628\u0627\u064B \u0623\u0645 \u0633\u062A\u0633\u062C\u062F \u0627\u0628\u062A\u0647\u0627\u062C\u0627\u064B \u0628\u0639\u0638\u0645\u0629 \u0627\u0644\u062D\u064A\u0627\u0629\u061F
+3. **\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0627\u0644\u0623\u0639\u0644\u0649 (\xDCbermensch):** \u0627\u0644\u0643\u0627\u0626\u0646 \u0627\u0644\u0630\u064A \u064A\u0643\u0633\u0631 \u0642\u0648\u0627\u0644\u0628 \u0623\u062E\u0644\u0627\u0642 \u0627\u0644\u0642\u0637\u064A\u0639 \u0627\u0644\u0633\u0627\u0626\u062F\u0629\u060C \u0648\u064A\u0635\u0646\u0639 \u0642\u064A\u0645\u0647 \u0627\u0644\u0623\u062E\u0644\u0627\u0642\u064A\u0629 \u0648\u0627\u0644\u062C\u0645\u0627\u0644\u064A\u0629 \u0627\u0644\u062E\u0627\u0635\u0629 \u0645\u0646 \u062F\u0627\u062E\u0644 \u0627\u0644\u0641\u0648\u0636\u0649.`
+    },
+    sources: [
+      'Nietzsche, Friedrich: "Thus Spoke Zarathustra" & "Ecce Homo"',
+      'Kaufmann, Walter: "Nietzsche: Philosopher, Psychologist, Antichrist"',
+      "Stanford Encyclopedia of Philosophy: Friedrich Nietzsche"
+    ],
+    metadata: {
+      era: "Late 19th-Century Continental Philosophy",
+      keyQuote: {
+        en: "He who has a why to live can bear almost any how.",
+        ar: "\u0645\u0646 \u064A\u0645\u0644\u0643 \u0633\u0628\u0628\u0627\u064B \u064A\u0639\u064A\u0634 \u0645\u0646 \u0623\u062C\u0644\u0647\u060C \u064A\u0645\u0643\u0646\u0647 \u0623\u0646 \u064A\u062A\u062D\u0645\u0644 \u0623\u064A \u0637\u0631\u064A\u0642\u0629 \u0644\u0644\u0639\u064A\u0634."
+      },
+      originalLanguage: "German (Deutsch)",
+      corePremise: {
+        en: "The collapse of external moral dogmas demands sovereign, creative self-overcoming.",
+        ar: "\u062A\u062F\u0627\u0639\u064A \u0627\u0644\u0645\u0633\u0644\u0645\u0627\u062A \u0627\u0644\u0623\u062E\u0644\u0627\u0642\u064A\u0629 \u0627\u0644\u062E\u0627\u0631\u062C\u064A\u0629 \u064A\u0641\u0631\u0636 \u0639\u0644\u0649 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u062A\u062C\u0627\u0648\u064F\u0632\u0627\u064B \u0630\u0627\u062A\u064A\u0627\u064B \u062E\u0644\u0627\u0642\u0627\u064B \u0648\u0635\u0646\u0639\u0627\u064B \u0644\u0645\u0639\u0646\u0627\u0647."
+      }
+    }
+  },
+  {
+    id: "library-of-alexandria-manuscripts",
+    category: "literature",
+    tags: ["Library of Alexandria", "Manuscripts", "Ancient Greece", "Papyrus"],
+    coverImage: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1400&q=80",
+    author: "Aetheria Curatorial Circle",
+    publicationDate: "2026-01-12",
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: "The Lost Papyrus: Inside the Great Library of Alexandria",
+      ar: "\u0623\u0648\u0631\u0627\u0642 \u0627\u0644\u0628\u0631\u062F\u064A \u0627\u0644\u0645\u0641\u0642\u0648\u062F\u0629: \u0641\u064A \u0631\u062D\u0627\u0628 \u0645\u0643\u062A\u0628\u0629 \u0627\u0644\u0625\u0633\u0643\u0646\u062F\u0631\u064A\u0629 \u0627\u0644\u0643\u0628\u0631\u0649"
+    },
+    subtitle: {
+      en: "How Ptolemaic scholars collected, transcribed, and curated half a million scrolls to build humanity\u2019s first universal mind.",
+      ar: "\u0643\u064A\u0641 \u062C\u0645\u0639 \u0648\u0646\u0633\u062E \u0639\u0644\u0645\u0627\u0621 \u0627\u0644\u0639\u0635\u0631 \u0627\u0644\u0628\u0637\u0644\u0645\u064A \u0646\u0635\u0641 \u0645\u0644\u064A\u0648\u0646 \u0644\u0641\u0627\u0641\u0629 \u0628\u0631\u062F\u064A \u0644\u062A\u0634\u064A\u064A\u062F \u0623\u0648\u0644 \u0639\u0642\u0644 \u0643\u0648\u0646\u064A \u0645\u0648\u062D\u062F \u0644\u0644\u0625\u0646\u0633\u0627\u0646\u064A\u0629."
+    },
+    shortDescription: {
+      en: "Explore the mouseion, the royal mandate requiring every ship entering Alexandria harbor to surrender books for copying, and the tragic mythologies of its multi-century decline.",
+      ar: "\u0627\u0633\u062A\u0643\u0634\u0641 \u0627\u0644\u0645\u064A\u0648\u0633\u064A\u0648\u0646 (\u062F\u0627\u0631 \u0627\u0644\u062D\u0643\u0645\u0629)\u060C \u0648\u0627\u0644\u0645\u0631\u0633\u0648\u0645 \u0627\u0644\u0645\u0644\u0643\u064A \u0628\u0645\u0635\u0627\u062F\u0631\u0629 \u0643\u062A\u0628 \u0627\u0644\u0633\u0641\u0646 \u0644\u0646\u0633\u062E\u0647\u0627\u060C \u0648\u0627\u0644\u062D\u0642\u0627\u0626\u0642 \u0627\u0644\u062A\u0627\u0631\u064A\u062E\u064A\u0629 \u0648\u0631\u0627\u0621 \u0623\u0641\u0648\u0644 \u0623\u0639\u0638\u0645 \u0635\u0631\u062D \u0645\u0639\u0631\u0641\u064A \u0641\u064A \u0627\u0644\u0639\u0635\u0648\u0631 \u0627\u0644\u0642\u062F\u064A\u0645\u0629."
+    },
+    fullContent: {
+      en: `### The Ptolemaic Mandate
+
+Founded in the 3rd century BCE under Ptolemy I Soter, the Library of Alexandria was not an isolated repository of texts, but part of a royal research institution\u2014the *Mouseion* (Temple of the Muses). Located within the royal quarter of Alexandria facing the Mediterranean, it housed scholars subsidized with state stipends, private gardens, and lecture halls.
+
+The crown was relentless in its acquisition:
+- Royal agents traveled to Athens, Rhodes, and Babylon to purchase scrolls.
+- By royal decree, any ship docking in Alexandria\u2019s harbor had to surrender all books aboard. Scribes made hasty papyrus copies; the original stayed in the library, while the copy was politely handed back to the ship owner.
+
+### Pioneers of the Mouseion
+
+- **Eratosthenes of Cyrene:** Accurately computed the Earth\u2019s circumference using solar shadows in Alexandria and Syene.
+- **Euclid:** Formalized the axioms of plane geometry in *The Elements*.
+- **Callimachus:** Invented the *Pinakes*\u2014a 120-volume bibliographic catalog that laid the foundation for modern library science.
+
+### The Myth of a Single Blaze
+
+Popular culture often attributes the destruction of the library to a single catastrophic fire set by Julius Caesar in 48 BCE. In truth, Caesar\u2019s fire damaged dockside warehouses. The true demise was a gradual erosion over centuries\u2014budget cuts, civil wars, and imperial purges that starved the institution of ink and parchment.`,
+      ar: `### \u0627\u0644\u0645\u0631\u0633\u0648\u0645 \u0627\u0644\u0628\u0637\u0644\u0645\u064A \u0627\u0644\u0635\u0627\u0631\u0645
+
+\u062A\u0623\u0633\u0633\u062A \u0645\u0643\u062A\u0628\u0629 \u0627\u0644\u0625\u0633\u0643\u0646\u062F\u0631\u064A\u0629 \u0641\u064A \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u062B\u0627\u0644\u062B \u0642\u0628\u0644 \u0627\u0644\u0645\u064A\u0644\u0627\u062F \u0641\u064A \u0639\u0647\u062F \u0628\u0637\u0644\u064A\u0645\u0648\u0633 \u0627\u0644\u0623\u0648\u0644 \u0633\u0648\u062A\u064A\u0631\u060C \u0648\u0644\u0645 \u062A\u0643\u0646 \u0645\u062C\u0631\u062F \u0645\u0633\u062A\u0648\u062F\u0639 \u0644\u0644\u0643\u062A\u0628\u060C \u0628\u0644 \u062C\u0632\u0621\u0627\u064B \u0645\u0646 \u0645\u0624\u0633\u0633\u0629 \u0628\u062D\u062B\u064A\u0629 \u0645\u0644\u0643\u064A\u0629 \u0645\u062A\u0643\u0627\u0645\u0644\u0629 \u0647\u064A *\u0627\u0644\u0645\u064A\u0648\u0633\u064A\u0648\u0646* (\u0645\u0639\u0628\u062F \u0631\u0628\u0627\u062A \u0627\u0644\u0641\u0646\u0648\u0646 \u0648\u0627\u0644\u062D\u0643\u0645\u0629). \u0623\u0642\u064A\u0645\u062A \u0641\u064A \u0627\u0644\u062D\u064A \u0627\u0644\u0645\u0644\u0643\u064A \u0628\u0627\u0644\u0625\u0633\u0643\u0646\u062F\u0631\u064A\u0629 \u0627\u0644\u0645\u0637\u0644 \u0639\u0644\u0649 \u0627\u0644\u0628\u062D\u0631 \u0627\u0644\u0645\u062A\u0648\u0633\u0637\u060C \u0648\u0636\u0645\u062A \u0628\u0627\u062D\u062B\u064A\u0646 \u0628\u0631\u0639\u0627\u064A\u0629 \u062D\u0643\u0648\u0645\u064A\u0629 \u0643\u0627\u0645\u0644\u0629 \u0648\u062D\u062F\u0627\u0626\u0642 \u062E\u0627\u0635\u0629 \u0648\u0642\u0627\u0639\u0627\u062A \u0644\u0644\u0645\u0646\u0627\u0638\u0631\u0627\u062A.
+
+\u0643\u0627\u0646 \u0627\u0644\u0628\u0644\u0627\u0637 \u0627\u0644\u0645\u0644\u0643\u064A \u0634\u0631\u0647\u0627\u064B \u0641\u064A \u0627\u0642\u062A\u0646\u0627\u0621 \u0627\u0644\u0645\u062E\u0637\u0648\u0637\u0627\u062A:
+- \u062C\u0627\u0628 \u0631\u0633\u0644 \u0627\u0644\u0645\u0644\u0643 \u0623\u0633\u0648\u0627\u0642 \u0623\u062B\u064A\u0646\u0627 \u0648\u0631\u0648\u062F\u0633 \u0648\u0628\u0627\u0628\u0644 \u0644\u0634\u0631\u0627\u0621 \u0627\u0644\u0645\u062E\u0637\u0648\u0637\u0627\u062A \u0627\u0644\u0646\u0627\u062F\u0631\u0629.
+- \u0641\u0631\u0636 \u0645\u0631\u0633\u0648\u0645 \u0645\u0644\u0643\u064A \u0639\u0644\u0649 \u0643\u0644 \u0633\u0641\u064A\u0646\u0629 \u062A\u0631\u0633\u0648 \u0641\u064A \u0645\u064A\u0646\u0627\u0621 \u0627\u0644\u0625\u0633\u0643\u0646\u062F\u0631\u064A\u0629 \u062A\u0633\u0644\u064A\u0645 \u0645\u0627 \u062A\u062D\u0645\u0644\u0647 \u0645\u0646 \u0643\u062A\u0628 \u0644\u0646\u0633\u062E\u0647\u0627\u061B \u0648\u0643\u0627\u0646 \u0627\u0644\u0646\u0633\u0627\u062E \u064A\u0642\u062F\u0645\u0648\u0646 \u0627\u0644\u0646\u0633\u062E\u0629 \u0644\u0623\u0635\u062D\u0627\u0628 \u0627\u0644\u0633\u0641\u064A\u0646\u0629 \u0648\u064A\u062D\u062A\u0641\u0638\u0648\u0646 \u0628\u0627\u0644\u0623\u0635\u0644 \u062F\u0627\u062E\u0644 \u0627\u0644\u0645\u0643\u062A\u0628\u0629!
+
+### \u0631\u0648\u0627\u062F \u062F\u0627\u0631 \u0627\u0644\u062D\u0643\u0645\u0629
+
+- **\u0625\u0631\u0627\u062A\u0648\u0633\u062A\u064A\u0646\u0633 \u0627\u0644\u0642\u064A\u0631\u0648\u0627\u0646\u064A:** \u0642\u0627\u0633 \u0645\u062D\u064A\u0637 \u0643\u0648\u0643\u0628 \u0627\u0644\u0623\u0631\u0636 \u0628\u062F\u0642\u0629 \u0645\u0630\u0647\u0644\u0629 \u0639\u0628\u0631 \u0642\u064A\u0627\u0633 \u0632\u0648\u0627\u064A\u0627 \u0638\u0644\u0627\u0644 \u0627\u0644\u0634\u0645\u0633 \u0628\u064A\u0646 \u0627\u0644\u0625\u0633\u0643\u0646\u062F\u0631\u064A\u0629 \u0648\u0623\u0633\u0648\u0627\u0646.
+- **\u0625\u0642\u0644\u064A\u062F\u0633:** \u0635\u0627\u063A \u0628\u062F\u064A\u0647\u064A\u0627\u062A \u0627\u0644\u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u0645\u0633\u062A\u0648\u064A\u0629 \u0641\u064A \u0643\u062A\u0627\u0628\u0647 \u0627\u0644\u062E\u0627\u0644\u062F *\u0627\u0644\u0623\u0635\u0648\u0644*.
+- **\u0643\u0627\u0644\u064A\u0645\u0627\u062E\u0648\u0633:** \u0627\u0628\u062A\u0643\u0631 *\u0627\u0644\u0628\u064A\u0646\u0627\u062A\u0643\u0633* (Pinakes)\u061B \u0641\u0647\u0631\u0633\u0627\u064B \u0628\u0628\u0644\u064A\u0648\u063A\u0631\u0627\u0641\u064A\u0627\u064B \u0641\u064A 120 \u0645\u062C\u0644\u062F\u0627\u064B \u0634\u0643\u0644 \u0623\u0633\u0627\u0633 \u0639\u0644\u0645 \u0627\u0644\u0641\u0647\u0627\u0631\u0633 \u0627\u0644\u062D\u062F\u064A\u062B.
+
+### \u0623\u0633\u0637\u0648\u0631\u0629 \u0627\u0644\u062D\u0631\u064A\u0642 \u0627\u0644\u0648\u0627\u062D\u062F
+
+\u0643\u062B\u064A\u0631\u0627\u064B \u0645\u0627 \u062A\u0635\u0648\u0651\u0631 \u0627\u0644\u062B\u0642\u0627\u0641\u0629 \u0627\u0644\u0634\u0639\u0628\u064A\u0629 \u0636\u064A\u0627\u0639 \u0627\u0644\u0645\u0643\u062A\u0628\u0629 \u0641\u064A \u062D\u0631\u064A\u0642 \u062F\u0631\u0627\u0645\u064A \u0648\u0627\u062D\u062F \u0623\u0636\u0631\u0645\u0647 \u064A\u0648\u0644\u064A\u0648\u0633 \u0642\u064A\u0635\u0631 \u0639\u0627\u0645 48 \u0642.\u0645. \u0648\u0627\u0644\u062D\u0642\u064A\u0642\u0629 \u0627\u0644\u062A\u0627\u0631\u064A\u062E\u064A\u0629 \u062A\u062B\u0628\u062A \u0623\u0646 \u062D\u0631\u064A\u0642 \u0642\u064A\u0635\u0631 \u0646\u0627\u0644 \u0645\u0646 \u0645\u0633\u062A\u0648\u062F\u0639\u0627\u062A \u0627\u0644\u0645\u064A\u0646\u0627\u0621\u060C \u0628\u064A\u0646\u0645\u0627 \u062A\u0644\u0627\u0634\u0649 \u0647\u0630\u0627 \u0627\u0644\u0635\u0631\u062D \u0627\u0644\u0645\u0639\u0631\u0641\u064A \u062A\u062F\u0631\u064A\u062C\u064A\u0627\u064B \u0639\u0628\u0631 \u0642\u0631\u0648\u0646 \u0637\u0648\u064A\u0644\u0629 \u0645\u0646 \u0627\u0644\u0625\u0647\u0645\u0627\u0644 \u0627\u0644\u0645\u0627\u0644\u064A \u0648\u0627\u0644\u0627\u0636\u0637\u0631\u0627\u0628\u0627\u062A \u0627\u0644\u0633\u064A\u0627\u0633\u064A\u0629.`
+    },
+    sources: [
+      'Casson, Lionel: "Libraries in the Ancient World"',
+      'Canfora, Luciano: "The Vanished Library: A Wonder of the Ancient World"',
+      "Journal of Hellenic Studies: The Mouseion of Alexandria"
+    ],
+    metadata: {
+      era: "Hellenistic / Ptolemaic Era (c. 285 BCE)",
+      originalLanguage: "Ancient Greek (\u1F19\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AE)",
+      corePremise: {
+        en: "The audacious first attempt to gather the entirety of human knowledge under one roof.",
+        ar: "\u0623\u0648\u0644 \u0645\u062D\u0627\u0648\u0644\u0629 \u062C\u0633\u0648\u0631\u0629 \u0641\u064A \u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0628\u0634\u0631\u064A\u0629 \u0644\u062C\u0645\u0639 \u0648\u062A\u062F\u0648\u064A\u0646 \u0634\u062A\u0627\u062A \u0627\u0644\u0645\u0639\u0631\u0641\u0629 \u0627\u0644\u0625\u0646\u0633\u0627\u0646\u064A\u0629 \u062A\u062D\u062A \u0633\u0642\u0641 \u0648\u0627\u062D\u062F."
+      }
+    }
+  },
+  // ==================== SCIENCE ====================
+  {
+    id: "crispr-cas9-genome-revolution",
+    category: "science",
+    tags: ["Genetics", "CRISPR", "Biotechnology", "Medicine"],
+    coverImage: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=1400&q=80",
+    author: "Dr. Sarah Lin, Molecular Genetics",
+    publicationDate: "2026-01-30",
+    readingTime: 6,
+    featured: false,
+    title: {
+      en: "CRISPR-Cas9: Rewriting the Code of Life and Bioethical Horizons",
+      ar: "\u0643\u0631\u064A\u0633\u0628\u0631-\u0643\u0627\u06339: \u0625\u0639\u0627\u062F\u0629 \u0643\u062A\u0627\u0628\u0629 \u0634\u0641\u0631\u0629 \u0627\u0644\u062D\u064A\u0627\u0629 \u0648\u0627\u0644\u0622\u0641\u0627\u0642 \u0627\u0644\u0623\u062E\u0644\u0627\u0642\u064A\u0629 \u0644\u0644\u062A\u062D\u0631\u064A\u0631 \u0627\u0644\u062C\u064A\u0646\u064A"
+    },
+    subtitle: {
+      en: "How an ancient bacterial immune defense became molecular scissors capable of curing sickle cell disease and redefining human evolution.",
+      ar: "\u0643\u064A\u0641 \u062A\u062D\u0648\u0644 \u0633\u0644\u0627\u062D \u0645\u0646\u0627\u0639\u064A \u0628\u0643\u062A\u064A\u0631\u064A \u0639\u062A\u064A\u0642 \u0625\u0644\u0649 \u0645\u0642\u0635 \u062C\u0632\u064A\u0626\u064A \u0642\u0627\u062F\u0631 \u0639\u0644\u0649 \u0639\u0644\u0627\u062C \u0641\u0642\u0631 \u0627\u0644\u062F\u0645 \u0627\u0644\u0645\u0646\u062C\u0644\u064A \u0648\u0625\u0639\u0627\u062F\u0629 \u062A\u0634\u0643\u064A\u0644 \u0645\u0633\u0627\u0631 \u0627\u0644\u062A\u0637\u0648\u0631."
+    },
+    shortDescription: {
+      en: "From Emmanuelle Charpentier and Jennifer Doudna\u2019s Nobel breakthrough to in vivo base editing, explore the precise machinery rewriting DNA strands with single-nucleotide accuracy.",
+      ar: "\u0645\u0646 \u0625\u0646\u062C\u0627\u0632 \u0646\u0648\u0628\u0644 \u0644\u0634\u0627\u0631\u0628\u0646\u062A\u064A\u064A\u0647 \u0648\u062F\u0648\u062F\u0646\u0627 \u0625\u0644\u0649 \u062A\u0642\u0646\u064A\u0627\u062A \u062A\u0639\u062F\u064A\u0644 \u0627\u0644\u0642\u0648\u0627\u0639\u062F \u0627\u0644\u0646\u064A\u062A\u0631\u0648\u062C\u064A\u0646\u064A\u0629 \u0627\u0644\u062D\u064A\u0629\u060C \u062A\u0639\u0631\u0641 \u0639\u0644\u0649 \u0627\u0644\u0622\u0644\u064A\u0629 \u0627\u0644\u062C\u0632\u064A\u0626\u064A\u0629 \u0627\u0644\u062A\u064A \u062A\u0639\u064A\u062F \u0643\u062A\u0627\u0628\u0629 \u0627\u0644\u062D\u0645\u0636 \u0627\u0644\u0646\u0648\u0648\u064A \u0628\u062F\u0642\u0629 \u0641\u0627\u0626\u0642\u0629."
+    },
+    fullContent: {
+      en: `### The Microbial Immune Memory
+
+Long before molecular biologists wielded gene editing in sterile rooms, single-celled bacteria and archaea were waging war against invading bacteriophage viruses. Bacteria developed **CRISPR** (Clustered Regularly Interspaced Short Palindromic Repeats)\u2014an archival genomic scrapbook where fragments of viral DNA are archived as spacer sequences.
+
+When a recurring virus attacks, the bacterium transcribes this spacer into a guide RNA (gRNA), which escorts an endonuclease enzyme (**Cas9**) to inspect the viral genome. Finding a complementary match, Cas9 unzips the double helix and slices both strands with surgical fatality.
+
+### The Precision Revolution
+
+In 2012, Jennifer Doudna and Emmanuelle Charpentier proved that this system could be reprogrammed. By simply synthesizing a custom 20-nucleotide guide RNA, scientists could direct Cas9 to any location in the 3.2 billion base pairs of the human genome.
+
+### Modern Horizons: Prime Editing & Ethics
+
+- **Base and Prime Editing:** Advances that allow transmuting single letters (e.g., C to T or A to G) without causing dangerous double-strand DNA breaks.
+- **Therapeutic Approvals:** Approved therapies for sickle cell anemia and beta-thalassemia represent the first clinical cures directly written into patient hematopoietic stem cells.
+- **The Germline Frontier:** Strict international consensus bars heritable edits in human embryos, prioritizing safety and equity.`,
+      ar: `### \u0627\u0644\u0630\u0627\u0643\u0631\u0629 \u0627\u0644\u0645\u0646\u0627\u0639\u064A\u0629 \u0627\u0644\u0645\u064A\u0643\u0631\u0648\u0628\u064A\u0629
+
+\u0642\u0628\u0644 \u0641\u062A\u0631\u0629 \u0637\u0648\u064A\u0644\u0629 \u0645\u0646 \u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u0639\u0644\u0645\u0627\u0621 \u0627\u0644\u0623\u062D\u064A\u0627\u0621 \u0627\u0644\u062C\u0632\u064A\u0626\u064A\u0629 \u0644\u062A\u0642\u0646\u064A\u0627\u062A \u062A\u0639\u062F\u064A\u0644 \u0627\u0644\u062C\u064A\u0646\u0627\u062A\u060C \u0643\u0627\u0646\u062A \u0627\u0644\u0628\u0643\u062A\u064A\u0631\u064A\u0627 \u0648\u062D\u064A\u062F\u0629 \u0627\u0644\u062E\u0644\u064A\u0629 \u062A\u062E\u0648\u0636 \u062D\u0631\u0648\u0628\u0627\u064B \u0634\u0631\u0633\u0629 \u0644\u0644\u0628\u0642\u0627\u0621 \u0636\u062F \u0627\u0644\u0641\u064A\u0631\u0648\u0633\u0627\u062A \u0627\u0644\u063A\u0627\u0632\u064A\u0629. \u0637\u0648\u0631\u062A \u0627\u0644\u0628\u0643\u062A\u064A\u0631\u064A\u0627 \u0646\u0638\u0627\u0645 **CRISPR**\u061B \u0648\u0647\u0648 \u0628\u0645\u062B\u0627\u0628\u0629 \u0623\u0631\u0634\u064A\u0641 \u062C\u064A\u0646\u0648\u0645\u064A \u062A\u062D\u0641\u0638 \u0641\u064A\u0647 \u0645\u0642\u0627\u0637\u0639 \u0645\u0646 \u0627\u0644\u062D\u0645\u0636 \u0627\u0644\u0646\u0648\u0648\u064A \u0644\u0644\u0641\u064A\u0631\u0648\u0633\u0627\u062A \u0627\u0644\u0645\u0647\u0632\u0648\u0645\u0629 \u0643\u0633\u0644\u0633\u0644\u0629 \u0645\u0646 \u0627\u0644\u0641\u0648\u0627\u0635\u0644 \u0627\u0644\u0645\u062A\u0643\u0631\u0631\u0629.
+
+\u0648\u0639\u0646\u062F\u0645\u0627 \u064A\u0647\u0627\u062C\u0645 \u0641\u064A\u0631\u0648\u0633 \u0645\u0645\u0627\u062B\u0644 \u0645\u062C\u062F\u062F\u0627\u064B\u060C \u062A\u0646\u0633\u062E \u0627\u0644\u0628\u0643\u062A\u064A\u0631\u064A\u0627 \u0647\u0630\u0627 \u0627\u0644\u0641\u0627\u0635\u0644 \u0625\u0644\u0649 \u062D\u0645\u0636 \u0646\u0648\u0648\u064A \u0631\u064A\u0628\u0648\u0632\u064A \u062F\u0644\u064A\u0644\u064A (gRNA)\u060C \u064A\u0631\u0634\u062F \u0625\u0646\u0632\u064A\u0645\u0627\u064B \u0642\u0627\u0637\u0639\u0627\u064B (**Cas9**) \u0644\u062A\u0645\u0634\u064A\u0637 \u062C\u064A\u0646\u0648\u0645 \u0627\u0644\u0641\u064A\u0631\u0648\u0633. \u0648\u0639\u0646\u062F \u062A\u0637\u0627\u0628\u0642 \u0627\u0644\u062A\u0633\u0644\u0633\u0644\u060C \u064A\u0641\u0643 \u0627\u0644\u0625\u0646\u0632\u064A\u0645 \u0627\u0644\u0634\u0631\u064A\u0637 \u0627\u0644\u0645\u0632\u062F\u0648\u062C \u0648\u064A\u0642\u0637\u0639\u0647 \u0628\u062F\u0642\u0629 \u062C\u0631\u0627\u062D\u064A\u0629 \u0642\u0627\u0636\u064A\u0629.
+
+### \u062B\u0648\u0631\u0629 \u0627\u0644\u062F\u0642\u0629 \u0627\u0644\u062C\u0632\u064A\u0626\u064A\u0629
+
+\u0641\u064A \u0639\u0627\u0645 2012\u060C \u0623\u062B\u0628\u062A\u062A \u062C\u064A\u0646\u064A\u0641\u0631 \u062F\u0648\u062F\u0646\u0627 \u0648\u0625\u064A\u0645\u0627\u0646\u0648\u064A\u0644 \u0634\u0627\u0631\u0628\u0646\u062A\u064A\u064A\u0647 \u0625\u0645\u0643\u0627\u0646\u064A\u0629 \u0625\u0639\u0627\u062F\u0629 \u0628\u0631\u0645\u062C\u0629 \u0647\u0630\u0627 \u0627\u0644\u0646\u0638\u0627\u0645 \u0627\u0644\u0635\u0646\u0627\u0639\u064A. \u0648\u0628\u0645\u062C\u0631\u062F \u062A\u0635\u0645\u064A\u0645 \u0634\u0631\u064A\u0637 \u062F\u0644\u064A\u0644\u064A \u0645\u0643\u0648\u0646 \u0645\u0646 20 \u062D\u0631\u0641\u0627\u064B \u0646\u064A\u062A\u0631\u0648\u062C\u064A\u0646\u064A\u0627\u064B\u060C \u0628\u0627\u062A \u0628\u0625\u0645\u0643\u0627\u0646 \u0627\u0644\u0639\u0644\u0645\u0627\u0621 \u062A\u0648\u062C\u064A\u0647 \u0625\u0646\u0632\u064A\u0645 Cas9 \u0625\u0644\u0649 \u0623\u064A \u0645\u0648\u0636\u0639 \u0645\u062D\u062F\u062F \u0628\u062F\u0642\u0629 \u0645\u062A\u0646\u0627\u0647\u064A\u0629 \u0639\u0628\u0631 3.2 \u0645\u0644\u064A\u0627\u0631 \u0632\u0648\u062C \u0645\u0646 \u0627\u0644\u0642\u0648\u0627\u0639\u062F \u0641\u064A \u0627\u0644\u062C\u064A\u0646\u0648\u0645 \u0627\u0644\u0628\u0634\u0631\u064A.
+
+### \u0627\u0644\u0622\u0641\u0627\u0642 \u0627\u0644\u0645\u0639\u0627\u0635\u0631\u0629 \u0648\u0627\u0644\u0623\u062E\u0644\u0627\u0642\u064A\u0627\u062A
+
+- **\u062A\u0639\u062F\u064A\u0644 \u0627\u0644\u0642\u0648\u0627\u0639\u062F \u0648\u0627\u0644\u062A\u0639\u062F\u064A\u0644 \u0627\u0644\u0623\u0648\u0644\u064A (Prime Editing):** \u062A\u0642\u0646\u064A\u0627\u062A \u0645\u062A\u0637\u0648\u0631\u0629 \u062A\u062A\u064A\u062D \u062A\u0628\u062F\u064A\u0644 \u062D\u0631\u0641 \u0646\u0648\u0648\u064A \u0648\u0627\u062D\u062F \u062F\u0648\u0646 \u0627\u0644\u062D\u0627\u062C\u0629 \u0644\u0643\u0633\u0631 \u0627\u0644\u0634\u0631\u064A\u0637\u064A\u0646 \u0645\u0639\u0627\u064B.
+- **\u0627\u0644\u0627\u0646\u062A\u0635\u0627\u0631\u0627\u062A \u0627\u0644\u0639\u0644\u0627\u062C\u064A\u0629:** \u0639\u0644\u0627\u062C\u0627\u062A \u0645\u0639\u062A\u0645\u062F\u0629 \u0631\u0633\u0645\u064A\u0627\u064B \u0644\u0641\u0642\u0631 \u0627\u0644\u062F\u0645 \u0627\u0644\u0645\u0646\u062C\u0644\u064A \u0648\u062B\u0644\u0627\u0633\u064A\u0645\u064A\u0627 \u0628\u064A\u062A\u0627 \u062A\u0645\u062B\u0644 \u0623\u0648\u0644\u0649 \u0627\u0644\u0634\u0641\u0627\u0621\u0627\u062A \u0627\u0644\u062C\u064A\u0646\u064A\u0629 \u0627\u0644\u0645\u0643\u062A\u0648\u0628\u0629 \u0645\u0628\u0627\u0634\u0631\u0629 \u0641\u064A \u062E\u0644\u0627\u064A\u0627 \u0627\u0644\u0645\u0631\u0636\u0649.
+- **\u0627\u0644\u0645\u062D\u0627\u0630\u064A\u0631 \u0627\u0644\u0623\u062E\u0644\u0627\u0642\u064A\u0629:** \u0625\u062C\u0645\u0627\u0639 \u0639\u0644\u0645\u064A \u062F\u0648\u0644\u064A \u0635\u0627\u0631\u0645 \u064A\u0645\u0646\u0639 \u0627\u0644\u062A\u0639\u062F\u064A\u0644\u0627\u062A \u0627\u0644\u0648\u0631\u0627\u062B\u064A\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u062C\u0646\u0629 \u0627\u0644\u0628\u0634\u0631\u064A\u0629 \u062D\u0641\u0627\u0638\u0627\u064B \u0639\u0644\u0649 \u0643\u0631\u0627\u0645\u0629 \u0627\u0644\u0646\u0633\u0644 \u0627\u0644\u0628\u0634\u0631\u064A.`
+    },
+    sources: [
+      'Doudna, Jennifer & Sternberg, Samuel: "A Crack in Creation: Gene Editing and the Unthinkable Power to Control Evolution"',
+      "New England Journal of Medicine: Clinical Trial Outcomes of CRISPR Therapeutics for Sickle Cell",
+      "Nature Biotechnology: Prime and Base Editing Innovations"
+    ],
+    metadata: {
+      techStack: ["Guide RNA Synthesis", "Cas9 Endonuclease", "Prime Editing", "Viral Vector Delivery"],
+      breakthroughType: "Targeted Genomic Engineering",
+      impactScore: 97,
+      status: "Active Clinical Medicine"
+    }
+  },
+  // ==================== BIOGRAPHIES & GREAT MINDS ====================
+  {
+    id: "ibn-al-haytham-father-of-optics",
+    category: "science",
+    tags: ["Biographies", "Ibn al-Haytham", "Optics", "Scientific Method", "Scholars"],
+    coverImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1400&q=80",
+    author: "Aetheria Curatorial Circle",
+    publicationDate: "2026-02-14",
+    readingTime: 8,
+    featured: true,
+    title: {
+      en: "Al-Hasan Ibn al-Haytham: The Father of Modern Optics and the Empirical Method",
+      ar: "\u0627\u0644\u062D\u0633\u0646 \u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645: \u0623\u0645\u064A\u0631 \u0627\u0644\u0628\u0635\u0631\u064A\u0627\u062A \u0648\u0645\u0624\u0633\u0633 \u0627\u0644\u0645\u0646\u0647\u062C \u0627\u0644\u0639\u0644\u0645\u064A \u0627\u0644\u062A\u062C\u0631\u064A\u0628\u064A"
+    },
+    subtitle: {
+      en: "How an 11th-century polymath under house arrest in Cairo refuted Greek theories of vision and forged modern experimental science.",
+      ar: "\u0643\u064A\u0641 \u0646\u0642\u0636 \u0639\u0627\u0644\u0645 \u0627\u0644\u0628\u0635\u0631\u0629 \u0648\u0627\u0644\u0642\u0627\u0647\u0631\u0629 \u0641\u064A \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u062D\u0627\u062F\u064A \u0639\u0634\u0631 \u0646\u0638\u0631\u064A\u0627\u062A \u0627\u0644\u0625\u063A\u0631\u064A\u0642 \u062D\u0648\u0644 \u0627\u0644\u0631\u0624\u064A\u0629\u060C \u0648\u0634\u064A\u0651\u062F \u0627\u0644\u0645\u0646\u0647\u062C \u0627\u0644\u062A\u062C\u0631\u064A\u0628\u064A \u0627\u0644\u0635\u0627\u0631\u0645 \u0627\u0644\u0642\u0627\u0626\u0645 \u0639\u0644\u0649 \u0627\u0644\u0634\u0643 \u0648\u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631."
+    },
+    shortDescription: {
+      en: "Renowned in Europe as Alhazen, Ibn al-Haytham revolutionized physics with his seminal Kitab al-Manazir (Book of Optics), proving light travels into the eye and establishing the dark chamber (camera obscura).",
+      ar: "\u0627\u0644\u0645\u0639\u0631\u0648\u0641 \u0641\u064A \u0627\u0644\u0644\u0627\u062A\u064A\u0646\u064A\u0629 \u0628\u0627\u0633\u0645 (Alhazen)\u061B \u0623\u062D\u062F\u062B \u0627\u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645 \u062B\u0648\u0631\u0629 \u0639\u0644\u0645\u064A\u0629 \u0643\u0628\u0631\u0649 \u0628\u0643\u062A\u0627\u0628\u0647 \u0627\u0644\u062E\u0627\u0644\u062F \xAB\u0627\u0644\u0645\u0646\u0627\u0638\u0631\xBB\u060C \u0645\u0628\u0631\u0647\u0646\u0627\u064B \u0623\u0646 \u0627\u0644\u0636\u0648\u0621 \u064A\u0646\u0639\u0643\u0633 \u0625\u0644\u0649 \u0627\u0644\u0639\u064A\u0646 \u0644\u0627 \u0645\u0646\u0647\u0627\u060C \u0648\u0645\u0628\u062A\u0643\u0631\u0627\u064B \u0645\u0628\u062F\u0623 \u0627\u0644\u0642\u064F\u0645\u0631\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629."
+    },
+    fullContent: {
+      en: `### The Solitary Crucible of Cairo
+
+Born in Basra in 965 CE (354 AH), al-Hasan Ibn al-Haytham lived through the golden age of Islamic scholarship. Summoned to Cairo by the Fatimid Caliph al-Hakim bi-Amr Allah to construct a dam regulating the annual floods of the Nile, Ibn al-Haytham surveyed the terrain near Aswan and realized the engineering was unfeasible with existing technologies. To escape royal retribution, he feigned illness and was placed under house arrest near Al-Azhar Mosque for over a decade.
+
+Rather than succumbing to confinement, he turned his room into a laboratory of darkness and rays.
+
+### Dismantling the Greek Paradigm
+
+For over a millennium, Euclid and Ptolemy had maintained the "emission theory" of vision\u2014that the eye emits invisible rays that reach out and touch objects. Ibn al-Haytham dismantled this mathematically and experimentally:
+1. **Intromission Theory:** He proved that light reflects off objects and enters the cornea through the lens. The sensation of blinding pain caused by looking at the sun demonstrated that rays are external inputs into the ocular system.
+2. **The Camera Obscura (*Al-Bayt al-Muzlim*):** By observing light piercing a pinhole in his shuttered window, he projected the inverted image of the illuminated street outside onto a white wall, establishing the foundation of photography and optical projection.
+3. **Refraction and Reflection:** Through meticulously graduated bronze discs and glass globes filled with water, he measured the angles of incidence and refraction, discovering atmospheric refraction causing stars to appear above their actual astronomical positions.
+
+### The True Father of the Scientific Method
+
+Centuries before Francis Bacon and Ren\xE9 Descartes, Ibn al-Haytham formulated the uncompromising philosophy of scientific skepticism:
+
+> *"The seeker after the truth is not one who studies the writings of the ancients and, following his natural disposition, puts his trust in them, but rather the one who suspects his faith in them and questions what he gathers from them, the one who submits to argument and demonstration, and not to the sayings of a human being whose nature is fraught with all kinds of imperfection and deficiency."* \u2014 **Kitab al-Manazir (Book of Optics)**
+
+His legacy laid the direct groundwork for Roger Bacon, Witelo, Kepler, and Newton, bridging classical antiquity with modern empirical science.`,
+      ar: `### \u062E\u0644\u0648\u0629 \u0627\u0644\u0642\u0627\u0647\u0631\u0629 \u0648\u0639\u0628\u0642\u0631\u064A\u0629 \u0627\u0644\u062D\u0635\u0627\u0631
+
+\u0648\u0644\u062F \u0623\u0628\u0648 \u0639\u0644\u064A \u0627\u0644\u062D\u0633\u0646 \u0628\u0646 \u0627\u0644\u062D\u0633\u0646 \u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645 \u0641\u064A \u0627\u0644\u0628\u0635\u0631\u0629 \u0628\u0627\u0644\u0639\u0631\u0627\u0642 \u0639\u0627\u0645 965 \u0645 (354 \u0647\u0640). \u0643\u0627\u0646 \u0639\u0627\u0644\u0645\u0627\u064B \u0645\u0648\u0633\u0648\u0639\u064A\u0627\u064B \u0646\u0627\u062F\u0631\u0627\u064B \u0641\u064A \u0627\u0644\u0631\u064A\u0627\u0636\u064A\u0627\u062A \u0648\u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0648\u0627\u0644\u0641\u0644\u0643 \u0648\u0627\u0644\u0637\u0628. \u0627\u0633\u062A\u062F\u0639\u0627\u0647 \u0627\u0644\u062E\u0644\u064A\u0641\u0629 \u0627\u0644\u0641\u0627\u0637\u0645\u064A \u0627\u0644\u062D\u0627\u0643\u0645 \u0628\u0623\u0645\u0631 \u0627\u0644\u0644\u0647 \u0625\u0644\u0649 \u0627\u0644\u0642\u0627\u0647\u0631\u0629 \u0644\u062A\u0646\u0638\u064A\u0645 \u0641\u064A\u0636\u0627\u0646 \u0627\u0644\u0646\u064A\u0644 \u0639\u0628\u0631 \u0633\u062F \u0639\u0638\u064A\u0645\u061B \u0648\u0639\u0646\u062F\u0645\u0627 \u0639\u0627\u064A\u0646 \u0627\u0644\u0645\u0648\u0642\u0639 \u0642\u0631\u0628 \u0623\u0633\u0648\u0627\u0646\u060C \u0623\u064A\u0642\u0646 \u0628\u0627\u0633\u062A\u062D\u0627\u0644\u0629 \u0627\u0644\u0645\u0634\u0631\u0648\u0639 \u0628\u0627\u0644\u0625\u0645\u0643\u0627\u0646\u064A\u0627\u062A \u0627\u0644\u0647\u0646\u062F\u0633\u064A\u0629 \u0644\u0632\u0645\u0627\u0646\u0647. \u0648\u0625\u064A\u062B\u0627\u0631\u0627\u064B \u0644\u0644\u0633\u0644\u0627\u0645\u0629 \u0645\u0646 \u0628\u0637\u0634 \u0627\u0644\u062D\u0627\u0643\u0645\u060C \u062A\u0638\u0627\u0647\u0631 \u0628\u0627\u0644\u062C\u0646\u0648\u0646 \u0648\u0627\u0639\u062A\u0632\u0644 \u0641\u064A \u0628\u064A\u062A\u0647 \u0642\u0631\u0628 \u062C\u0627\u0645\u0639 \u0627\u0644\u0623\u0632\u0647\u0631 \u0641\u064A \u0625\u0642\u0627\u0645\u0629 \u062C\u0628\u0631\u064A\u0629 \u0627\u0633\u062A\u0645\u0631\u062A \u0623\u0643\u062B\u0631 \u0645\u0646 \u0639\u0642\u062F.
+
+\u0641\u064A \u062A\u0644\u0643 \u0627\u0644\u0639\u062A\u0645\u0629\u060C \u062D\u0648\u0651\u0644 \u0627\u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645 \u0645\u062D\u0628\u0633\u0647 \u0625\u0644\u0649 \u0645\u062E\u062A\u0628\u0631 \u0631\u0627\u0626\u062F \u0644\u062F\u0631\u0627\u0633\u0629 \u0627\u0644\u0636\u0648\u0621\u060C \u0648\u0623\u0646\u062C\u0632 \u0633\u0641\u0631\u0647 \u0627\u0644\u062E\u0627\u0644\u062F: **\u0643\u062A\u0627\u0628 \u0627\u0644\u0645\u0646\u0627\u0638\u0631**.
+
+### \u0647\u062F\u0645 \u0627\u0644\u0646\u0645\u0648\u0630\u062C \u0627\u0644\u0625\u063A\u0631\u064A\u0642\u064A \u0648\u0628\u0646\u0627\u0621 \u0639\u0644\u0645 \u0627\u0644\u0628\u0635\u0631\u064A\u0627\u062A
+
+\u0638\u0644 \u0627\u0644\u0639\u0627\u0644\u0645 \u0644\u0623\u0643\u062B\u0631 \u0645\u0646 \u0623\u0644\u0641 \u0639\u0627\u0645 \u0623\u0633\u064A\u0631\u0627\u064B \u0644\u0646\u0638\u0631\u064A\u0629 "\u0627\u0644\u0627\u0646\u0628\u0639\u0627\u062B" \u0627\u0644\u062A\u064A \u0642\u0627\u0644 \u0628\u0647\u0627 \u0625\u0642\u0644\u064A\u062F\u0633 \u0648\u0628\u0637\u0644\u064A\u0645\u0648\u0633\u060C \u0648\u0627\u0644\u062A\u064A \u0632\u0639\u0645\u062A \u0623\u0646 \u0627\u0644\u0639\u064A\u0646 \u062A\u0628\u0639\u062B \u0623\u0634\u0639\u0629 \u062A\u0645\u062A\u062F \u0644\u062A\u062A\u062D\u0633\u0633 \u0627\u0644\u0623\u062C\u0633\u0627\u0645 \u0627\u0644\u0645\u0631\u0626\u064A\u0629. \u0623\u0633\u0642\u0637 \u0627\u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645 \u0647\u0630\u0627 \u0627\u0644\u0648\u0647\u0645 \u0628\u0631\u0647\u0627\u0646\u0627\u064B \u0648\u062A\u062C\u0631\u0628\u0629:
+1. **\u0646\u0638\u0631\u064A\u0629 \u0627\u0644\u0627\u0646\u0637\u0628\u0627\u0639 (\u062F\u062E\u0648\u0644 \u0627\u0644\u0636\u0648\u0621):** \u0623\u062B\u0628\u062A \u0628\u0627\u0644\u062A\u0634\u0631\u064A\u062D \u0648\u0627\u0644\u062A\u062C\u0631\u0628\u0629 \u0623\u0646 \u0627\u0644\u0631\u0624\u064A\u0629 \u062A\u062D\u062F\u062B \u0628\u0627\u0646\u0639\u0643\u0627\u0633 \u0623\u0634\u0639\u0629 \u0627\u0644\u0636\u0648\u0621 \u0645\u0646 \u0627\u0644\u0623\u062C\u0633\u0627\u0645 \u0625\u0644\u0649 \u062F\u0627\u062E\u0644 \u0627\u0644\u0639\u064A\u0646\u060C \u0648\u0623\u0646 \u0623\u0644\u0645 \u0627\u0644\u0639\u064A\u0646 \u0639\u0646\u062F \u0627\u0644\u0646\u0638\u0631 \u0644\u0644\u0634\u0645\u0633 \u064A\u062B\u0628\u062A \u0623\u0646 \u0627\u0644\u0645\u0624\u062B\u0631 \u0648\u0627\u0631\u062F \u0645\u0646 \u0627\u0644\u062E\u0627\u0631\u062C \u0644\u0627 \u0635\u0627\u062F\u0631 \u0645\u0646 \u0627\u0644\u062F\u0627\u062E\u0644.
+2. **\u0627\u0644\u0642\u0645\u0631\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629 (Camera Obscura):** \u0644\u0627\u062D\u0638 \u062A\u0633\u0644\u0644 \u0627\u0644\u0636\u0648\u0621 \u0639\u0628\u0631 \u062B\u0642\u0628 \u0635\u063A\u064A\u0631 \u0641\u064A \u062C\u062F\u0627\u0631 \u063A\u0631\u0641\u062A\u0647 \u0644\u064A\u0631\u0633\u0645 \u0635\u0648\u0631\u0629 \u0645\u0642\u0644\u0648\u0628\u0629 \u0644\u0644\u0623\u0634\u062C\u0627\u0631 \u0648\u0627\u0644\u0623\u0634\u062E\u0627\u0635 \u0641\u064A \u0627\u0644\u062E\u0627\u0631\u062C \u0639\u0644\u0649 \u0627\u0644\u062C\u062F\u0627\u0631 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u060C \u0648\u0627\u0636\u0639\u0627\u064B \u0623\u0648\u0644 \u0623\u0633\u0627\u0633 \u0639\u0645\u0644\u064A \u0644\u0643\u0627\u0645\u064A\u0631\u0627\u062A \u0627\u0644\u062A\u0635\u0648\u064A\u0631 \u0639\u0628\u0631 \u0627\u0644\u062A\u0627\u0631\u064A\u062E.
+3. **\u0627\u0644\u0627\u0646\u0639\u0643\u0627\u0633 \u0648\u0627\u0644\u0627\u0646\u0643\u0633\u0627\u0631:** \u0635\u0645\u0645 \u0623\u062F\u0648\u0627\u062A \u0642\u064A\u0627\u0633 \u062F\u0642\u064A\u0642\u0629 \u0648\u0623\u0648\u0627\u0646\u064A \u0632\u062C\u0627\u062C\u064A\u0629 \u0645\u0645\u0644\u0648\u0621\u0629 \u0628\u0627\u0644\u0645\u0627\u0621 \u0644\u062F\u0631\u0627\u0633\u0629 \u0627\u0646\u062D\u0646\u0627\u0621 \u0627\u0644\u0636\u0648\u0621\u060C \u0648\u062D\u0633\u0628 \u0627\u0644\u0627\u0631\u062A\u0641\u0627\u0639 \u0627\u0644\u062C\u0648\u064A \u0644\u0644\u0634\u0641\u0642 \u0627\u0644\u0634\u0645\u0633\u064A\u060C \u0645\u0628\u064A\u0646\u0627\u064B \u0638\u0627\u0647\u0631\u0629 \u0627\u0644\u0627\u0646\u0643\u0633\u0627\u0631 \u0641\u064A \u0627\u0644\u063A\u0644\u0627\u0641 \u0627\u0644\u062C\u0648\u064A.
+
+### \u0627\u0644\u0645\u0646\u0647\u062C \u0627\u0644\u0639\u0644\u0645\u064A: \u0645\u064A\u0632\u0627\u0646 \u0627\u0644\u0634\u0643 \u0648\u0627\u0644\u0628\u0631\u0647\u0627\u0646
+
+\u0642\u0628\u0644 \u0641\u0631\u0627\u0646\u0633\u064A\u0633 \u0628\u064A\u0643\u0648\u0646 \u0648\u0631\u064A\u0646\u064A\u0647 \u062F\u064A\u0643\u0627\u0631\u062A \u0628\u0642\u0631\u0648\u0646 \u0637\u0648\u064A\u0644\u0629\u060C \u0635\u0627\u063A \u0627\u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645 \u062F\u0633\u062A\u0648\u0631\u0647 \u0627\u0644\u062E\u0627\u0644\u062F \u0641\u064A \u0627\u0644\u0628\u062D\u062B \u0627\u0644\u0639\u0644\u0645\u064A:
+
+> *\xAB\u0625\u0646 \u0637\u0627\u0644\u0628 \u0627\u0644\u062D\u0642 \u0644\u064A\u0633 \u0647\u0648 \u0645\u0646 \u064A\u0646\u0638\u0631 \u0641\u064A \u0643\u062A\u0628 \u0627\u0644\u0623\u0642\u062F\u0645\u064A\u0646 \u0641\u064A\u062D\u0633\u0646 \u0627\u0644\u0638\u0646 \u0628\u0647\u0645\u060C \u0628\u0644 \u0637\u0627\u0644\u0628 \u0627\u0644\u062D\u0642 \u0647\u0648 \u0645\u0646 \u064A\u062A\u0647\u0645 \u0638\u0646\u0647 \u0641\u064A\u0647\u0645\u060C \u0648\u064A\u0642\u0641 \u0641\u064A\u0645\u0627 \u064A\u0641\u0647\u0645\u0647 \u0639\u0646\u0647\u0645\u060C \u0648\u064A\u062A\u0628\u0639 \u0627\u0644\u062D\u062C\u0629 \u0648\u0627\u0644\u0628\u0631\u0647\u0627\u0646 \u0644\u0627 \u0642\u0648\u0644 \u0642\u0627\u0626\u0644\u060C \u0644\u0623\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0645\u062C\u0628\u0648\u0644 \u0639\u0644\u0649 \u0623\u0646\u0648\u0627\u0639 \u0627\u0644\u0646\u0642\u0635 \u0648\u0627\u0644\u0646\u0642\u0635\u0627\u0646... \u0648\u0646\u062D\u0646 \u0625\u0630\u0627 \u0633\u0644\u0643\u0646\u0627 \u0647\u0630\u0627 \u0627\u0644\u0645\u0633\u0644\u0643\u060C \u0648\u0623\u0645\u0639\u0646\u0627 \u0641\u064A \u0627\u0644\u0628\u062D\u062B \u0645\u062A\u062C\u0631\u062F\u064A\u0646 \u0639\u0646 \u0627\u0644\u0647\u0648\u0649\u060C \u0627\u0646\u0641\u062A\u062D\u062A \u0644\u0646\u0627 \u0648\u062C\u0648\u0647 \u0627\u0644\u062D\u0642\u0627\u0626\u0642.\xBB* \u2014 **\u0645\u0642\u062F\u0645\u0629 \u0643\u062A\u0627\u0628 \u0627\u0644\u0645\u0646\u0627\u0638\u0631**
+
+\u0646\u064F\u0642\u0644\u062A \u0623\u0628\u062D\u0627\u062B\u0647 \u0625\u0644\u0649 \u0627\u0644\u0644\u0627\u062A\u064A\u0646\u064A\u0629 \u0628\u0627\u0633\u0645 **Alhazen**\u060C \u0648\u062A\u0623\u062B\u0631 \u0628\u0647 \u0643\u0628\u0627\u0631 \u0641\u0644\u0627\u0633\u0641\u0629 \u0627\u0644\u063A\u0631\u0628 \u0645\u0646 \u0631\u0648\u062C\u0631 \u0628\u064A\u0643\u0648\u0646 \u0648\u0643\u0628\u0644\u0631 \u0648\u0625\u0633\u062D\u0627\u0642 \u0646\u064A\u0648\u062A\u0646\u060C \u0644\u064A\u0628\u0642\u0649 \u0627\u0633\u0645\u0647 \u0631\u0645\u0632\u0627\u064B \u0644\u0627\u0646\u062A\u0635\u0627\u0631 \u0627\u0644\u0639\u0642\u0644 \u0627\u0644\u062A\u062C\u0631\u064A\u0628\u064A.`
+    },
+    sources: [
+      'Ibn al-Haytham: "Kitab al-Manazir" (Book of Optics, Books I\u2013VII)',
+      'Sabra, A.I.: "The Optics of Ibn al-Haytham: Books I\u2013III: On Direct Vision"',
+      "UNESCO: International Year of Light & 1000 Years of Ibn al-Haytham",
+      'Lindberg, David C.: "Theories of Vision from Al-Kindi to Kepler"'
+    ],
+    metadata: {
+      isBiography: true,
+      personName: {
+        en: "Al-Hasan Ibn al-Haytham (Alhazen)",
+        ar: "\u0627\u0644\u062D\u0633\u0646 \u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645 (\u0627\u0644\u0634\u064A\u062E \u0627\u0644\u0628\u0635\u0631\u064A)"
+      },
+      lifespan: "965 \u2013 1040 CE (354 \u2013 430 AH)",
+      fieldOfImpact: {
+        en: "Optics, Experimental Physics, Scientific Epistemology, Astronomy",
+        ar: "\u0639\u0644\u0645 \u0627\u0644\u0628\u0635\u0631\u064A\u0627\u062A\u060C \u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0627\u0644\u062A\u062C\u0631\u064A\u0628\u064A\u0629\u060C \u0627\u0644\u0645\u0646\u0647\u062C \u0627\u0644\u0639\u0644\u0645\u064A\u060C \u0627\u0644\u0641\u0644\u0643 \u0648\u0627\u0644\u0631\u064A\u0627\u0636\u064A\u0627\u062A"
+      },
+      birthPlace: {
+        en: "Basra (Abbasid Caliphate) \u2014 Flourished in Cairo (Fatimid Era)",
+        ar: "\u0627\u0644\u0628\u0635\u0631\u0629 (\u0627\u0644\u0639\u0631\u0627\u0642) \u2014 \u0627\u0632\u062F\u0647\u0631 \u0648\u062A\u0648\u0641\u064A \u0641\u064A \u0627\u0644\u0642\u0627\u0647\u0631\u0629 (\u0645\u0635\u0631)"
+      },
+      keyQuote: {
+        en: "The seeker after truth is not one who puts his trust in the writings of the ancients, but rather the one who questions what he gathers from them and submits solely to argument and demonstration.",
+        ar: "\u0625\u0646 \u0637\u0627\u0644\u0628 \u0627\u0644\u062D\u0642 \u0644\u064A\u0633 \u0647\u0648 \u0645\u0646 \u064A\u062D\u0633\u0646 \u0627\u0644\u0638\u0646 \u0628\u0643\u062A\u0628 \u0627\u0644\u0623\u0642\u062F\u0645\u064A\u0646\u060C \u0628\u0644 \u0647\u0648 \u0645\u0646 \u064A\u062A\u0647\u0645 \u0638\u0646\u0647 \u0641\u064A\u0647\u0645 \u0648\u064A\u062A\u0628\u0639 \u0627\u0644\u062D\u062C\u0629 \u0648\u0627\u0644\u0628\u0631\u0647\u0627\u0646 \u062F\u0648\u0646 \u0633\u0648\u0627\u0647\u0645\u0627."
+      },
+      historicalEra: {
+        en: "Golden Age of Islamic Science (10th\u201311th Century CE)",
+        ar: "\u0627\u0644\u0639\u0635\u0631 \u0627\u0644\u0630\u0647\u0628\u064A \u0644\u0644\u062D\u0636\u0627\u0631\u0629 \u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064A\u0629 (\u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u0631\u0627\u0628\u0639 \u0648\u0627\u0644\u062E\u0627\u0645\u0633 \u0627\u0644\u0647\u062C\u0631\u064A)"
+      },
+      majorContributions: [
+        { en: "Kitab al-Manazir (The Book of Optics in 7 Treatises)", ar: "\u0643\u062A\u0627\u0628 \u0627\u0644\u0645\u0646\u0627\u0638\u0631 (\u0633\u0628\u0639 \u0645\u0642\u0627\u0644\u0627\u062A \u0623\u0631\u0633\u062A \u0639\u0644\u0645 \u0627\u0644\u0636\u0648\u0621)" },
+        { en: "Invented the working principle of the Camera Obscura", ar: "\u0627\u0628\u062A\u0643\u0627\u0631 \u0645\u0628\u062F\u0623 \u0627\u0644\u0642\u064F\u0645\u0631\u0629 \u0627\u0644\u0645\u0638\u0644\u0645\u0629 (\u0623\u0633\u0627\u0633 \u0627\u0644\u062A\u0635\u0648\u064A\u0631 \u0627\u0644\u062D\u062F\u064A\u062B)" },
+        { en: "First formal formulation of the systematic Empirical Method", ar: "\u062A\u0623\u0633\u064A\u0633 \u0627\u0644\u0645\u0646\u0647\u062C \u0627\u0644\u0639\u0644\u0645\u064A \u0627\u0644\u062A\u062C\u0631\u064A\u0628\u064A \u0627\u0644\u0642\u0627\u0626\u0645 \u0639\u0644\u0649 \u0627\u0644\u0641\u0631\u0636\u064A\u0629 \u0648\u0627\u0644\u0627\u062E\u062A\u0628\u0627\u0631" },
+        { en: "Formulation of Alhazen\u2019s Problem in spherical geometry", ar: "\u0645\u0633\u0623\u0644\u0629 \u0627\u0628\u0646 \u0627\u0644\u0647\u064A\u062B\u0645 \u0641\u064A \u0639\u0644\u0645 \u0627\u0644\u0645\u0631\u0627\u064A\u0627 \u0648\u0627\u0644\u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u0643\u0631\u0648\u064A\u0629" }
+      ]
+    }
+  },
+  {
+    id: "marie-curie-radioactivity-pioneer",
+    category: "science",
+    tags: ["Biographies", "Marie Curie", "Physics", "Chemistry", "Nobel Laureate"],
+    coverImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1400&q=80",
+    author: "Aetheria Curatorial Circle",
+    publicationDate: "2026-02-20",
+    readingTime: 7,
+    featured: false,
+    title: {
+      en: "Marie Sk\u0142odowska-Curie: The Radiant Will and the Unveiling of the Atom",
+      ar: "\u0645\u0627\u0631\u064A \u0633\u0643\u0644\u0648\u062F\u0648\u0641\u0633\u0643\u0627 \u0643\u0648\u0631\u064A: \u0625\u0634\u0639\u0627\u0639 \u0627\u0644\u0625\u0631\u0627\u062F\u0629 \u0648\u0627\u0644\u062A\u0636\u062D\u064A\u0629 \u0641\u064A \u0645\u062D\u0631\u0627\u0628 \u0627\u0644\u0630\u0631\u0629"
+    },
+    subtitle: {
+      en: "The legendary scientist who discovered Polonium and Radium, becoming the first person to win Nobel prizes in two distinct scientific disciplines.",
+      ar: "\u0627\u0644\u0639\u0627\u0644\u0645\u0629 \u0627\u0644\u0641\u0630\u0629 \u0627\u0644\u062A\u064A \u0643\u0634\u0641\u062A \u0639\u0646 \u0627\u0644\u0628\u0648\u0644\u0648\u0646\u064A\u0648\u0645 \u0648\u0627\u0644\u0631\u0627\u062F\u064A\u0648\u0645\u060C \u0648\u0623\u0648\u0644 \u0625\u0646\u0633\u0627\u0646 \u0641\u064A \u0627\u0644\u062A\u0627\u0631\u064A\u062E \u064A\u062D\u0635\u062F \u062C\u0627\u0626\u0632\u062A\u064A \u0646\u0648\u0628\u0644 \u0641\u064A \u0641\u0631\u0639\u064A\u0646 \u0639\u0644\u0645\u064A\u064A\u0646 \u0645\u062E\u062A\u0644\u0641\u064A\u0646 (\u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0648\u0627\u0644\u0643\u064A\u0645\u064A\u0627\u0621)."
+    },
+    shortDescription: {
+      en: "From clandestine underground universities in occupied Warsaw to isolating pitchblende ores in an unheated Paris shed, Marie Curie shattered gender barriers and laid the foundation for modern nuclear physics and oncology.",
+      ar: "\u0645\u0646 \u0627\u0644\u062C\u0627\u0645\u0639\u0629 \u0627\u0644\u0637\u0627\u0626\u0631\u0629 \u0627\u0644\u0633\u0631\u064A\u0629 \u0641\u064A \u0648\u0627\u0631\u0633\u0648 \u0627\u0644\u0645\u062D\u062A\u0644\u0629 \u0625\u0644\u0649 \u0627\u0633\u062A\u062E\u0644\u0627\u0635 \u0627\u0644\u0631\u0627\u062F\u064A\u0648\u0645 \u0641\u064A \u0643\u0648\u062E \u0628\u0627\u0631\u064A\u0633\u064A \u0645\u062A\u062C\u0645\u062F\u060C \u0643\u0633\u0631\u062A \u0645\u0627\u0631\u064A \u0643\u0648\u0631\u064A \u0627\u0644\u0642\u064A\u0648\u062F \u0644\u062A\u0624\u0633\u0633 \u0644\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0627\u0644\u0646\u0648\u0648\u064A\u0629 \u0648\u0627\u0644\u0639\u0644\u0627\u062C \u0627\u0644\u0625\u0634\u0639\u0627\u0639\u064A \u0644\u0644\u0633\u0631\u0637\u0627\u0646."
+    },
+    fullContent: {
+      en: `### The Flying University of Warsaw
+
+Born Maria Sk\u0142odowska in Warsaw in 1867 under the oppressive rule of the Russian Empire, women were barred from higher education. Defiant, Maria and her sister attended the "Flying University"\u2014an illegal clandestine network of lectures held in changing private homes after dark. Working as a governess to fund her studies, she arrived at the Sorbonne in Paris in 1891, surviving on bread and tea in a garret.
+
+### The Shed on Rue Lhomond
+
+Joining forces with physicist Pierre Curie, Marie investigated Henri Becquerel's mysterious uranium rays. Suspecting an unknown, intensely active substance in raw uranium ore (pitchblende), the Curies acquired tons of mining tailings from Bohemia. In a drafty wooden shed with no ventilation:
+- Over four years, Marie stirred boiling caldrons of industrial slag with heavy iron rods.
+- By 1898, they announced two new elements: **Polonium** (named after her native Poland) and **Radium** (from the Latin for ray).
+- By 1902, from tons of pitchblende, Marie isolated one-tenth of a gram of pure radium chloride, which glowed with an eerie blue-green luminescence in the dark.
+
+### Unyielding Legacy and Sacrifice
+
+Marie coined the term **Radioactivity**. In 1903, she shared the Nobel Prize in Physics with Pierre and Becquerel. In 1911, overcoming personal heartbreak and virulent xenophobia, she was awarded a solo Nobel Prize in Chemistry.
+
+During World War I, she engineered mobile X-ray units ("Petites Curies") and personally drove them to the front lines, saving thousands of wounded soldiers from amputations. She refused to patent her radium extraction technique, believing scientific discovery belonged freely to humanity. She died in 1934 from aplastic anemia caused by prolonged radiation exposure\u2014her lab notebooks remain radioactive to this day.`,
+      ar: `### \u0627\u0644\u062C\u0627\u0645\u0639\u0629 \u0627\u0644\u0637\u0627\u0626\u0631\u0629 \u0641\u064A \u0648\u0627\u0631\u0633\u0648
+
+\u0648\u0644\u062F\u062A \u0645\u0627\u0631\u064A\u0627 \u0633\u0643\u0644\u0648\u062F\u0648\u0641\u0633\u0643\u0627 \u0641\u064A \u0648\u0627\u0631\u0633\u0648 \u0639\u0627\u0645 1867 \u0641\u064A \u0638\u0644 \u0627\u0644\u0627\u062D\u062A\u0644\u0627\u0644 \u0627\u0644\u0631\u0648\u0633\u064A \u0627\u0644\u0630\u064A \u062D\u0631\u0651\u0645 \u0639\u0644\u0649 \u0627\u0644\u0641\u062A\u064A\u0627\u062A \u0627\u0644\u0627\u0644\u062A\u062D\u0627\u0642 \u0628\u0627\u0644\u062A\u0639\u0644\u064A\u0645 \u0627\u0644\u062C\u0627\u0645\u0639\u064A. \u0644\u0645 \u062A\u0633\u062A\u0633\u0644\u0645 \u0627\u0644\u0641\u062A\u0627\u0629\u060C \u0628\u0644 \u0634\u0627\u0631\u0643\u062A \u0645\u0639 \u0634\u0642\u064A\u0642\u062A\u0647\u0627 \u0641\u064A "\u0627\u0644\u062C\u0627\u0645\u0639\u0629 \u0627\u0644\u0637\u0627\u0626\u0631\u0629"\u061B \u0648\u0647\u064A \u0634\u0628\u0643\u0629 \u0633\u0631\u064A\u0629 \u063A\u064A\u0631 \u0642\u0627\u0646\u0648\u0646\u064A\u0629 \u0645\u0646 \u0627\u0644\u0645\u062D\u0627\u0636\u0631\u0627\u062A \u0643\u0627\u0646\u062A \u062A\u064F\u0639\u0642\u062F \u0644\u064A\u0644\u0627\u064B \u0641\u064A \u0628\u064A\u0648\u062A \u0645\u062A\u0628\u062F\u0644\u0629 \u0647\u0631\u0628\u0627\u064B \u0645\u0646 \u0631\u0642\u0627\u0628\u0629 \u0627\u0644\u0634\u0631\u0637\u0629. \u0648\u0639\u0645\u0644\u062A \u0645\u0631\u0628\u064A\u0629 \u0644\u0633\u0646\u0648\u0627\u062A \u0644\u062A\u0645\u0648\u064A\u0644 \u062F\u0631\u0627\u0633\u062A\u0647\u0627 \u062D\u062A\u0649 \u0627\u0633\u062A\u0637\u0627\u0639\u062A \u0627\u0644\u0633\u0641\u0631 \u0625\u0644\u0649 \u0628\u0627\u0631\u064A\u0633 \u0644\u0644\u0627\u0644\u062A\u062D\u0627\u0642 \u0628\u062C\u0627\u0645\u0639\u0629 \u0627\u0644\u0633\u0648\u0631\u0628\u0648\u0646 \u0639\u0627\u0645 1891\u060C \u062D\u064A\u062B \u0639\u0627\u0634\u062A \u0641\u064A \u063A\u0631\u0641\u0629 \u0639\u0644\u0648\u064A\u0629 \u0645\u062A\u0648\u0627\u0636\u0639\u0629 \u062A\u0642\u062A\u0627\u062A \u0639\u0644\u0649 \u0627\u0644\u062E\u0628\u0632 \u0648\u0627\u0644\u0634\u0627\u064A \u0648\u062A\u062A\u0641\u0648\u0642 \u0639\u0644\u0649 \u062C\u0645\u064A\u0639 \u0623\u0642\u0631\u0627\u0646\u0647\u0627.
+
+### \u0643\u0648\u062E \u0634\u0627\u0631\u0639 \u0644\u0648\u0645\u0648\u0646\u062F \u0648\u0639\u0632\u0644 \u0627\u0644\u0631\u0627\u062F\u064A\u0648\u0645
+
+\u0627\u0644\u062A\u0642\u062A \u0628\u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0626\u064A \u0627\u0644\u0644\u0627\u0645\u0639 \u0628\u064A\u064A\u0631 \u0643\u0648\u0631\u064A \u0648\u062A\u0632\u0648\u062C\u0627\u060C \u0648\u062A\u0648\u062C\u0647\u0627 \u0645\u0639\u0627\u064B \u0644\u062F\u0631\u0627\u0633\u0629 \u0627\u0644\u0623\u0634\u0639\u0629 \u0627\u0644\u063A\u0627\u0645\u0636\u0629 \u0627\u0644\u062A\u064A \u0644\u0627\u062D\u0638\u0647\u0627 \u0647\u0646\u0631\u064A \u0628\u064A\u0643\u0631\u064A\u0644 \u0641\u064A \u062E\u0627\u0645\u0627\u062A \u0627\u0644\u064A\u0648\u0631\u0627\u0646\u064A\u0648\u0645. \u0634\u0643\u0651\u062A \u0645\u0627\u0631\u064A \u0641\u064A \u0623\u0646 \u062E\u0627\u0645\u0627\u062A (\u0627\u0644\u0628\u064A\u062A\u0634\u0628\u0644\u0646\u062F) \u062A\u062D\u062A\u0648\u064A \u0639\u0644\u0649 \u0639\u0646\u0635\u0631 \u0645\u062C\u0647\u0648\u0644 \u0630\u064A \u0646\u0634\u0627\u0637 \u0625\u0634\u0639\u0627\u0639\u064A \u062C\u0628\u0627\u0631 \u064A\u062A\u062C\u0627\u0648\u0632 \u0627\u0644\u064A\u0648\u0631\u0627\u0646\u064A\u0648\u0645 \u0628\u0643\u062B\u064A\u0631. \u0648\u0641\u064A \u0643\u0648\u062E \u062E\u0634\u0628\u064A \u0631\u0637\u0628 \u064A\u0641\u062A\u0642\u0631 \u0625\u0644\u0649 \u0623\u0628\u0633\u0637 \u0634\u0631\u0648\u0637 \u0627\u0644\u062A\u062F\u0641\u0626\u0629 \u0648\u0627\u0644\u062A\u0647\u0648\u064A\u0629:
+- \u0642\u0644\u0651\u0628\u062A \u0645\u0627\u0631\u064A \u0639\u0644\u0649 \u0645\u062F\u0649 \u0623\u0631\u0628\u0639 \u0633\u0646\u0648\u0627\u062A \u0645\u0636\u0646\u064A\u0629 \u0623\u0637\u0646\u0627\u0646\u0627\u064B \u0645\u0646 \u0627\u0644\u062E\u0627\u0645\u0627\u062A \u0627\u0644\u0645\u0634\u0639\u0629 \u0641\u064A \u0642\u062F\u0648\u0631 \u062D\u062F\u064A\u062F\u064A\u0629 \u0636\u062E\u0645\u0629 \u062A\u062D\u062A \u062F\u062E\u0627\u0646 \u062E\u0627\u0646\u0642.
+- \u0641\u064A \u0639\u0627\u0645 1898\u060C \u0623\u0639\u0644\u0646\u0627 \u0627\u0643\u062A\u0634\u0627\u0641 \u0639\u0646\u0635\u0631\u064A\u0646 \u062C\u062F\u064A\u062F\u064A\u0646: **\u0627\u0644\u0628\u0648\u0644\u0648\u0646\u064A\u0648\u0645** (\u062A\u0643\u0631\u064A\u0645\u0627\u064B \u0644\u0648\u0637\u0646\u0647\u0627 \u0628\u0648\u0644\u0646\u062F\u0627) \u0648**\u0627\u0644\u0631\u0627\u062F\u064A\u0648\u0645** (\u0645\u0634\u062A\u0642 \u0645\u0646 \u0627\u0644\u0643\u0644\u0645\u0629 \u0627\u0644\u0644\u0627\u062A\u064A\u0646\u064A\u0629 \u0644\u0644\u0634\u0639\u0627\u0639).
+- \u0641\u064A \u0639\u0627\u0645 1902\u060C \u0646\u062C\u062D\u062A \u0628\u0645\u0641\u0631\u062F\u0647\u0627 \u0641\u064A \u0639\u0632\u0644 \u0639\u064F\u0634\u0631 \u063A\u0631\u0627\u0645 \u0641\u0642\u0637 \u0645\u0646 \u0643\u0644\u0648\u0631\u064A\u062F \u0627\u0644\u0631\u0627\u062F\u064A\u0648\u0645 \u0627\u0644\u0646\u0642\u064A \u0628\u0639\u062F \u062A\u0635\u0641\u064A\u0629 \u0623\u0637\u0646\u0627\u0646 \u0645\u0646 \u0627\u0644\u0641\u0648\u0633\u0641\u0627\u062A\u060C \u0648\u0643\u0627\u0646 \u0647\u0630\u0627 \u0627\u0644\u0645\u0642\u062F\u0627\u0631 \u0627\u0644\u0636\u0626\u064A\u0644 \u064A\u062A\u0648\u0647\u062C \u0641\u064A \u0638\u0644\u0627\u0645 \u0627\u0644\u0644\u064A\u0644 \u0628\u0636\u0648\u0621 \u0623\u0632\u0631\u0642 \u0633\u0627\u062D\u0631.
+
+### \u0627\u0644\u0645\u062C\u062F \u0627\u0644\u0625\u0646\u0633\u0627\u0646\u064A \u0648\u0627\u0644\u0634\u0647\u0627\u062F\u0629 \u0641\u064A \u0633\u0628\u064A\u0644 \u0627\u0644\u0639\u0644\u0645
+
+\u0627\u0628\u062A\u0643\u0631\u062A \u0645\u0627\u0631\u064A \u0643\u0648\u0631\u064A \u0645\u0635\u0637\u0644\u062D **\xAB\u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u0625\u0634\u0639\u0627\u0639\u064A\xBB (Radioactivity)**. \u0648\u0646\u0627\u0644\u062A \u0639\u0627\u0645 1903 \u062C\u0627\u0626\u0632\u0629 \u0646\u0648\u0628\u0644 \u0641\u064A \u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0645\u0646\u0627\u0635\u0641\u0629 \u0645\u0639 \u0632\u0648\u062C\u0647\u0627 \u0648\u0628\u064A\u0643\u0631\u064A\u0644\u060C \u062B\u0645 \u0646\u0627\u0644\u062A \u0645\u0646\u0641\u0631\u062F\u0629 \u0639\u0627\u0645 1911 \u062C\u0627\u0626\u0632\u0629 \u0646\u0648\u0628\u0644 \u0641\u064A \u0627\u0644\u0643\u064A\u0645\u064A\u0627\u0621\u060C \u0644\u062A\u0635\u0628\u062D \u0623\u0648\u0644 \u0625\u0646\u0633\u0627\u0646 \u0641\u064A \u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0628\u0634\u0631\u064A\u0629 \u064A\u062D\u0642\u0642 \u0647\u0630\u0627 \u0627\u0644\u0625\u0646\u062C\u0627\u0632 \u0627\u0644\u0645\u0632\u062F\u0648\u062C.
+
+\u0648\u0641\u064A \u0627\u0644\u062D\u0631\u0628 \u0627\u0644\u0639\u0627\u0644\u0645\u064A\u0629 \u0627\u0644\u0623\u0648\u0644\u0649\u060C \u062C\u0647\u0632\u062A \u0633\u064A\u0627\u0631\u0627\u062A \u0625\u0633\u0639\u0627\u0641 \u0628\u0623\u062C\u0647\u0632\u0629 \u0623\u0634\u0639\u0629 \u0633\u064A\u0646\u064A\u0629 \u0645\u062A\u0646\u0642\u0644\u0629 \u0639\u064F\u0631\u0641\u062A \u0628\u0640 "\u0643\u0648\u0631\u064A \u0627\u0644\u0635\u063A\u064A\u0631\u0629"\u060C \u0648\u0642\u0627\u062F\u062A\u0647\u0627 \u0628\u0646\u0641\u0633\u0647\u0627 \u0625\u0644\u0649 \u062C\u0628\u0647\u0627\u062A \u0627\u0644\u0642\u062A\u0627\u0644 \u0644\u062A\u0635\u0648\u064A\u0631 \u0634\u0638\u0627\u064A\u0627 \u0627\u0644\u0631\u0635\u0627\u0635 \u0648\u0625\u0646\u0642\u0627\u0630 \u0623\u0637\u0631\u0627\u0641 \u0627\u0644\u062C\u0646\u0648\u062F \u0627\u0644\u062C\u0631\u062D\u0649. \u0648\u0631\u0641\u0636\u062A \u0645\u0627\u0631\u064A \u062A\u0633\u062C\u064A\u0644 \u0628\u0631\u0627\u0621\u0629 \u0627\u062E\u062A\u0631\u0627\u0639 \u0644\u0627\u0633\u062A\u062E\u0644\u0627\u0635 \u0627\u0644\u0631\u0627\u062F\u064A\u0648\u0645 \u0643\u064A \u064A\u0638\u0644 \u0627\u0644\u0639\u0644\u0627\u062C \u0645\u062A\u0627\u062D\u0627\u064B \u0644\u0644\u0637\u0628 \u062F\u0648\u0646 \u0627\u062D\u062A\u0643\u0627\u0631. \u0648\u062A\u0648\u0641\u064A\u062A \u0639\u0627\u0645 1934 \u0628\u0641\u0642\u0631 \u0627\u0644\u062F\u0645 \u0627\u0644\u0644\u0627\u062A\u0646\u0633\u062C\u064A \u062C\u0631\u0627\u0621 \u062A\u0639\u0631\u0636\u0647\u0627 \u0627\u0644\u0645\u062F\u064A\u062F \u0644\u0644\u0625\u0634\u0639\u0627\u0639\u060C \u0648\u0644\u0627 \u062A\u0632\u0627\u0644 \u062F\u0641\u0627\u062A\u0631 \u0623\u0628\u062D\u0627\u062B\u0647\u0627 \u062D\u062A\u0649 \u064A\u0648\u0645\u0646\u0627 \u0647\u0630\u0627 \u062A\u0634\u0639 \u0636\u0648\u0621\u0627\u064B \u0644\u0627 \u064A\u0646\u0637\u0641\u0626.`
+    },
+    sources: [
+      'Curie, Eve: "Madame Curie: A Biography"',
+      'Quinn, Susan: "Marie Curie: A Life"',
+      "Nobel Foundation: Archives of the 1903 Physics and 1911 Chemistry Prizes",
+      "American Institute of Physics: Marie Curie and the Science of Radioactivity"
+    ],
+    metadata: {
+      isBiography: true,
+      personName: {
+        en: "Marie Sk\u0142odowska-Curie",
+        ar: "\u0645\u0627\u0631\u064A \u0633\u0643\u0644\u0648\u062F\u0648\u0641\u0633\u0643\u0627 \u0643\u0648\u0631\u064A"
+      },
+      lifespan: "1867 \u2013 1934 CE",
+      fieldOfImpact: {
+        en: "Nuclear Physics, Radiochemistry, Oncology & Medicine",
+        ar: "\u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0627\u0644\u0646\u0648\u0648\u064A\u0629\u060C \u0627\u0644\u0643\u064A\u0645\u064A\u0627\u0621 \u0627\u0644\u0625\u0634\u0639\u0627\u0639\u064A\u0629\u060C \u0639\u0644\u0627\u062C \u0627\u0644\u0623\u0648\u0631\u0627\u0645 \u0648\u0627\u0644\u0637\u0628 \u0627\u0644\u0625\u0634\u0639\u0627\u0639\u064A"
+      },
+      birthPlace: {
+        en: "Warsaw, Poland \u2014 Conducted research and lived in Paris, France",
+        ar: "\u0648\u0627\u0631\u0633\u0648\u060C \u0628\u0648\u0644\u0646\u062F\u0627 \u2014 \u0639\u0627\u0634\u062A \u0648\u0623\u0628\u062F\u0639\u062A \u0648\u062A\u0648\u0641\u064A\u062A \u0641\u064A \u0628\u0627\u0631\u064A\u0633\u060C \u0641\u0631\u0646\u0633\u0627"
+      },
+      keyQuote: {
+        en: "Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.",
+        ar: "\u0644\u0627 \u0634\u064A\u0621 \u0641\u064A \u0627\u0644\u062D\u064A\u0627\u0629 \u064A\u0633\u062A\u062D\u0642 \u0623\u0646 \u0646\u062E\u0634\u0627\u0647\u060C \u0628\u0644 \u064A\u0646\u0628\u063A\u064A \u0641\u0642\u0637 \u0623\u0646 \u0646\u0641\u0647\u0645\u0647. \u0644\u0642\u062F \u062D\u0627\u0646 \u0627\u0644\u0648\u0642\u062A \u0644\u0646\u0641\u0647\u0645 \u0623\u0643\u062B\u0631 \u062D\u062A\u0649 \u064A\u0642\u0644 \u062E\u0648\u0641\u0646\u0627."
+      },
+      historicalEra: {
+        en: "Late 19th & Early 20th Century Science Revolution",
+        ar: "\u0623\u0648\u0627\u062E\u0631 \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u062A\u0627\u0633\u0639 \u0639\u0634\u0631 \u0648\u0628\u062F\u0627\u064A\u0627\u062A \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u0639\u0634\u0631\u064A\u0646"
+      },
+      majorContributions: [
+        { en: "Discovered Polonium and isolated Radium", ar: "\u0627\u0643\u062A\u0634\u0627\u0641 \u0639\u0646\u0635\u0631\u064A \u0627\u0644\u0628\u0648\u0644\u0648\u0646\u064A\u0648\u0645 \u0648\u0627\u0644\u0631\u0627\u062F\u064A\u0648\u0645 \u0627\u0644\u0645\u0634\u0639\u064A\u0646" },
+        { en: "Pioneered the theory and terminology of Radioactivity", ar: "\u0627\u0628\u062A\u0643\u0627\u0631 \u0645\u0635\u0637\u0644\u062D \u0648\u0645\u0641\u0647\u0648\u0645 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u0625\u0634\u0639\u0627\u0639\u064A" },
+        { en: "Only person to win Nobel Prizes in two different scientific fields", ar: "\u0627\u0644\u0634\u062E\u0635 \u0627\u0644\u0648\u062D\u064A\u062F \u0627\u0644\u062D\u0627\u0626\u0632 \u0639\u0644\u0649 \u062C\u0627\u0626\u0632\u062A\u064A \u0646\u0648\u0628\u0644 \u0641\u064A \u0641\u0631\u0639\u064A\u0646 \u0639\u0644\u0645\u064A\u064A\u0646 \u0645\u062E\u062A\u0644\u0641\u064A\u0646" },
+        { en: "Deployed mobile battlefield radiography units in WWI", ar: "\u0627\u0628\u062A\u0643\u0627\u0631 \u0648\u062A\u0634\u063A\u064A\u0644 \u0639\u0631\u0628\u0627\u062A \u0627\u0644\u0623\u0634\u0639\u0629 \u0627\u0644\u0645\u062A\u0646\u0642\u0644\u0629 \u0644\u0625\u0646\u0642\u0627\u0630 \u0627\u0644\u062C\u0631\u062D\u0649 \u0641\u064A \u0627\u0644\u062D\u0631\u0628 \u0627\u0644\u0639\u0627\u0644\u0645\u064A\u0629 \u0627\u0644\u0623\u0648\u0644\u0649" }
+      ]
+    }
+  },
+  {
+    id: "ibn-sina-avicenna-prince-of-physicians",
+    category: "science",
+    tags: ["Biographies", "Avicenna", "Medicine", "Philosophy", "Scholars"],
+    coverImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80",
+    author: "Aetheria Curatorial Circle",
+    publicationDate: "2026-02-25",
+    readingTime: 8,
+    featured: false,
+    title: {
+      en: "Ibn Sina (Avicenna): The Prince of Physicians and Master of Being",
+      ar: "\u0627\u0628\u0646 \u0633\u064A\u0646\u0627: \u0627\u0644\u0634\u064A\u062E \u0627\u0644\u0631\u0626\u064A\u0633 \u0648\u0623\u0645\u064A\u0631 \u0627\u0644\u0623\u0637\u0628\u0627\u0621 \u0627\u0644\u0630\u064A \u0639\u0644\u0651\u0645 \u0627\u0644\u0634\u0631\u0642 \u0648\u0627\u0644\u063A\u0631\u0628"
+    },
+    subtitle: {
+      en: 'The towering genius whose "Canon of Medicine" was the standard medical authority for half a millennium, and whose metaphysical philosophy shaped European scholasticism.',
+      ar: "\u0627\u0644\u0639\u0628\u0642\u0631\u064A \u0627\u0644\u0645\u0648\u0633\u0648\u0639\u064A \u0627\u0644\u0630\u064A \u0638\u0644 \u0643\u062A\u0627\u0628\u0647 \xAB\u0627\u0644\u0642\u0627\u0646\u0648\u0646 \u0641\u064A \u0627\u0644\u0637\u0628\xBB \u0627\u0644\u0645\u0631\u062C\u0639 \u0627\u0644\u0625\u0644\u0632\u0627\u0645\u064A \u0644\u062C\u0627\u0645\u0639\u0627\u062A \u0623\u0648\u0631\u0648\u0628\u0627 \u0644\u062E\u0645\u0633\u0629 \u0642\u0631\u0648\u0646 \u0643\u0627\u0645\u0644\u0629\u060C \u0648\u0635\u0627\u062D\u0628 \u0643\u062A\u0627\u0628 \xAB\u0627\u0644\u0634\u0641\u0627\u0621\xBB \u0623\u0639\u0638\u0645 \u0645\u0648\u0633\u0648\u0639\u0629 \u0641\u0644\u0633\u0641\u064A\u0629 \u0641\u064A \u0627\u0644\u0639\u0635\u0631 \u0627\u0644\u0648\u0633\u064A\u0637."
+    },
+    shortDescription: {
+      en: "From memorizing the Quran at age ten to diagnosing the diseases of kings on horseback, Ibn Sina pioneered contagion theories, quarantine principles, and clinical neuropsychiatry.",
+      ar: "\u0645\u0646 \u062D\u0641\u0638 \u0627\u0644\u0642\u0631\u0622\u0646 \u0648\u0627\u0644\u0645\u0646\u0637\u0642 \u0641\u064A \u0635\u0628\u0627\u0647 \u0625\u0644\u0649 \u0645\u0639\u0627\u0644\u062C\u0629 \u0645\u0644\u0648\u0643 \u0639\u0635\u0631\u0647 \u0648\u0647\u0648 \u0641\u064A \u0631\u064A\u0639\u0627\u0646 \u0634\u0628\u0627\u0628\u0647\u060C \u0648\u0636\u0639 \u0627\u0628\u0646 \u0633\u064A\u0646\u0627 \u0623\u0633\u0633 \u0646\u0638\u0631\u064A\u0629 \u0627\u0644\u0639\u062F\u0648\u0649 \u0648\u0627\u0644\u062D\u062C\u0631 \u0627\u0644\u0635\u062D\u064A \u0648\u0627\u0644\u0637\u0628 \u0627\u0644\u0646\u0641\u0633\u064A \u0627\u0644\u062C\u0633\u062F\u064A."
+    },
+    fullContent: {
+      en: `### The Prodigy of Bukhara
+
+Abu Ali al-Husayn ibn Abd Allah ibn Sina, known to the Latin West as **Avicenna**, was born in 980 CE (370 AH) in Afshana near Bukhara (modern-day Uzbekistan). A prodigy endowed with photographic recall, he had mastered the Quran, Arabic poetry, mathematics, and Islamic jurisprudence before puberty. Turning to medicine, he remarked: *"Medicine is not one of the difficult sciences, and in a short time I excelled in it, so that physicians of high repute came to study under me."*
+
+At seventeen, he successfully treated the ruling Samanid Emir Nuh ibn Mansur of a mysterious malady that court doctors had failed to cure. In gratitude, the Emir granted him unfettered access to the fabled royal library of Bukhara.
+
+### Al-Qanun fi al-Tibb: The Medical Bible of Civilizations
+
+Ibn Sina\u2019s monumental **The Canon of Medicine (*Al-Qanun fi al-Tibb*)** synthesized Greco-Roman, Persian, and Indian medical lore with his own rigorous empirical observations:
+1. **Contagion and Quarantine:** He recognized that airborne and waterborne micro-particles cause contagious diseases, establishing the mandatory 40-day quarantine period (*al-Arba'iniyya*, the etymological root of quarantine).
+2. **Clinical Pharmacology:** The Canon listed 760 medicinal drugs, detailing clinical trial protocols: tested on pure conditions, observed for contrary effects, and assessed across varying dosages.
+3. **Psychosomatic Medicine:** He diagnosed a prince dying of an unknown wasting illness by taking his pulse while reciting city street names; the sudden spike in heart rate revealed the secret love causing the melancholic breakdown.
+
+### Kitab al-Shifa: The Encyclopedia of Healing the Soul
+
+Parallel to medicine, Ibn Sina authored **The Book of Healing (*Kitab al-Shifa*)**, a massive encyclopedia of logic, physics, mathematics, and metaphysics. His famous "Floating Man" thought experiment proved self-consciousness exists independently of sensory input, anticipating Descartes' *Cogito* by six centuries.`,
+      ar: `### \u0639\u0628\u0642\u0631\u064A\u0629 \u0628\u062E\u0627\u0631\u0649 \u0627\u0644\u062E\u0627\u0631\u0642\u0629
+
+\u0648\u0644\u062F \u0623\u0628\u0648 \u0639\u0644\u064A \u0627\u0644\u062D\u0633\u064A\u0646 \u0628\u0646 \u0639\u0628\u062F \u0627\u0644\u0644\u0647 \u0628\u0646 \u0633\u064A\u0646\u0627 \u0639\u0627\u0645 980 \u0645 (370 \u0647\u0640) \u0641\u064A \u0642\u0631\u064A\u0629 \u0623\u0641\u0634\u0646\u0629 \u0642\u0631\u0628 \u0628\u062E\u0627\u0631\u0649. \u0623\u0648\u062A\u064A \u0630\u0627\u0643\u0631\u0629 \u0641\u0648\u062A\u0648\u063A\u0631\u0627\u0641\u064A\u0629 \u0645\u0630\u0647\u0644\u0629 \u0648\u0630\u0643\u0627\u0621\u064B \u062D\u0627\u062F\u0627\u064B\u061B \u0641\u0623\u062A\u0645 \u062D\u0641\u0638 \u0627\u0644\u0642\u0631\u0622\u0646 \u0648\u062F\u0631\u0627\u0633\u0629 \u0627\u0644\u0623\u062F\u0628 \u0648\u0627\u0644\u0645\u0646\u0637\u0642 \u0648\u0627\u0644\u0647\u0646\u062F\u0633\u0629 \u0642\u0628\u0644 \u0628\u0644\u0648\u063A\u0647 \u0627\u0644\u0639\u0627\u0634\u0631\u0629. \u0648\u0639\u0646\u062F\u0645\u0627 \u0627\u062A\u062C\u0647 \u0625\u0644\u0649 \u0627\u0644\u0637\u0628\u060C \u0642\u0627\u0644 \u0639\u0628\u0627\u0631\u062A\u0647 \u0627\u0644\u0634\u0647\u064A\u0631\u0629: *\xAB\u0648\u0639\u0644\u0645 \u0627\u0644\u0637\u0628 \u0644\u064A\u0633 \u0645\u0646 \u0627\u0644\u0639\u0644\u0648\u0645 \u0627\u0644\u0635\u0639\u0628\u0629\u060C \u0641\u0644\u0627 \u062C\u0631\u0645 \u0623\u0646\u064A \u0628\u0631\u0632\u062A \u0641\u064A\u0647 \u0641\u064A \u0623\u0642\u0644 \u0645\u062F\u0629\u060C \u062D\u062A\u0649 \u0628\u062F\u0623 \u0641\u0636\u0644\u0627\u0621 \u0627\u0644\u0623\u0637\u0628\u0627\u0621 \u064A\u0642\u0631\u0624\u0648\u0646 \u0639\u0644\u064A \u0639\u0644\u0645 \u0627\u0644\u0637\u0628!\xBB*
+
+\u0648\u0641\u064A \u0633\u0646 \u0627\u0644\u0633\u0627\u0628\u0639\u0629 \u0639\u0634\u0631\u0629\u060C \u062F\u0627\u0648\u0649 \u0623\u0645\u064A\u0631 \u0627\u0644\u062F\u0648\u0644\u0629 \u0627\u0644\u0633\u0627\u0645\u0627\u0646\u064A\u0629 \u0646\u0648\u062D \u0628\u0646 \u0645\u0646\u0635\u0648\u0631 \u0645\u0646 \u0639\u0644\u0629 \u0639\u062C\u0632 \u0639\u0646\u0647\u0627 \u0623\u0637\u0628\u0627\u0621 \u0627\u0644\u0628\u0644\u0627\u0637\u060C \u0641\u0643\u0627\u0641\u0623\u0647 \u0627\u0644\u0623\u0645\u064A\u0631 \u0628\u0641\u062A\u062D \u0623\u0628\u0648\u0627\u0628 \u062E\u0632\u0627\u0646\u0629 \u0643\u062A\u0628\u0647 \u0627\u0644\u0645\u0644\u0643\u064A\u0629 \u0627\u0644\u0639\u0627\u0645\u0631\u0629 \u0628\u0646\u0641\u0627\u0626\u0633 \u0627\u0644\u0645\u062E\u0637\u0648\u0637\u0627\u062A \u0627\u0644\u062A\u064A \u0644\u0645 \u064A\u0631\u0647\u0627 \u0623\u062D\u062F.
+
+### \u0627\u0644\u0642\u0627\u0646\u0648\u0646 \u0641\u064A \u0627\u0644\u0637\u0628: \u0625\u0646\u062C\u064A\u0644 \u0627\u0644\u0639\u0644\u0648\u0645 \u0627\u0644\u0637\u0628\u064A\u0629 \u0644\u0623\u0648\u0631\u0648\u0628\u0627 \u0648\u0627\u0644\u0634\u0631\u0642
+
+\u062C\u0645\u0639 \u0627\u0628\u0646 \u0633\u064A\u0646\u0627 \u0641\u064A \u0643\u062A\u0627\u0628\u0647 \u0627\u0644\u062E\u0627\u0644\u062F **\xAB\u0627\u0644\u0642\u0627\u0646\u0648\u0646 \u0641\u064A \u0627\u0644\u0637\u0628\xBB** \u0634\u062A\u0627\u062A \u0627\u0644\u0645\u0639\u0627\u0631\u0641 \u0627\u0644\u0637\u0628\u064A\u0629 \u0627\u0644\u0642\u062F\u064A\u0645\u0629 \u0648\u0623\u062E\u0636\u0639\u0647\u0627 \u0644\u0644\u0645\u0634\u0627\u0647\u062F\u0629 \u0648\u0627\u0644\u062A\u062C\u0631\u0628\u0629 \u0627\u0644\u0633\u0631\u064A\u0631\u064A\u0629 \u0627\u0644\u062F\u0642\u064A\u0642\u0629:
+1. **\u0627\u0644\u0639\u062F\u0648\u0649 \u0648\u0627\u0644\u062D\u062C\u0631 \u0627\u0644\u0635\u062D\u064A:** \u0623\u062F\u0631\u0643 \u0642\u0628\u0644 \u0638\u0647\u0648\u0631 \u0627\u0644\u0645\u062C\u0627\u0647\u0631 \u0628\u0642\u0631\u0648\u0646 \u0623\u0646 \u0627\u0644\u0623\u0645\u0631\u0627\u0636 \u0627\u0644\u0633\u0627\u0631\u064A\u0629 \u062A\u0646\u062A\u0642\u0644 \u0639\u0628\u0631 \u0630\u0631\u0627\u062A \u062F\u0642\u064A\u0642\u0629 \u062A\u0633\u0628\u062D \u0641\u064A \u0627\u0644\u0647\u0648\u0627\u0621 \u0648\u0627\u0644\u0645\u0627\u0621\u060C \u0648\u0623\u0631\u0633\u0649 \u0645\u0628\u062F\u0623 \u0627\u0644\u062D\u062C\u0631 \u0627\u0644\u0635\u062D\u064A \u0644\u0623\u0631\u0628\u0639\u064A\u0646 \u064A\u0648\u0645\u0627\u064B (\u0627\u0644\u0623\u0631\u0628\u0639\u064A\u0646\u064A\u0629 \u0627\u0644\u062A\u064A \u0627\u0634\u062A\u064F\u0642 \u0645\u0646\u0647\u0627 \u0645\u0635\u0637\u0644\u062D Quarantine).
+2. **\u0627\u0644\u062A\u062C\u0627\u0631\u0628 \u0627\u0644\u062F\u0648\u0627\u0626\u064A\u0629 \u0627\u0644\u0645\u0646\u0636\u0628\u0637\u0629:** \u0648\u0636\u0639 \u0641\u064A \u0627\u0644\u0642\u0627\u0646\u0648\u0646 \u0628\u0631\u0648\u062A\u0648\u0643\u0648\u0644\u0627\u062A \u0635\u0627\u0631\u0645\u0629 \u0644\u0627\u062E\u062A\u0628\u0627\u0631 \u0627\u0644\u0623\u062F\u0648\u064A\u0629 \u0639\u0644\u0649 \u0627\u0644\u0625\u0646\u0633\u0627\u0646: \u0627\u0634\u062A\u0631\u0627\u0637 \u0646\u0642\u0627\u0621 \u0627\u0644\u062F\u0648\u0627\u0621\u060C \u0648\u0645\u0644\u0627\u062D\u0638\u0629 \u0627\u0633\u062A\u0642\u0631\u0627\u0631 \u0627\u0644\u0623\u062B\u0631 \u0627\u0644\u0639\u0644\u0627\u062C\u064A\u060C \u0648\u062A\u062D\u062F\u064A\u062F \u0627\u0644\u062C\u0631\u0639\u0627\u062A \u0648\u0645\u0648\u0627\u0646\u0639 \u0627\u0644\u0627\u0633\u062A\u0639\u0645\u0627\u0644 \u0644\u0623\u0643\u062B\u0631 \u0645\u0646 760 \u0639\u0642\u0627\u0631\u0627\u064B \u0646\u0628\u0627\u062A\u064A\u0627\u064B \u0648\u0645\u0639\u062F\u0646\u064A\u0627\u064B.
+3. **\u0627\u0644\u0637\u0628 \u0627\u0644\u0646\u0641\u0633\u064A \u0627\u0644\u062C\u0633\u062F\u064A (\u0627\u0644\u0633\u064A\u0643\u0648\u0633\u0648\u0645\u0627\u062A\u064A):** \u0623\u062F\u0631\u0643 \u062A\u0631\u0627\u0628\u0637 \u0627\u0644\u0631\u0648\u062D \u0648\u0627\u0644\u062C\u0633\u062F\u061B \u0648\u0634\u062E\u0651\u0635 \u0645\u0631\u0636 \u0623\u0645\u064A\u0631 \u0639\u062C\u0632 \u0627\u0644\u0623\u0637\u0628\u0627\u0621 \u0639\u0646 \u0645\u0639\u0631\u0641\u0629 \u0639\u0644\u062A\u0647 \u0639\u0628\u0631 \u0642\u064A\u0627\u0633 \u0646\u0628\u0636\u0627\u062A \u0642\u0644\u0628\u0647 \u0623\u062B\u0646\u0627\u0621 \u0630\u0643\u0631 \u0623\u0633\u0645\u0627\u0621 \u0634\u0648\u0627\u0631\u0639 \u0648\u0628\u064A\u0648\u062A \u0627\u0644\u0645\u062F\u064A\u0646\u0629\u060C \u062D\u062A\u0649 \u0627\u0636\u0637\u0631\u0628 \u0646\u0628\u0636\u0647 \u0639\u0646\u062F \u0627\u0633\u0645 \u0628\u0639\u064A\u0646\u0647\u060C \u0644\u064A\u0643\u0634\u0641 \u0639\u0646 \u0639\u0634\u0642\u0647 \u0627\u0644\u0633\u0631\u064A \u0627\u0644\u0630\u064A \u0643\u0627\u0646 \u064A\u0641\u062A\u0643 \u0628\u062C\u0633\u062F\u0647 \u0643\u0622\u0628\u0629\u064B \u0648\u0647\u0632\u0627\u0644\u0627\u064B.
+
+### \u0643\u062A\u0627\u0628 \u0627\u0644\u0634\u0641\u0627\u0621 \u0648\u0625\u062B\u0628\u0627\u062A \u0627\u0644\u0648\u062C\u0648\u062F
+
+\u0648\u0644\u0645 \u064A\u0642\u062A\u0635\u0631 \u0646\u0628\u0648\u063A\u0647 \u0639\u0644\u0649 \u0645\u062F\u0627\u0648\u0627\u0629 \u0627\u0644\u0623\u0628\u062F\u0627\u0646\u060C \u0628\u0644 \u0623\u0644\u0651\u0641 \u0645\u0648\u0633\u0648\u0639\u0629 **\xAB\u0627\u0644\u0634\u0641\u0627\u0621\xBB** \u0641\u064A \u0627\u0644\u0645\u0646\u0637\u0642 \u0648\u0627\u0644\u0641\u064A\u0632\u064A\u0627\u0621 \u0648\u0627\u0644\u0631\u064A\u0627\u0636\u064A\u0627\u062A \u0648\u0627\u0644\u0645\u064A\u062A\u0627\u0641\u064A\u0632\u064A\u0642\u0627. \u0648\u0642\u062F\u0651\u0645 \u0641\u064A\u0647\u0627 \u062A\u062C\u0631\u0628\u0629 "\u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0627\u0644\u0645\u0639\u0644\u0642 \u0641\u064A \u0627\u0644\u0641\u0636\u0627\u0621" \u0627\u0644\u062A\u064A \u0623\u062B\u0628\u062A\u062A \u0648\u062C\u0648\u062F \u0627\u0644\u0648\u0639\u064A \u0648\u0627\u0644\u0630\u0627\u062A \u0627\u0644\u0625\u0646\u0633\u0627\u0646\u064A\u0629 \u0628\u0645\u0639\u0632\u0644 \u0639\u0646 \u0627\u0644\u062D\u0648\u0627\u0633\u060C \u0645\u0645\u0647\u062F\u0627\u064B \u0644\u0643\u0648\u062C\u064A\u062A\u0648 \u062F\u064A\u0643\u0627\u0631\u062A \u0628\u0633\u062A\u0629 \u0642\u0631\u0648\u0646 \u0643\u0627\u0645\u0644\u0629.`
+    },
+    sources: [
+      'Ibn Sina: "Al-Qanun fi al-Tibb" (The Canon of Medicine, 5 Volumes)',
+      'Gutas, Dimitri: "Avicenna and the Aristotelian Tradition"',
+      "Encyclopaedia Iranica: Avicenna / Medicine and Philosophy",
+      'Rahman, Fazlur: "Avicenna\u2019s Psychology"'
+    ],
+    metadata: {
+      isBiography: true,
+      personName: {
+        en: "Abu Ali Ibn Sina (Avicenna)",
+        ar: "\u0623\u0628\u0648 \u0639\u0644\u064A \u0628\u0646 \u0633\u064A\u0646\u0627 (\u0627\u0644\u0634\u064A\u062E \u0627\u0644\u0631\u0626\u064A\u0633)"
+      },
+      lifespan: "980 \u2013 1037 CE (370 \u2013 428 AH)",
+      fieldOfImpact: {
+        en: "Medicine, Psychosomatic Therapy, Metaphysical Philosophy, Logic",
+        ar: "\u0627\u0644\u0637\u0628 \u0627\u0644\u0633\u0631\u064A\u0631\u064A\u060C \u0627\u0644\u0637\u0628 \u0627\u0644\u0646\u0641\u0633\u064A \u0627\u0644\u062C\u0633\u062F\u064A\u060C \u0627\u0644\u0641\u0644\u0633\u0641\u0629\u060C \u0627\u0644\u0645\u0646\u0637\u0642 \u0648\u0627\u0644\u0639\u0644\u0648\u0645 \u0627\u0644\u0637\u0628\u064A\u0639\u064A\u0629"
+      },
+      birthPlace: {
+        en: "Afshana (Bukhara, Central Asia) \u2014 Died in Hamadan, Persia",
+        ar: "\u0623\u0641\u0634\u0646\u0629 (\u0642\u0631\u0628 \u0628\u062E\u0627\u0631\u0649) \u2014 \u062A\u0646\u0642\u0644 \u0628\u064A\u0646 \u062E\u0648\u0627\u0631\u0632\u0645 \u0648\u0623\u0635\u0641\u0647\u0627\u0646 \u0648\u062A\u0648\u0641\u064A \u0641\u064A \u0647\u0645\u0630\u0627\u0646"
+      },
+      keyQuote: {
+        en: "Illusion is half the disease, tranquility is half the cure, and patience is the first step toward healing.",
+        ar: "\u0627\u0644\u0648\u0647\u0645 \u0646\u0635\u0641 \u0627\u0644\u062F\u0627\u0621\u060C \u0648\u0627\u0644\u0627\u0637\u0645\u0626\u0646\u0627\u0646 \u0646\u0635\u0641 \u0627\u0644\u062F\u0648\u0627\u0621\u060C \u0648\u0627\u0644\u0635\u0628\u0631 \u0623\u0648\u0644 \u062E\u0637\u0648\u0627\u062A \u0627\u0644\u0634\u0641\u0627\u0621."
+      },
+      historicalEra: {
+        en: "Islamic Golden Age / 10th\u201311th Century Scholasticism",
+        ar: "\u0627\u0644\u0639\u0635\u0631 \u0627\u0644\u0630\u0647\u0628\u064A \u0644\u0644\u062D\u0636\u0627\u0631\u0629 \u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064A\u0629 (\u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u0631\u0627\u0628\u0639 \u0648\u0627\u0644\u062E\u0627\u0645\u0633 \u0627\u0644\u0647\u062C\u0631\u064A)"
+      },
+      majorContributions: [
+        { en: "Al-Qanun fi al-Tibb (The Canon of Medicine, standard text in Europe until 1650)", ar: "\u0627\u0644\u0642\u0627\u0646\u0648\u0646 \u0641\u064A \u0627\u0644\u0637\u0628 (\u0627\u0644\u0645\u0631\u062C\u0639 \u0627\u0644\u0631\u0626\u064A\u0633\u064A \u0644\u062C\u0627\u0645\u0639\u0627\u062A \u0623\u0648\u0631\u0648\u0628\u0627 \u062D\u062A\u0649 \u0623\u0648\u0627\u062E\u0631 \u0627\u0644\u0642\u0631\u0646 \u0627\u0644\u0633\u0627\u0628\u0639 \u0639\u0634\u0631)" },
+        { en: "Kitab al-Shifa (The Book of Healing, philosophical encyclopedia)", ar: "\u0643\u062A\u0627\u0628 \u0627\u0644\u0634\u0641\u0627\u0621 (\u0623\u0643\u0628\u0631 \u0645\u0648\u0633\u0648\u0639\u0629 \u0641\u0644\u0633\u0641\u064A\u0629 \u0648\u0639\u0644\u0645\u064A\u0629 \u0643\u062A\u0628\u0647\u0627 \u0631\u062C\u0644 \u0648\u0627\u062D\u062F \u0641\u064A \u0627\u0644\u0639\u0635\u0631 \u0627\u0644\u0648\u0633\u064A\u0637)" },
+        { en: "Pioneered clinical drug testing standards and quarantine protocol", ar: "\u062A\u0623\u0633\u064A\u0633 \u0642\u0648\u0627\u0639\u062F \u0627\u0644\u062A\u062C\u0627\u0631\u0628 \u0627\u0644\u062F\u0648\u0627\u0626\u064A\u0629 \u0627\u0644\u0633\u0631\u064A\u0631\u064A\u0629 \u0648\u062A\u0637\u0628\u064A\u0642 \u0646\u0638\u0627\u0645 \u0627\u0644\u062D\u062C\u0631 \u0627\u0644\u0635\u062D\u064A" },
+        { en: "Formulated the Floating Man epistemological thought experiment", ar: "\u0628\u0631\u0647\u0627\u0646 \u0627\u0644\u0625\u0646\u0633\u0627\u0646 \u0627\u0644\u0645\u0639\u0644\u0642 \u0641\u064A \u0627\u0644\u0647\u0648\u0627\u0621 \u0644\u0625\u062B\u0628\u0627\u062A \u062C\u0648\u0647\u0631 \u0627\u0644\u0648\u0639\u064A \u0628\u0627\u0644\u0630\u0627\u062A" }
+      ]
+    }
+  }
+];
+
+// server.ts
+var app = (0, import_express.default)();
+var PORT = 3e3;
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+  next();
+});
+app.use(import_express.default.json({ limit: "15mb" }));
+var ipRateLimits = /* @__PURE__ */ new Map();
+function rateLimiter(maxRequests = 60, windowMs = 6e4) {
+  return (req, res, next) => {
+    const ip = req.ip || req.socket.remoteAddress || "unknown";
+    const now = Date.now();
+    const entry = ipRateLimits.get(ip);
+    if (!entry || now > entry.resetTime) {
+      ipRateLimits.set(ip, { count: 1, resetTime: now + windowMs });
+      return next();
+    }
+    entry.count += 1;
+    if (entry.count > maxRequests) {
+      return res.status(429).json({ error: "Too many requests. Please slow down." });
+    }
+    next();
+  };
+}
+function sanitizeText(input) {
+  if (typeof input === "string") {
+    return input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "").trim();
+  }
+  if (Array.isArray(input)) {
+    return input.map(sanitizeText);
+  }
+  if (typeof input === "object" && input !== null) {
+    const cleanObj = {};
+    for (const key of Object.keys(input)) {
+      cleanObj[key] = sanitizeText(input[key]);
+    }
+    return cleanObj;
+  }
+  return input;
+}
+var DATA_DIR = import_path.default.join(process.cwd(), "data");
+var DB_FILE = import_path.default.join(DATA_DIR, "db.json");
+function hashPassword(password) {
+  const salt = import_crypto.default.randomBytes(16).toString("hex");
+  const hash = import_crypto.default.scryptSync(password, salt, 64).toString("hex");
+  return { hash, salt };
+}
+function verifyPassword(password, hash, salt) {
+  const testHash = import_crypto.default.scryptSync(password, salt, 64).toString("hex");
+  return import_crypto.default.timingSafeEqual(Buffer.from(testHash, "hex"), Buffer.from(hash, "hex"));
+}
+var SESSIONS_FILE = import_path.default.join(DATA_DIR, "sessions.json");
+function loadSessions() {
+  const map = /* @__PURE__ */ new Map();
+  if (import_fs.default.existsSync(SESSIONS_FILE)) {
+    try {
+      const data = JSON.parse(import_fs.default.readFileSync(SESSIONS_FILE, "utf-8"));
+      for (const [key, val] of Object.entries(data)) {
+        map.set(key, val);
+      }
+    } catch (e) {
+      console.error("Error loading sessions:", e);
+    }
+  }
+  return map;
+}
+var sessions = loadSessions();
+var SESSION_TTL_MS = 365 * 24 * 60 * 60 * 1e3;
+function saveSessions() {
+  try {
+    const obj = {};
+    for (const [k, v] of sessions.entries()) {
+      obj[k] = v;
+    }
+    import_fs.default.writeFileSync(SESSIONS_FILE, JSON.stringify(obj, null, 2), "utf-8");
+  } catch (e) {
+    console.error("Error saving sessions:", e);
+  }
+}
+var EMAILS_LOG_FILE = import_path.default.join(DATA_DIR, "sent_emails.json");
+function logSentEmail(record) {
+  try {
+    let logs = [];
+    if (import_fs.default.existsSync(EMAILS_LOG_FILE)) {
+      logs = JSON.parse(import_fs.default.readFileSync(EMAILS_LOG_FILE, "utf-8"));
+    }
+    logs.unshift(record);
+    import_fs.default.writeFileSync(EMAILS_LOG_FILE, JSON.stringify(logs.slice(0, 100), null, 2), "utf-8");
+  } catch (err) {
+    console.warn("Failed to record sent email log:", err);
+  }
+}
+async function sendWelcomeEmail(toEmail, username, followedCategories) {
+  const subject = "\u0645\u0631\u062D\u0628\u0627\u064B \u0628\u0643 \u0641\u064A \u0628\u0648\u0627\u0628\u0629 \u0623\u062B\u064A\u0631\u064A\u0627 \u0627\u0644\u0645\u0639\u0631\u0641\u064A\u0629 \u2014 \u062A\u0645 \u062A\u0641\u0639\u064A\u0644 \u062D\u0633\u0627\u0628\u0643 \u0628\u0646\u062C\u0627\u062D \u2726 Welcome to Aetheria Archive";
+  const categoriesList = followedCategories && followedCategories.length > 0 ? followedCategories.join("\u060C ") : "\u0627\u0644\u0627\u0633\u062A\u0643\u0634\u0627\u0641 \u0627\u0644\u0639\u0627\u0645";
+  const appUrl = process.env.APP_URL || "https://aetheria-platform.app";
+  const htmlContent = `
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #030712; color: #f8fafc; margin: 0; padding: 24px; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #0f172a; border: 1px solid #1e293b; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
+    .header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); padding: 32px 24px; text-align: center; border-bottom: 1px solid #312e81; }
+    .badge { display: inline-block; background-color: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #fbbf24; padding: 5px 14px; border-radius: 9999px; font-size: 12px; font-weight: bold; margin-bottom: 12px; }
+    .title { color: #f59e0b; font-size: 24px; font-weight: bold; margin: 0 0 8px 0; }
+    .subtitle { color: #94a3b8; font-size: 13px; margin: 0; }
+    .content { padding: 32px 24px; line-height: 1.8; font-size: 14px; color: #cbd5e1; }
+    .card { background-color: #1e293b; border-radius: 12px; padding: 18px; margin: 20px 0; border: 1px solid #334155; }
+    .card-item { margin: 8px 0; font-size: 13px; color: #e2e8f0; }
+    .button-container { text-align: center; margin: 28px 0 10px 0; }
+    .button { display: inline-block; background-color: #f59e0b; color: #030712; font-weight: bold; padding: 12px 32px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .footer { padding: 20px; text-align: center; font-size: 11px; color: #64748b; border-top: 1px solid #1e293b; background-color: #020617; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">\u2726 \u0623\u062B\u064A\u0631\u064A\u0627 \u2014 \u0627\u0644\u0645\u0648\u0633\u0648\u0639\u0629 \u0627\u0644\u0645\u0639\u0631\u0641\u064A\u0629 \u2726</div>
+      <h1 class="title">\u0623\u0647\u0644\u0627\u064B \u0628\u0643 \u064A\u0627 ${username} \u0641\u064A \u0627\u0644\u0645\u0646\u0635\u0629</h1>
+      <p class="subtitle">Aetheria Knowledge Platform \u2014 Educational & Research Encyclopedia</p>
+    </div>
+    <div class="content">
+      <p>\u064A\u0633\u0639\u062F\u0646\u0627 \u0627\u0646\u0636\u0645\u0627\u0645\u0643 \u0625\u0644\u0649 \u0645\u062C\u062A\u0645\u0639 \u0627\u0644\u0628\u0627\u062D\u062B\u064A\u0646 \u0648\u0627\u0644\u0645\u0633\u062A\u0643\u0634\u0641\u064A\u0646. \u062A\u0645 \u062A\u0633\u062C\u064A\u0644 \u062D\u0633\u0627\u0628\u0643 \u0628\u0646\u062C\u0627\u062D \u0648\u0623\u0635\u0628\u062D \u0646\u0634\u0637\u0627\u064B \u0644\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u0643\u0627\u0641\u0629 \u0645\u0642\u0627\u0644\u0627\u062A \u0648\u0645\u062D\u062A\u0648\u064A\u0627\u062A \u0627\u0644\u0645\u0646\u0635\u0629 \u0648\u062A\u062F\u0648\u064A\u0646 \u0645\u0641\u0636\u0644\u0627\u062A\u0643 \u0627\u0644\u0634\u062E\u0635\u064A\u0629.</p>
+      
+      <div class="card">
+        <div class="card-item"><strong>\u{1F4E7} \u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A:</strong> ${toEmail}</div>
+        <div class="card-item"><strong>\u{1F464} \u0627\u0644\u0627\u0633\u0645:</strong> ${username}</div>
+        <div class="card-item"><strong>\u{1F4DA} \u0645\u062C\u0627\u0644\u0627\u062A \u0627\u0644\u0627\u0647\u062A\u0645\u0627\u0645 \u0627\u0644\u0645\u062A\u0627\u0628\u0639\u0629:</strong> ${categoriesList}</div>
+        <div class="card-item"><strong>\u{1F514} \u0627\u0644\u062A\u0646\u0628\u064A\u0647\u0627\u062A:</strong> \u0645\u0641\u0639\u0644\u0629 \u0644\u0625\u0634\u0639\u0627\u0631\u0643 \u0639\u0646\u062F \u0646\u0634\u0631 \u0623\u064A \u0623\u0628\u062D\u0627\u062B \u0623\u0648 \u0645\u0642\u0627\u0644\u0627\u062A \u062C\u062F\u064A\u062F\u0629 \u0641\u064A \u0645\u062C\u0627\u0644\u0627\u062A\u0643 \u0627\u0644\u0645\u0641\u0636\u0644\u0629.</div>
+      </div>
+
+      <p>\u062A\u0628\u0642\u0649 \u062C\u0644\u0633\u0627\u062A\u0643 \u0648\u0628\u064A\u0627\u0646\u0627\u062A\u0643 \u0645\u062D\u0641\u0648\u0638\u0629 \u062F\u0627\u0626\u0645\u0627\u064B\u060C \u0648\u0644\u0646 \u062A\u0635\u0644\u0643 \u0623\u064A \u0625\u0634\u0639\u0627\u0631\u0627\u062A \u063A\u064A\u0631 \u0645\u0631\u063A\u0648\u0628 \u0641\u064A\u0647\u0627\u060C \u0645\u0639 \u0643\u0627\u0645\u0644 \u0627\u0644\u062E\u0635\u0648\u0635\u064A\u0629 \u0648\u0627\u0644\u0623\u0645\u0627\u0646 \u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062A\u0643.</p>
+
+      <div class="button-container">
+        <a href="${appUrl}" class="button">\u062F\u062E\u0648\u0644 \u0648\u062A\u0635\u0641\u062D \u0627\u0644\u0645\u0648\u0633\u0648\u0639\u0629</a>
+      </div>
+    </div>
+    <div class="footer">
+      <p>\xA9 ${(/* @__PURE__ */ new Date()).getFullYear()} \u0628\u0648\u0627\u0628\u0629 \u0623\u062B\u064A\u0631\u064A\u0627 \u0627\u0644\u0645\u0639\u0631\u0641\u064A\u0629. \u0625\u0634\u0631\u0627\u0641 \u0648\u0625\u062F\u0627\u0631\u0629 \u0635\u0627\u0628\u0631\u064A\u0646 \u0631\u062D\u0645\u0627\u0646\u064A (Sabrina Rahmani).</p>
+      <p>\u0648\u0635\u0644\u0643 \u0647\u0630\u0627 \u0627\u0644\u0625\u0634\u0639\u0627\u0631 \u0644\u0623\u0646\u0643 \u0642\u0645\u062A \u0628\u0625\u0646\u0634\u0627\u0621 \u062D\u0633\u0627\u0628 \u0639\u0644\u0649 \u0627\u0644\u0645\u0648\u0642\u0639.</p>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  let status = "simulated";
+  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+    try {
+      const transporter = import_nodemailer.default.createTransport({
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT) || 587,
+        secure: Number(process.env.SMTP_PORT) === 465,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
+        }
+      });
+      await transporter.sendMail({
+        from: process.env.SMTP_FROM || `"Aetheria Knowledge Platform" <${process.env.SMTP_USER}>`,
+        to: toEmail,
+        subject,
+        html: htmlContent
+      });
+      status = "sent";
+      console.log(`[Email Service] Live welcome email successfully dispatched to ${toEmail}`);
+    } catch (mailErr) {
+      console.error("[Email Service] SMTP dispatch error, recorded locally:", mailErr);
+    }
+  } else {
+    console.log(`[Email Service] Welcome email dispatched & logged for: ${toEmail}`);
+  }
+  logSentEmail({
+    id: `mail_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    to: toEmail,
+    subject,
+    sentAt: (/* @__PURE__ */ new Date()).toISOString(),
+    status,
+    bodySnippet: `\u0623\u0647\u0644\u0627\u064B \u0628\u0643 \u064A\u0627 ${username} \u0641\u064A \u0623\u062B\u064A\u0631\u064A\u0627. \u062A\u0645 \u062A\u0641\u0639\u064A\u0644 \u062D\u0633\u0627\u0628\u0643 \u0628\u0646\u062C\u0627\u062D.`
+  });
+  return { success: true, status };
+}
+function ensureDb() {
+  if (!import_fs.default.existsSync(DATA_DIR)) {
+    import_fs.default.mkdirSync(DATA_DIR, { recursive: true });
+  }
+  const ensureOwnerAdmin = (schema) => {
+    schema.users = schema.users.filter(
+      (u) => u.email.toLowerCase() !== "admin@aetheria.archive" && u.email.toLowerCase() !== "admin@example.com"
+    );
+    const sabrinaCreds2 = hashPassword("adminwoow2020");
+    const existingIdx = schema.users.findIndex((u) => u.email.toLowerCase() === "sabrinarahmani920@gmail.com");
+    if (existingIdx >= 0) {
+      schema.users[existingIdx].role = "admin";
+      schema.users[existingIdx].passwordHash = sabrinaCreds2.hash;
+      schema.users[existingIdx].salt = sabrinaCreds2.salt;
+      schema.users[existingIdx].username = "Sabrina Rahmani";
+    } else {
+      schema.users.push({
+        id: "usr_owner_sabrina",
+        email: "sabrinarahmani920@gmail.com",
+        username: "Sabrina Rahmani",
+        role: "admin",
+        passwordHash: sabrinaCreds2.hash,
+        salt: sabrinaCreds2.salt,
+        savedArticles: ["nikola-tesla-electricity", "james-webb-cosmic-dawn", "claude-monet-water-lilies"],
+        followedCategories: ["technology", "space", "literature", "philosophy", "art", "science"],
+        notificationPreferences: {
+          inApp: true,
+          browserPush: false
+        },
+        readingHistory: [],
+        createdAt: (/* @__PURE__ */ new Date()).toISOString()
+      });
+    }
+  };
+  if (import_fs.default.existsSync(DB_FILE)) {
+    try {
+      const data = JSON.parse(import_fs.default.readFileSync(DB_FILE, "utf-8"));
+      ensureOwnerAdmin(data);
+      import_fs.default.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), "utf-8");
+      return data;
+    } catch (e) {
+      console.error("Error parsing db.json, recreating with seeds:", e);
+    }
+  }
+  const sabrinaCreds = hashPassword("adminwoow2020");
+  const initialAdmin = {
+    id: "usr_owner_sabrina",
+    email: "sabrinarahmani920@gmail.com",
+    username: "Sabrina Rahmani",
+    role: "admin",
+    passwordHash: sabrinaCreds.hash,
+    salt: sabrinaCreds.salt,
+    savedArticles: ["nikola-tesla-electricity", "james-webb-cosmic-dawn", "claude-monet-water-lilies"],
+    followedCategories: ["technology", "space", "literature", "philosophy", "art", "science"],
+    notificationPreferences: {
+      inApp: true,
+      browserPush: false
+    },
+    readingHistory: [
+      { articleId: "james-webb-cosmic-dawn", timestamp: new Date(Date.now() - 36e5).toISOString() }
+    ],
+    createdAt: (/* @__PURE__ */ new Date()).toISOString()
+  };
+  const initialNotifications = [
+    {
+      id: "notif_seed_1",
+      type: "article_published",
+      category: "technology",
+      articleId: "nikola-tesla-electricity",
+      title: {
+        en: "New Treatise in Technology & Digital World",
+        ar: "\u062F\u0631\u0627\u0633\u0629 \u062C\u062F\u064A\u062F\u0629 \u0641\u064A \u0627\u0644\u062A\u0643\u0646\u0648\u0644\u0648\u062C\u064A\u0627 \u0648\u0627\u0644\u0639\u0627\u0644\u0645 \u0627\u0644\u0631\u0642\u0645\u064A"
+      },
+      message: {
+        en: "Nikola Tesla & The Wardenclyffe Dream: Architect of the Alternating Era is now available.",
+        ar: "\u0645\u0642\u0627\u0644 \u062C\u062F\u064A\u062F: \u0646\u064A\u0643\u0648\u0644\u0627 \u062A\u0633\u0644\u0627 \u0648\u062D\u0644\u0645 \u0648\u0627\u0631\u062F\u0646\u0643\u0644\u064A\u0641 \u0645\u062A\u0627\u062D \u0627\u0644\u0622\u0646 \u0644\u0644\u0642\u0631\u0627\u0621\u0629."
+      },
+      read: false,
+      timestamp: new Date(Date.now() - 72e5).toISOString()
+    },
+    {
+      id: "notif_seed_2",
+      type: "article_published",
+      category: "space",
+      articleId: "james-webb-cosmic-dawn",
+      title: {
+        en: "New Cosmic Observation Published",
+        ar: "\u0631\u0635\u062F \u0641\u0644\u0643\u064A \u062C\u062F\u064A\u062F \u0646\u064F\u0634\u0631 \u0644\u0644\u062A\u0648"
+      },
+      message: {
+        en: "The Cosmic Dawn: How JWST Rewrote Early Universe Chronology.",
+        ar: "\u0641\u062C\u0631 \u0627\u0644\u0643\u0648\u0646: \u0643\u064A\u0641 \u0623\u0639\u0627\u062F \u062A\u0644\u0633\u0643\u0648\u0628 \u062C\u064A\u0645\u0633 \u0648\u064A\u0628 \u0643\u062A\u0627\u0628\u0629 \u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0643\u0648\u0646 \u0627\u0644\u0645\u0628\u0643\u0631."
+      },
+      read: false,
+      timestamp: new Date(Date.now() - 864e5).toISOString()
+    }
+  ];
+  const initialDb = {
+    articles: SEED_ARTICLES,
+    users: [initialAdmin],
+    notifications: initialNotifications
+  };
+  import_fs.default.writeFileSync(DB_FILE, JSON.stringify(initialDb, null, 2));
+  return initialDb;
+}
+var db = ensureDb();
+function saveDb() {
+  try {
+    const tmpFile = `${DB_FILE}.tmp.${Date.now()}`;
+    import_fs.default.writeFileSync(tmpFile, JSON.stringify(db, null, 2), "utf-8");
+    import_fs.default.renameSync(tmpFile, DB_FILE);
+  } catch (e) {
+    console.error("Failed to write db.json atomically:", e);
+  }
+}
+function getAuthenticatedUser(req) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) return null;
+  const token = authHeader.split(" ")[1];
+  const session = sessions.get(token);
+  if (!session) return null;
+  if (Date.now() - session.createdAt > SESSION_TTL_MS) {
+    sessions.delete(token);
+    return null;
+  }
+  const user = db.users.find((u) => u.id === session.userId);
+  return user || null;
+}
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", articlesCount: db.articles.length, timestamp: (/* @__PURE__ */ new Date()).toISOString() });
+});
+app.get("/api/articles", (req, res) => {
+  const { category, tag, search, featured } = req.query;
+  let results = [...db.articles];
+  if (category && typeof category === "string" && category !== "all") {
+    results = results.filter((a) => a.category === category);
+  }
+  if (tag && typeof tag === "string" && tag !== "all") {
+    results = results.filter((a) => a.tags.some((t) => t.toLowerCase() === tag.toLowerCase()));
+  }
+  if (featured === "true") {
+    results = results.filter((a) => a.featured);
+  }
+  if (search && typeof search === "string" && search.trim()) {
+    const q = search.trim().toLowerCase();
+    results = results.filter(
+      (a) => a.title.en.toLowerCase().includes(q) || a.title.ar.toLowerCase().includes(q) || a.subtitle.en.toLowerCase().includes(q) || a.subtitle.ar.toLowerCase().includes(q) || a.shortDescription.en.toLowerCase().includes(q) || a.shortDescription.ar.toLowerCase().includes(q) || a.tags.some((t) => t.toLowerCase().includes(q)) || a.category.toLowerCase().includes(q)
+    );
+  }
+  results.sort((a, b) => new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime());
+  res.json({ articles: results, total: results.length });
+});
+app.get("/api/articles/:id", (req, res) => {
+  const article = db.articles.find((a) => a.id === req.params.id);
+  if (!article) {
+    return res.status(404).json({ error: "Article not found" });
+  }
+  const user = getAuthenticatedUser(req);
+  if (user) {
+    if (!user.readingHistory) user.readingHistory = [];
+    user.readingHistory = [
+      { articleId: article.id, timestamp: (/* @__PURE__ */ new Date()).toISOString() },
+      ...user.readingHistory.filter((h) => h.articleId !== article.id)
+    ].slice(0, 30);
+    saveDb();
+  }
+  res.json({ article });
+});
+app.post("/api/articles", rateLimiter(30, 6e4), (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user || user.role !== "admin") {
+    return res.status(403).json({ error: "Unauthorized: Admin privileges required to publish" });
+  }
+  const rawPayload = req.body;
+  const payload = sanitizeText(rawPayload);
+  if (!payload.title?.en || !payload.title?.ar || !payload.category || !payload.fullContent?.en) {
+    return res.status(400).json({ error: "Missing required article fields" });
+  }
+  const id = payload.id?.trim() || payload.title.en.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || `art_${Date.now()}`;
+  if (db.articles.some((a) => a.id === id)) {
+    return res.status(400).json({ error: "An article with this identifier already exists" });
+  }
+  const newArticle = {
+    id,
+    title: payload.title,
+    subtitle: payload.subtitle || { en: "", ar: "" },
+    category: payload.category,
+    tags: Array.isArray(payload.tags) ? payload.tags : [],
+    coverImage: payload.coverImage || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=80",
+    author: payload.author || user.username || "Curator Archive",
+    publicationDate: payload.publicationDate || (/* @__PURE__ */ new Date()).toISOString().split("T")[0],
+    readingTime: Number(payload.readingTime) || 5,
+    shortDescription: payload.shortDescription || { en: "", ar: "" },
+    fullContent: payload.fullContent,
+    featured: !!payload.featured,
+    sources: Array.isArray(payload.sources) ? payload.sources : [],
+    relatedArticleIds: Array.isArray(payload.relatedArticleIds) ? payload.relatedArticleIds : [],
+    metadata: payload.metadata || {}
+  };
+  db.articles.unshift(newArticle);
+  const notifId = `notif_${Date.now()}`;
+  const notification = {
+    id: notifId,
+    type: "article_published",
+    category: newArticle.category,
+    articleId: newArticle.id,
+    title: {
+      en: `New Treatise in ${newArticle.category.toUpperCase()}`,
+      ar: `\u0646\u064F\u0634\u0631\u062A \u062F\u0631\u0627\u0633\u0629 \u062C\u062F\u064A\u062F\u0629 \u0641\u064A ${newArticle.category}`
+    },
+    message: {
+      en: `${newArticle.title.en} is now available in the archive.`,
+      ar: `\u062A\u0645 \u0646\u0634\u0631 "${newArticle.title.ar}" \u0641\u064A \u0623\u0631\u0634\u064A\u0641 \u0627\u0644\u0645\u0639\u0631\u0641\u0629.`
+    },
+    read: false,
+    timestamp: (/* @__PURE__ */ new Date()).toISOString()
+  };
+  db.notifications.unshift(notification);
+  saveDb();
+  res.status(201).json({ success: true, article: newArticle });
+});
+app.put("/api/articles/:id", rateLimiter(30, 6e4), (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user || user.role !== "admin") {
+    return res.status(403).json({ error: "Admin privileges required" });
+  }
+  const index = db.articles.findIndex((a) => a.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ error: "Article not found" });
+  }
+  const cleanBody = sanitizeText(req.body);
+  db.articles[index] = {
+    ...db.articles[index],
+    ...cleanBody,
+    id: db.articles[index].id
+    // preserve ID
+  };
+  saveDb();
+  res.json({ success: true, article: db.articles[index] });
+});
+app.delete("/api/articles/:id", rateLimiter(30, 6e4), (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user || user.role !== "admin") {
+    return res.status(403).json({ error: "Admin privileges required" });
+  }
+  const index = db.articles.findIndex((a) => a.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ error: "Article not found" });
+  }
+  const deleted = db.articles.splice(index, 1);
+  saveDb();
+  res.json({ success: true, deleted: deleted[0] });
+});
+app.get("/api/admin/export", (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user || user.role !== "admin") {
+    return res.status(403).json({ error: "Admin privileges required" });
+  }
+  res.setHeader("Content-Disposition", `attachment; filename=aetheria_backup_${Date.now()}.json`);
+  res.setHeader("Content-Type", "application/json");
+  res.json({
+    timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+    articlesCount: db.articles.length,
+    articles: db.articles
+  });
+});
+app.post("/api/admin/import", (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user || user.role !== "admin") {
+    return res.status(403).json({ error: "Admin privileges required" });
+  }
+  const { articles } = req.body;
+  if (!Array.isArray(articles)) {
+    return res.status(400).json({ error: "Articles array required" });
+  }
+  let importedCount = 0;
+  for (const art of articles) {
+    if (art && art.id && art.title && art.category) {
+      const existingIdx = db.articles.findIndex((a) => a.id === art.id);
+      if (existingIdx !== -1) {
+        db.articles[existingIdx] = art;
+      } else {
+        db.articles.push(art);
+      }
+      importedCount++;
+    }
+  }
+  saveDb();
+  res.json({ success: true, importedCount, totalArticles: db.articles.length });
+});
+app.post("/api/auth/register", rateLimiter(20, 6e4), (req, res) => {
+  const { email, password, username, followedCategories } = req.body;
+  if (!email || !password || !username) {
+    return res.status(400).json({ error: "Email, username, and password are required" });
+  }
+  const cleanEmail = email.trim().toLowerCase();
+  if (db.users.some((u) => u.email === cleanEmail)) {
+    return res.status(400).json({ error: "An account with this email address already exists" });
+  }
+  const { hash, salt } = hashPassword(password);
+  const newUser = {
+    id: `usr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    email: cleanEmail,
+    username: username.trim(),
+    role: "user",
+    passwordHash: hash,
+    salt,
+    savedArticles: [],
+    followedCategories: Array.isArray(followedCategories) ? followedCategories : ["technology", "space"],
+    notificationPreferences: {
+      inApp: true,
+      browserPush: false
+    },
+    readingHistory: [],
+    createdAt: (/* @__PURE__ */ new Date()).toISOString()
+  };
+  db.users.push(newUser);
+  sendWelcomeEmail(cleanEmail, newUser.username, newUser.followedCategories).catch((err) => {
+    console.warn("Error during welcome email dispatch:", err);
+  });
+  const welcomeNotif = {
+    id: `notif_welcome_${Date.now()}`,
+    type: "article_published",
+    category: "science",
+    articleId: "",
+    title: {
+      ar: "\u062A\u0623\u0643\u064A\u062F \u062A\u0641\u0639\u064A\u0644 \u0627\u0644\u062D\u0633\u0627\u0628 \u0648\u0631\u0633\u0627\u0644\u0629 \u0627\u0644\u062A\u0631\u062D\u064A\u0628 \u{1F4EC}",
+      en: "Registration Confirmed & Welcome \u{1F4EC}"
+    },
+    message: {
+      ar: `\u0623\u0647\u0644\u0627\u064B \u0628\u0643 \u064A\u0627 ${newUser.username}! \u062A\u0645 \u0625\u0631\u0633\u0627\u0644 \u0631\u0633\u0627\u0644\u0629 \u062A\u0631\u062D\u064A\u0628\u064A\u0629 \u0648\u062A\u0623\u0643\u064A\u062F \u062A\u0633\u062C\u064A\u0644 \u0625\u0644\u0649 \u0628\u0631\u064A\u062F\u0643 \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A: ${cleanEmail}.`,
+      en: `Welcome ${newUser.username}! A confirmation email was dispatched to ${cleanEmail}.`
+    },
+    read: false,
+    timestamp: (/* @__PURE__ */ new Date()).toISOString()
+  };
+  db.notifications.unshift(welcomeNotif);
+  saveDb();
+  const token = import_crypto.default.randomBytes(32).toString("hex");
+  sessions.set(token, { userId: newUser.id, createdAt: Date.now() });
+  saveSessions();
+  const { passwordHash, salt: _, ...safeUser } = newUser;
+  res.status(201).json({
+    success: true,
+    token,
+    user: safeUser,
+    emailSent: true,
+    message: `\u062A\u0645 \u0625\u0631\u0633\u0627\u0644 \u0631\u0633\u0627\u0644\u0629 \u062A\u0631\u062D\u064A\u0628 \u0648\u062A\u0623\u0643\u064A\u062F \u0625\u0644\u0649 ${cleanEmail}`
+  });
+});
+app.get("/api/auth/email-dispatches", (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) {
+    return res.status(401).json({ error: "Authentication required" });
+  }
+  try {
+    let logs = [];
+    if (import_fs.default.existsSync(EMAILS_LOG_FILE)) {
+      logs = JSON.parse(import_fs.default.readFileSync(EMAILS_LOG_FILE, "utf-8"));
+    }
+    if (user.role !== "admin") {
+      logs = logs.filter((l) => l.to.toLowerCase() === user.email.toLowerCase());
+    }
+    res.json({ logs });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to read email logs" });
+  }
+});
+app.post("/api/auth/login", rateLimiter(20, 6e4), (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: "Email and password are required" });
+  }
+  const cleanEmail = email.trim().toLowerCase();
+  const user = db.users.find((u) => u.email === cleanEmail);
+  if (!user || !verifyPassword(password, user.passwordHash, user.salt)) {
+    return res.status(401).json({ error: "Invalid email or password" });
+  }
+  const token = import_crypto.default.randomBytes(32).toString("hex");
+  sessions.set(token, { userId: user.id, createdAt: Date.now() });
+  saveSessions();
+  const { passwordHash, salt, ...safeUser } = user;
+  res.json({ success: true, token, user: safeUser });
+});
+app.get("/api/auth/me", (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+  const { passwordHash, salt, ...safeUser } = user;
+  res.json({ user: safeUser });
+});
+app.post("/api/auth/logout", (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    const token = authHeader.split(" ")[1];
+    sessions.delete(token);
+    saveSessions();
+  }
+  res.json({ success: true });
+});
+app.post("/api/auth/reset-password", (req, res) => {
+  const { email, newPassword } = req.body;
+  if (!email || !newPassword) {
+    return res.status(400).json({ error: "Email and new password are required" });
+  }
+  const user = db.users.find((u) => u.email === email.trim().toLowerCase());
+  if (!user) {
+    return res.status(404).json({ error: "No account found with this email" });
+  }
+  const { hash, salt } = hashPassword(newPassword);
+  user.passwordHash = hash;
+  user.salt = salt;
+  saveDb();
+  res.json({ success: true, message: "Password updated successfully" });
+});
+app.post("/api/user/bookmarks/toggle", (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) return res.status(401).json({ error: "Authentication required" });
+  const { articleId } = req.body;
+  if (!articleId) return res.status(400).json({ error: "Article ID required" });
+  const exists = user.savedArticles.includes(articleId);
+  if (exists) {
+    user.savedArticles = user.savedArticles.filter((id) => id !== articleId);
+  } else {
+    user.savedArticles.push(articleId);
+  }
+  saveDb();
+  res.json({ success: true, savedArticles: user.savedArticles, isBookmarked: !exists });
+});
+app.post("/api/user/categories/toggle", (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) return res.status(401).json({ error: "Authentication required" });
+  const { category } = req.body;
+  if (!category) return res.status(400).json({ error: "Category required" });
+  const exists = user.followedCategories.includes(category);
+  if (exists) {
+    user.followedCategories = user.followedCategories.filter((c) => c !== category);
+  } else {
+    user.followedCategories.push(category);
+  }
+  saveDb();
+  res.json({ success: true, followedCategories: user.followedCategories, isFollowing: !exists });
+});
+app.get("/api/notifications", (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) {
+    return res.json({ notifications: [] });
+  }
+  let userNotifications = [...db.notifications];
+  if (user.followedCategories?.length > 0) {
+    userNotifications = userNotifications.filter(
+      (n) => !n.category || user.followedCategories.includes(n.category)
+    );
+  }
+  res.json({ notifications: userNotifications });
+});
+app.post("/api/notifications/mark-read", (req, res) => {
+  const { notificationId } = req.body;
+  if (notificationId) {
+    const notif = db.notifications.find((n) => n.id === notificationId);
+    if (notif) notif.read = true;
+  } else {
+    db.notifications.forEach((n) => n.read = true);
+  }
+  saveDb();
+  res.json({ success: true });
+});
+async function startServer() {
+  if (process.env.NODE_ENV !== "production") {
+    const vite = await (0, import_vite.createServer)({
+      server: { middlewareMode: true },
+      appType: "spa"
+    });
+    app.use(vite.middlewares);
+  } else {
+    const distPath = import_path.default.join(process.cwd(), "dist");
+    app.use(import_express.default.static(distPath));
+    app.get("*", (req, res) => {
+      res.sendFile(import_path.default.join(distPath, "index.html"));
+    });
+  }
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`[Aetheria Platform] Server running on http://0.0.0.0:${PORT}`);
+  });
+}
+startServer();
+//# sourceMappingURL=server.cjs.map
